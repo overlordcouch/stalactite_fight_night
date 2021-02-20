@@ -79,12 +79,12 @@ public class Adventurer{
 	     */
 	     private List<Item> inventory;
 	     
-	     /**
-	      * The current weapon that the player is holding.
-	      * 
-	      * @since 1.1
-	      */
-	      private Weapon currentWeapon;
+		 /**
+		  * The current weapon that the player is holding.
+		  * 
+		  * @since 1.1
+		  */
+		  private Weapon currentWeapon;
 	      
 	      //~ /**
 	       //~ * The current armor that the player is wearing.
