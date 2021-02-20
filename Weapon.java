@@ -4,7 +4,7 @@
  * specific to Weapon behaviors.
  * 
  * @author M. Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class Weapon extends Item{
 	
@@ -23,7 +23,19 @@ public class Weapon extends Item{
 	 * 
 	 * */ 
 	 
-	 
+	 /**
+	  * Weapon constructor.  Works like any item, with the addition of
+	  * populating the damage field.
+	  * 
+	  * @param level The level of the weapon
+	  * @param type The type of weapon
+	  * @param desc The descriptor word of the weapon
+	  * @since 1.1
+	  */
+	 public Weapon(int level, String type, String desc){
+		 super(level, type, desc);
+		 damage = -1;
+	 }
 	 
 	
 	
