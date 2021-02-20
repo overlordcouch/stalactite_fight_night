@@ -6,6 +6,11 @@
 public class Adventurer{
 	
 	/**
+	 * Player's name
+	 */
+	private String name;
+	
+	/**
 	 * Player's level
 	 */
 	 private int level;
@@ -35,6 +40,17 @@ public class Adventurer{
 	    * Armor class.  How protected is the player from getting hit.
 	    */
 	   private int ac;
+	   
+	   /**
+	    * Tracks whether the player is in combat
+	    */
+	   private boolean inCombat;
+	   
+	   /**
+	    * Tracks if it is the player's turn in combat
+	    */
+	    private boolean myTurn;
+	   
 	 
 	
 }//class Adventurer
