@@ -48,7 +48,7 @@ public class Item {
 		 * user interaction.
 		 * 
 		 * @return String representation of the Item.
-		 * @since 1.0
+		 * @since 1.0 
 		 */
 		public String toString(){
 			return "Level " + level + " "+ description + " " + type;
