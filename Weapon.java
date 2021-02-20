@@ -17,7 +17,11 @@ public class Weapon extends Item{
 	 
 	 
 	 
-	 
+	/*TODO:
+	 * Figure out how damage will be related to level.
+	 * Implement that in a constructor.
+	 * 
+	 * */ 
 	 
 	 
 	 
