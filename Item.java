@@ -3,7 +3,7 @@
  * Item superclass contains state and methods common to all items
  * 
  * @author M.Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class Item {
 	
@@ -29,6 +29,20 @@ public class Item {
 	  * @since 1.0
 	  */
 	 private String description;
+	 
+	 /**
+	  * Item constructor, common to all items.
+	  * 
+	  * @param level The level of the item
+	  * @param type The type of item.
+	  * @param desc The descriptor word for the item.
+	  * @since 1.1
+	  */
+	 public Item(int level, String type, String desc){
+		 this.level = level;
+		 this.type = type;
+		 this.description = desc;
+	 }//constructor
 	 
 	 
 /*General accessors for items*/
