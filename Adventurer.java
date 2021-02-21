@@ -1,11 +1,12 @@
 import java.util.*;
+import java.lang.Math;
 
 
 /**
  * Class that contains information, statistics, and inventory for the player character.
  * 
  * @author M.Ansell
- * @version 1.3
+ * @version 1.4
  */
 public class Adventurer{
 	
@@ -135,12 +136,15 @@ public class Adventurer{
 		 this.name = name;
 		 this.level = 1;
 		 this.xp = 0;
-		 this.nextLevelXP = -1;
-		 this.health = 10;
-		 this.maxHealth = 10;
+		 this.nextLevelXP = 54;
+		 
+		 this.maxHealth = getNewMaxHealth(this.level);
+		 this.health = this.maxHealth;
+		 
 		 this.investigation = 1;
-		 this.strength = -1;
+		 this.strength = 10;
 		 this.ac = 10;
+		 
 		 this.inCombat = false;
 		 this.myTurn = false;
 		 this.inventory = new ArrayList<Item>();
@@ -180,6 +184,52 @@ public class Adventurer{
 	public void heal(int points){
 		this.health += points;
 		return;
+	}
+	
+	/**
+	 * Calculate the XP required for the next level up.
+	 * NOTE: Must be calculated AFTER level increase occurs.
+	 * 
+	 * @param currentLevel The current level you are calculating the next bound for.
+	 * @return The XP required to level up next
+	 * @since 1.4
+	 */
+	private int getNextXP(int currentLevel){
+		return this.nextLevelXP + (((int)Math.round(this.strength/2.0))+this.level - 1)*3;
+	}
+	
+	
+	/**
+	 * Calculates new maxuimum health based on new level.
+	 * 
+	 * @param currentLevel The new level of the player.
+	 * @return New value for maximum health capacity.
+	 * @since 1.4
+	 */
+	private int getNewMaxHealth(int currentLevel){
+		return ((int)Math.round((9 + currentLevel)/2.0) + currentLevel)*4;
+	}
+	
+	/**
+	 * Levels the player up.  Increases all stats appropriately.
+	 * 
+	 * @since 1.4
+	 */
+	private void levelUp(){
+		this.ac++;
+		this.strength++;
+		this.level++;
+		
+		this.nextLevelXP = getNextXP(this.level);
+		
+		int tempHealth = this.maxHealth;
+		this.maxHealth = getNewMaxHealth(this.level);
+		
+		this.health += (this.maxHealth - tempHealth);
+	}
+	
+	private void updateAC(){
+		this.ac = 9 + this.level + currentArmor.armor;
 	}
 	   
 	 
