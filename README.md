@@ -9,7 +9,7 @@ are related.
   
 - Create CavernNode class for cave creation.  
   
-- [x]Create Monster class
+- [x] Create Monster class
 
 - Driver class  
   
