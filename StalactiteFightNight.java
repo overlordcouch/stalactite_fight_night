@@ -6,7 +6,7 @@ import java.io.*;
  * StalactiteFightNight is the driving class for this game.  
  * 
  * @author M.AnsellRose
- * @version 1.0
+ * @version 1.1
  */
 public class StalactiteFightNight{
 	
@@ -42,6 +42,22 @@ public class StalactiteFightNight{
 		System.out.println("\t\t\t\t\t\t\t\t\t\t  Press 'i' for some instructions");
 		
 		return;
+	}//splashPrint
+	
+	/**
+	 * Clears the console window.  Used regularly in gameplay.
+	 * 
+	 * @since 1.2
+	 */
+	public static void clearWindow(){
+		
+		try{
+			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+		}catch(IOException | InterruptedException ex){
+			System.out.println("Couldn't clear terminal!  Oopsie");
+		}
+		
+
 	}
 	
 	
