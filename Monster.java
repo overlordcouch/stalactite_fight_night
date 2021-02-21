@@ -4,9 +4,12 @@
  * CavernNode.
  * 
  * @author M.Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class Monster {
+	
+	/*TODOL
+	 * Figure out relationship between level and other parameters*/
 	
 	/**
 	 * The level of the monster.  Plays into strength and health.
@@ -58,6 +61,27 @@ public class Monster {
 		this.myTurn = false;
 		this.type = type;
 		this.description = desc;
+	}
+	
+	/**
+	 * Applies damage to creature by taking away from health
+	 * 
+	 * @param damage The amount of damage to deal
+	 * @since 1.1
+	 */
+	public void takeDamage(int damage){
+		this.health -= damage;
+		return;
+	}
+	
+	/**
+	 * Returns the current health of the monster.
+	 * 
+	 * @return Current monster health.
+	 * @since 1.1
+	 */
+	public int getHealth(){
+		return this.health;
 	}
 	
 }//monster class
