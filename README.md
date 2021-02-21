@@ -1,5 +1,10 @@
 # stalactite_fight_night  
   
+    
+  
+  
+![splash output](/dev_documents/splash_print.jpg)
+  
 ## TODO:  
   
 - [x] Figure out how level, strength, xp, weapon damage, armor values  

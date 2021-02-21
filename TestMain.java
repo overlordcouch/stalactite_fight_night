@@ -10,9 +10,7 @@ public class TestMain{
 		
 		game.splashPrint();
 		
-		game.clearWindow();
 		
-		System.out.println("Cleared!");
 		
 		return;
 	}
