@@ -216,7 +216,7 @@ public class Adventurer{
 	 * @since 1.4
 	 */
 	private void levelUp(){
-		this.ac++;
+		this.updateAC();
 		this.strength++;
 		this.level++;
 		
@@ -229,7 +229,7 @@ public class Adventurer{
 	}
 	
 	private void updateAC(){
-		this.ac = 9 + this.level + currentArmor.armor;
+		this.ac = 9 + this.level + currentArmor.getArmor();
 	}
 	   
 	 
