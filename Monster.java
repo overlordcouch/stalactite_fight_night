@@ -147,9 +147,7 @@ public class Monster {
 			return (rand.nextInt(this.strength)+1 + rand.nextInt(this.strength)+1)/2;
 		}
 		
-	}
-	
-	
+	}	
 	
 	
 }//monster class
