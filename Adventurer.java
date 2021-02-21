@@ -5,7 +5,7 @@ import java.util.*;
  * Class that contains information, statistics, and inventory for the player character.
  * 
  * @author M.Ansell
- * @version 1.2
+ * @version 1.3
  */
 public class Adventurer{
 	
@@ -29,6 +29,13 @@ public class Adventurer{
 	* @since 1.0
 	*/
 	private int xp;
+	
+	/**
+	 * The amount of xp that is the boundary to the next level
+	 * 
+	 * @since 1.3
+	 */
+	 private int nextLevelXP;
 
 	/**
 	* Player health and maximum help.  Changes with combat and level
@@ -128,6 +135,7 @@ public class Adventurer{
 		 this.name = name;
 		 this.level = 1;
 		 this.xp = 0;
+		 this.nextLevelXP = -1;
 		 this.health = 10;
 		 this.maxHealth = 10;
 		 this.investigation = 1;
@@ -141,6 +149,38 @@ public class Adventurer{
 	 }
 	      
 	
+	/**
+	 * Get the adventurer's current health.
+	 * 
+	 * @return The adventurer's health
+	 * @since 1.3
+	 */
+	public int getHealth(){
+		return this.health;
+		
+	}
+	
+	/**
+	 * Deal damage to the adventurer by reducing health.
+	 * 
+	 * @param damage The damage to deal to the player
+	 * @since 1.3
+	 */
+	public void takeDamage(int damage){
+		this.health -= damage;
+		return;
+	}
+	
+	/**
+	 * Heal the adventurer for a certain number of points.
+	 * 
+	 * @param points The number of points to heal
+	 * @since 1.3
+	 */
+	public void heal(int points){
+		this.health += points;
+		return;
+	}
 	   
 	 
 	
