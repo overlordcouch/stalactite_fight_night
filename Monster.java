@@ -1,10 +1,11 @@
+import java.lang.Math;
 /**
  * Monster class represents the monsters that will be encountered
  * in the adventure.  Generally, they will be instantiated inside a
  * CavernNode.
  * 
  * @author M.Ansell
- * @version 1.2
+ * @version 1.3
  */
 public class Monster {
 	
@@ -60,7 +61,9 @@ public class Monster {
 	
 	/**
 	 * Monster constructor builds a Monster of a certain level, populating
-	 * fields based on the level.
+	 * fields based on the level.  Monster stats such that an adventurer
+	 * of the same level should be able to beat the monster in an average of
+	 * 3 hits.  Beating three monsters of adventurer level should level up.
 	 * 
 	 * @param level The level of the Monster
 	 * @param type The type of creature
@@ -69,12 +72,18 @@ public class Monster {
 	 */
 	public Monster(int level, String type, String desc){
 		this.level = level;
-		this.health = -1;
-		this.maxHealth = -1;
-		this.strength = -1;
+		
+		this.maxHealth = (((int)Math.round((double)(9 + this.level)/ 2.0)) + level)*3;
+		this.health = maxHealth;
+		
+		this.strength = this.level + 9;
+		this.ac = this.level +9;
+		this.defeatXP = this.maxHealth;
+		
 		this.myTurn = false;
 		this.type = type;
 		this.description = desc;
+		
 	}
 	
 	/**
