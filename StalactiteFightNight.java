@@ -34,7 +34,7 @@ public class StalactiteFightNight{
 		}catch(Exception FileNotFoundException){
 			/*If the chosen file name is not valid, this message will print
 			 * to the terminal.*/
-			System.out.println("SPlash file not found in current directory.\n");
+			System.out.println("Splash file not found in current directory.\n");
 		}
 		
 		System.out.println("\t\t\t\t\t\t\t\t\t\t  Press 's' to start a new game");
