@@ -1,16 +1,16 @@
 import java.lang.Math;
+import java.util.*;
 /**
  * Monster class represents the monsters that will be encountered
  * in the adventure.  Generally, they will be instantiated inside a
  * CavernNode.
  * 
  * @author M.Ansell
- * @version 1.3
+ * @version 1.4
  */
 public class Monster {
 	
-	/*TODO
-	 * Figure out relationship between level and other parameters*/
+	
 	
 	/**
 	 * The level of the monster.  Plays into strength and health.
@@ -18,6 +18,13 @@ public class Monster {
 	 * @since 1.0
 	 */
 	private int level;
+	
+	/**
+	 * Hit modifier for the creature when attacking.
+	 * 
+	 * @since 1.4
+	 */
+	private int hitMod;
 	
 	/**
 	 * The health of the monster.
@@ -68,7 +75,7 @@ public class Monster {
 	 * @param level The level of the Monster
 	 * @param type The type of creature
 	 * @param desc The descibing word for this monster 
-	 * @since 1.0
+	 * @since 1.4
 	 */
 	public Monster(int level, String type, String desc){
 		this.level = level;
@@ -79,6 +86,7 @@ public class Monster {
 		this.strength = this.level + 9;
 		this.ac = this.level +9;
 		this.defeatXP = this.maxHealth;
+		this.hitMod = level - (int)Math.round(strength/7.0);
 		
 		this.myTurn = false;
 		this.type = type;
@@ -106,5 +114,42 @@ public class Monster {
 	public int getHealth(){
 		return this.health;
 	}
+	
+	/**
+	 * Monster attack check.  Outputs the attack, to be compared to
+	 * adventurer AC.
+	 * 
+	 * @param d20Roll The result of a d20 roll
+	 * @return The monster's attack
+	 * @since 1.4
+	 */
+	public int attack(int d20Roll){
+		
+		return d20Roll + hitMod;
+		
+	}
+	
+	
+	/**
+	 * Deals monster damage.  Returns the number of points of damage dealt,
+	 * including consideration for a critical strike.
+	 * 
+	 * @param rand A Random object used to generate damage rolls
+	 * @param isCrit Boolean representation of whether the strike is critical.
+	 * @return The damage dealt by this strike.
+	 * @since 1.4
+	 */
+	public int giveDamage(Random rand, boolean isCrit){
+		
+		if(isCrit){
+			return (int )0.75*(this.strength) + rand.nextInt(this.strength) + 1;
+		}else{
+			return (rand.nextInt(this.strength)+1 + rand.nextInt(this.strength)+1)/2;
+		}
+		
+	}
+	
+	
+	
 	
 }//monster class
