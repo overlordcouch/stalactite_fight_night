@@ -6,7 +6,7 @@ import java.lang.Math;
  * Class that contains information, statistics, and inventory for the player character.
  * 
  * @author M.Ansell
- * @version 1.4
+ * @version 1.5
  */
 public class Adventurer{
 	
@@ -143,7 +143,7 @@ public class Adventurer{
 		 
 		 this.investigation = 1;
 		 this.strength = 10;
-		 this.ac = 10;
+		 this.updateAC();
 		 
 		 this.inCombat = false;
 		 this.myTurn = false;
@@ -184,6 +184,42 @@ public class Adventurer{
 	public void heal(int points){
 		this.health += points;
 		return;
+	}
+	
+	/**
+	 * Determines the hitliness of the attack considering chance, player
+	 * strength, and and the current weapon equipped.
+	 * 
+	 * @param d20Roll The result of a d20 roll
+	 * @return The total hit number of the attack, to be compared against monster AC.
+	 * @since 1.5
+	 */
+	public int attack(int d20Roll){
+		return d20Roll + (int)Math.round(this.strength/ 10.0) + currentWeapon.getHitMod();
+	}
+	
+	/**
+	 * Determines the damage done by a successful attack.  Considers critical
+	 * hits, as well as current weapon that is equipped.
+	 * 
+	 * @param rand Random object for determining damage dealt.
+	 * @param isCrit Boolean representation of if the strike was a critical hit.
+	 * @return The amount of damage to deal to the monster.
+	 * @since 1.5  
+	 */
+	public int giveDamage(Random rand, boolean isCrit){
+		
+		/*Return damage based on whether it's a critical hit or not.*/
+		if(isCrit){
+			
+			return this.strength + (rand.nextInt(this.strength)+1) + currentWeapon.getDamageMod();
+			
+		}else{
+			
+			return rand.nextInt(this.strength)+1 + currentWeapon.getDamageMod();
+			
+		}
+	
 	}
 	
 	/**
