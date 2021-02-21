@@ -13,7 +13,7 @@ public class Weapon extends Item{
 	 * 
 	 * @since 1.0
 	 */
-	 private int damage;
+	 private int damageModifier;
 	 
 	 
 	 
@@ -34,7 +34,7 @@ public class Weapon extends Item{
 	  */
 	 public Weapon(int level, String type, String desc){
 		 super(level, type, desc);
-		 damage = -1;
+		 damageModifier = -1;
 	 }
 	 
 	
