@@ -11,10 +11,12 @@ are related.
   
 - [x] Create Monster class
 
-- Driver class  
+- [x] Driver class  
   
 - Start testing what has been written so far.
 
 - Add toString methods to classes already made.  
 
-- Start creating actual gameplay, even if limited
+- Start creating actual gameplay, even if limited  
+  
+- User start prompt
