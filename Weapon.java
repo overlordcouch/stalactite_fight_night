@@ -4,7 +4,7 @@
  * specific to Weapon behaviors.
  * 
  * @author M. Ansell
- * @version 1.1
+ * @version 1.2
  */
 public class Weapon extends Item{
 	
@@ -14,6 +14,20 @@ public class Weapon extends Item{
 	 * @since 1.0
 	 */
 	 private int damageModifier;
+	 
+	 /**
+	  * How good this is at hitting things.
+	  * 
+	  * @since 1.2
+	  */
+	 private int hitModifier;
+	 
+	 /**
+	  * How many times this can hit without breaking.
+	  * 
+	  * @since 1.2
+	  */
+	 private int durability;
 	 
 	 
 	 
@@ -25,7 +39,8 @@ public class Weapon extends Item{
 	 
 	 /**
 	  * Weapon constructor.  Works like any item, with the addition of
-	  * populating the damage field.
+	  * populating the damage field.  Updated in 1.2 to reflect appropriate
+	  * relationships.
 	  * 
 	  * @param level The level of the weapon
 	  * @param type The type of weapon
@@ -34,9 +49,32 @@ public class Weapon extends Item{
 	  */
 	 public Weapon(int level, String type, String desc){
 		 super(level, type, desc);
-		 damageModifier = -1;
+		 this.damageModifier = this.level;
+		 this.hitModifier = this.level;
+		 
 	 }
 	 
+	 /**
+	  * Returns the weapon hit modifier used when seeing if an attack
+	  * with this weapon hits
+	  * 
+	  * @return The weapon's hit modifier
+	  * @since 1.2
+	  */
+	 public int getHitMod(){
+		 return this.hitModifier;
+	 }
+	 
+	 /**
+	  * Returns the damage modifier for this weapon.  Used when calculating
+	  * damage done by a hit with this weapon.
+	  * 
+	  * @return The damage modifier for this weapon.
+	  * @since 1.2
+	  */
+	 public int getDamageMod(){
+		 return this.damageModifier;
+	 }
 	
 	
 	
