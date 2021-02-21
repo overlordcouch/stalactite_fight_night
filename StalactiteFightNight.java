@@ -10,7 +10,12 @@ import java.io.*;
  */
 public class StalactiteFightNight{
 	
-	
+	/**
+	 * Prints the game's splash screen to the console, including initial
+	 * prompts for user input.
+	 * 
+	 * @since 1.0
+	 */
 	public static void splashPrint(){
 		
 		//Print the splash screen for the game.  Try/catch in case the
