@@ -4,7 +4,7 @@
  * CavernNode.
  * 
  * @author M.Ansell
- * @version 1.1
+ * @version 1.2
  */
 public class Monster {
 	
@@ -29,6 +29,13 @@ public class Monster {
 	 * The strength of the monster
 	 */
 	private int strength;
+	
+	/**
+	 * The experience the player gains from defeating this monster.
+	 * 
+	 * @since 1.2
+	 */
+	private int defeatXP;
 	
 	/**
 	 * Whether it is the monster's turn in combat.
