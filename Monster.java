@@ -38,6 +38,13 @@ public class Monster {
 	private int defeatXP;
 	
 	/**
+	 * How hard it is to hit this monster.
+	 * 
+	 * @since 1.2
+	 */
+	private int ac;
+	
+	/**
 	 * Whether it is the monster's turn in combat.
 	 * 
 	 * @since 1.0
