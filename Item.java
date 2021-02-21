@@ -12,7 +12,7 @@ public class Item {
 	 * 
 	 * @since 1.0
 	 */
-	 private int level;
+	 protected int level;
 	 
 	 /**
 	  * All items will have a general type description.  For example, a
@@ -20,7 +20,7 @@ public class Item {
 	  * 
 	  * @since 1.0
 	  */
-	 private String type;
+	 protected String type;
 	 
 	 
 	 /**
@@ -28,7 +28,7 @@ public class Item {
 	  * 
 	  * @since 1.0
 	  */
-	 private String description;
+	 protected String description;
 	 
 	 /**
 	  * Item constructor, common to all items.
