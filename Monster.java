@@ -8,7 +8,7 @@
  */
 public class Monster {
 	
-	/*TODOL
+	/*TODO
 	 * Figure out relationship between level and other parameters*/
 	
 	/**
