@@ -5,7 +5,7 @@ import java.util.*;
  * about the room's contents and description.
  * 
  * @author M.Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class CaveNode{
 	
@@ -95,6 +95,68 @@ public class CaveNode{
 		/*TODO:
 		 * Figure out probabilities for monsters, loot, etc.*/
 		
+	}
+	
+	/**
+	 * Accessor to check if this cavern has loots.
+	 * 
+	 * @return If the cavern has loot or not.
+	 * @since 1.1
+	 */
+	public boolean hasLoot(){
+		return this.hasLoot;
+	}
+	
+	/**
+	 * Accessor to check if this cavern has been searched.
+	 * 
+	 * @return If this cavern has been searched yet.
+	 * @since 1.1
+	 */
+	public boolean beenSearched(){
+		return this.searched;
+	}
+	
+	/**
+	 * Accessor to check if this cavern has a monster.
+	 * 
+	 * @return If there is a monster here.
+	 * @since 1.1
+	 */
+	public boolean hasMonster(){
+		return this.hasMonster;
+	}
+	
+	/**
+	 * Gives the caller a pointer to the Monster object in this cave.
+	 * 
+	 * @return The monster in this cave.
+	 * @throws IllegalStateException if there is no monster in this cave.
+	 * @since 1.1
+	 */
+	public Monster getMonster()throws IllegalStateException{
+		
+		if(!this.hasMonster){
+			throw new IllegalStateException("No monster here");
+		}
+		return this.caveMon;
+	}
+	
+	
+	/**
+	 * Eliminates the monster from this cavern when the monster is killed.
+	 * 
+	 * @throws IllegalStateException if there is no monster in here.
+	 * @since 1.1
+	 */
+	public void killMonster() throws IllegalStateException{
+		
+		if(!this.hasMonster){
+			throw new IllegalStateException("No monster here");
+		}
+		
+		this.caveMon = null;
+		this.hasMonster = false;
 	}
 	   
 	
