@@ -12,7 +12,11 @@ are related.
   
 - Generate lists of descriptors for each thing  
   
-- Create CavernNode class for cave creation.  
+- [x] Create CavernNode class for cave creation.   
+  
+- Finish CaveNode constructor.  
+  
+- Include getters and setters. 
   
 - [x] Create Monster class
 
