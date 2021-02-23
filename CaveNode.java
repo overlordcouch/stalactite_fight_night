@@ -101,13 +101,13 @@ public class CaveNode{
 	 * 
 	 * @since 1.0
 	 */
-	public CaveNode(Random rand, int level, String adj1, String adj2){
+	public CaveNode(int level, String adj1, String adj2){
 		
 		this.level = level;
 		this.desc1 = adj1;
 		this.desc2 = adj2;
-		this.monsterGen(rand, level);
-		this.lootGen(rand, level);
+		this.monsterGen(level);
+		this.lootGen(level);
 		
 		/*TODO:
 		 * Figure out probabilities for monsters, loot, etc.*/
@@ -185,27 +185,27 @@ public class CaveNode{
 	 * @param level The player level around which the monster will be generated.
 	 * @since 1.2
 	 */
-	private void monsterGen(Random rand, int level){
+	private void monsterGen(int level){
 		
 		/*Don't generate monster if chance is exceeded*/
-		if(rand.nextInt(100) >= this.MONSTER_CHANCE){
+		if(StalactiteFightNight.rand.nextInt(100) >= this.MONSTER_CHANCE){
 			
 			return;
 			
 		}else{
 			//Monster level will be player level +-1
-			int monsterLevel = rand.nextInt((level+1) - (level -1)) + (level - 1);
+			int monsterLevel = StalactiteFightNight.rand.nextInt((level+1) - (level -1)) + (level - 1);
 			
 			//Generate a monster with random type, description, and the level
 			//calculated above.
 			
 			/*Pull a monster type from the master list by randomly picking an int value less than the size
 			 * of the list and pulling the entry from that index.*/
-			String type = StalactiteFightNight.monsterType.get(rand.nextInt(StalactiteFightNight.monsterType.size()));
+			String type = StalactiteFightNight.monsterType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.monsterType.size()));
 			
 			/*Pull a monster description from the master list by randomly picking an int value less than the size
 			 * of the list and pulling the entry from that index.*/
-			String desc = StalactiteFightNight.monsterDesc.get(rand.nextInt(StalactiteFightNight.monsterDesc.size()));
+			String desc = StalactiteFightNight.monsterDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.monsterDesc.size()));
 			
 			/*Generate and hold that monster*/
 			this.caveMon = new Monster(monsterLevel, type, desc);
@@ -224,23 +224,26 @@ public class CaveNode{
 	 * @param level The level of the player at the time of calling
 	 * @since 1.2
 	 */
-	private void lootGen(Random rand, int level){
+	private void lootGen(int level){
 		
 		/*Do nothing if loot chance is exceeded*/
-		if(rand.nextInt() >= this.LOOT_CHANCE){
+		if(StalactiteFightNight.rand.nextInt() >= this.LOOT_CHANCE){
 			return;
 		}else{
 			this.hasLoot = true;
 			/*First, choose what kind of loot to generate*/
-			int choice = rand.nextInt(3);
+			int choice = StalactiteFightNight.rand.nextInt(6);
 			
 			//And then generate it
 			switch(choice){
-				case 0: //make a weapon
+				case 0:
+				case 1:
+				case 2: //make a weapon
 					break;
-				case 1: //make some armor
+				case 3:
+				case 4: //make some armor
 					break;
-				case 2: //make a potion
+				case 5: //make a potion
 					break;
 			}//switch/case
 			
