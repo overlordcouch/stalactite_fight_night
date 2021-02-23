@@ -6,9 +6,69 @@ import java.io.*;
  * StalactiteFightNight is the driving class for this game.  
  * 
  * @author M.AnsellRose
- * @version 1.1
+ * @version 1.2
  */
 public class StalactiteFightNight{
+	
+	/**
+	 * Public lists that other game classes can access for random content
+	 * generation.
+	 * 
+	 * @since 1.2
+	 */
+	public static List<String> monsterType, monsterDesc;
+	
+	
+	public static void main(String[] args){
+		
+		/*First, we populate the lists that are used for content generation*/
+		try{
+			
+			listPopulate();
+			
+		}catch(Exception FileNotFoundException){
+			System.out.println("The file paths to content lists are not all valid.");
+		}
+		
+		
+	}
+	
+	/**
+	 * Runs at the beginning of the program to populate the public lists
+	 * that other game classes use to generate random content.
+	 * 
+	 * @throws FileNotFoundException if filepath to descriptors is not valid.
+	 * @since 1.2
+	 */
+	private static void listPopulate()throws FileNotFoundException{
+		
+		/*Open the descripto files*/
+		File monDescFile = new File("dev_documents/monster_desc.txt");
+		File monTypeFile = new File("dev_documents/monster_types.txt");
+		
+		/*Scan the files, reading them into a HashSet to scramble them.
+		 * Then, move them into an ArrayList for fast access*/
+		Scanner monDescReader = new Scanner(monDescFile);
+		
+		Set<String> monDescSet = new HashSet<String>();
+		
+		while(monDescReader.hasNextLine()){
+			monDescSet.add(monDescReader.nextLine());
+		}
+		monsterDesc = new ArrayList<String>(monDescSet);
+		
+		
+		Scanner monTypeReader = new Scanner (monTypeFile);
+		
+		Set<String> monTypeSet = new HashSet<String>();
+		
+		while(monTypeReader.hasNextLine()){
+			monTypeSet.add(monTypeReader.nextLine());
+		}
+		
+		monsterType = new ArrayList<String>(monTypeSet);
+		
+	}//listpopulate
 	
 	/**
 	 * Prints the game's splash screen to the console, including initial
