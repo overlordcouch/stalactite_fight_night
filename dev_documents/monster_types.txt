@@ -1,0 +1,127 @@
+dragon
+hag
+imp kraken
+ogre
+witch
+wyrm
+wyvern
+basilisk
+griffin
+manticore
+salamander
+bugbear
+grindylow
+revenant
+banshee
+kelpie
+leprechaun
+selkie
+spider
+mogwai
+demon
+mummy
+sphinx
+kobold
+krampus
+lindworm
+cerberus
+charon
+chimera
+cyclops
+dryad
+gorgon
+harpy
+hydra
+snake
+python
+siren
+satyr
+werewolf
+yeti
+djin
+genie
+ghoul
+kappa
+golem
+succubus
+chupacabra
+zombie
+shapeshifter
+Grendel
+bigfoot
+sasquatch
+gremlin
+hodag
+mothman
+slenderman
+vampire
+wendigo
+sylph
+troll
+redcap
+trow
+morag
+Baba Yaga
+firbolg
+balrog
+unicorn
+boggle
+morlock
+dalek
+godzilla
+godzilla jr.
+king kong
+rodan
+mothra
+behemoth
+dodongo
+deku scrub
+poe
+skulltula
+abomination
+glob
+gelatinous cube
+flying monkey
+Pennywise the Clown
+Xenomorph
+demon
+drow
+stalker
+ooze
+cthulu
+smoke monster
+goblin
+titan
+wraith
+goblin
+aboleth
+simulacrum
+abjurer
+beholder
+alcolyte
+fiend
+cultist
+air elemental
+fire elemental
+hoplite
+drake
+troglodyte
+bandit
+bandit captain
+barghast
+blood witch
+blood hawk
+bullywug
+chull
+cloaker
+crab
+crocodile
+fanatic
+devil dog
+dretch
+duergar
+goblin
+goblin
+
+
+
