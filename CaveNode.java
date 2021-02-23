@@ -5,7 +5,7 @@ import java.util.*;
  * about the room's contents and description.
  * 
  * @author M.Ansell
- * @version 1.1
+ * @version 1.2
  */
 public class CaveNode{
 	
@@ -65,7 +65,14 @@ public class CaveNode{
 
 	private int level;
 
-
+	/**
+	 * The chance percentage that a monster will spawn in this cavern when
+	 * it generates.
+	 * 
+	 * @since 1.2
+	 */
+	private static int MONSTER_CHANCE = 65;
+	
 /*Constructor will need to accept a Random object for contents generation.
  * No need to make a new one here, as that would build up as the game progresses.
  * 
@@ -157,6 +164,34 @@ public class CaveNode{
 		
 		this.caveMon = null;
 		this.hasMonster = false;
+	}
+	
+	
+	/**
+	 * Decides if a monster should populate with the node and generates 
+	 * that monster if necessary.
+	 * 
+	 * @param rand Random object for characteristic generation.
+	 * @param level The player level around which the monster will be generated.
+	 * @since 1.2
+	 */
+	private void monsterGen(Random rand, int level){
+		
+		/*Don't generate monster is chance is exceeded*/
+		if(rand.nextInt(100) >= this.MONSTER_CHANCE){
+			
+			return;
+			
+		}else{
+			//Monster level will be player level +-1
+			int monsterLevel = rand.nextInt((level+1) - (level -1)) + (level - 1);
+			
+			//Generate a monster with random type, description, and the level
+			//calculated above.
+			
+			return;
+		}
+		
 	}
 	   
 	
