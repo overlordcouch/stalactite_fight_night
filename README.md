@@ -10,11 +10,19 @@
 - [x] Figure out how level, strength, xp, weapon damage, armor values  
 are related.  
   
-- Generate lists of descriptors for each thing  
+- Generate lists of descriptors for each thing 
+
+- [x] Monsters
+
+- [x] Monster descriptors
+
+- [ ] Weapons, Armors, Potions and descriptions
   
 - [x] Create CavernNode class for cave creation.   
   
-- Finish CaveNode constructor.  
+-  [x] Finish CaveNode constructor.  
+
+- [ ] Implement searching in caverns
   
 - Include getters and setters. 
   

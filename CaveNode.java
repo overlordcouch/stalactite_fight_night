@@ -107,6 +107,7 @@ public class CaveNode{
 		this.desc1 = adj1;
 		this.desc2 = adj2;
 		this.monsterGen(rand, level);
+		this.lootGen(rand, level);
 		
 		/*TODO:
 		 * Figure out probabilities for monsters, loot, etc.*/
@@ -240,7 +241,7 @@ public class CaveNode{
 				case 1: //make some armor
 					break;
 				case 2: //make a potion
-					break
+					break;
 			}//switch/case
 			
 			return;
