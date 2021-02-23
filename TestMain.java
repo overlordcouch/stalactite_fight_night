@@ -4,14 +4,14 @@ import java.io.*;
 public class TestMain{
 	
 	
-	public static void main(String[] args){
+	//~ public static void main(String[] args){
 		
-		StalactiteFightNight game = new StalactiteFightNight();
+		//~ StalactiteFightNight game = new StalactiteFightNight();
 		
-		game.splashPrint();
+		//~ game.splashPrint();
 		
 		
 		
-		return;
-	}
+		//~ return;
+	//~ }
 }
