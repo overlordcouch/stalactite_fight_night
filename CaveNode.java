@@ -73,6 +73,14 @@ public class CaveNode{
 	 */
 	private static int MONSTER_CHANCE = 63;
 	
+	/**
+	 * The chance percentage that there will be loot in this cavern that
+	 * is visible at spawn.
+	 * 
+	 * @since 1.2
+	 */
+	private static int LOOT_CHANCE = 33;
+	
 /*Constructor will need to accept a Random object for contents generation.
  * No need to make a new one here, as that would build up as the game progresses.
  * 
@@ -205,6 +213,38 @@ public class CaveNode{
 			return;
 		}
 		
+	}//monsterGen
+	
+	/**
+	 * Decides is there is loot upon intial generation, and
+	 * generates that loot if necessary.
+	 * 
+	 * @param rand A Random object used to generate the items and description.
+	 * @param level The level of the player at the time of calling
+	 * @since 1.2
+	 */
+	private void lootGen(Random rand, int level){
+		
+		/*Do nothing if loot chance is exceeded*/
+		if(rand.nextInt() >= this.LOOT_CHANCE){
+			return;
+		}else{
+			this.hasLoot = true;
+			/*First, choose what kind of loot to generate*/
+			int choice = rand.nextInt(3);
+			
+			//And then generate it
+			switch(choice){
+				case 0: //make a weapon
+					break;
+				case 1: //make some armor
+					break;
+				case 2: //make a potion
+					break
+			}//switch/case
+			
+			return;
+		}//if/else
 	}
 	   
 	
