@@ -14,4 +14,6 @@ work gloves
 bathing suit
 hockey pads
 goggles
-welding shield
+welding mask
+breastplate
+boots
