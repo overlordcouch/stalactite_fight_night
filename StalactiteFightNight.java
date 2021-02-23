@@ -6,7 +6,7 @@ import java.io.*;
  * StalactiteFightNight is the driving class for this game.  
  * 
  * @author M.AnsellRose
- * @version 1.2
+ * @version 1.3
  */
 public class StalactiteFightNight{
 	
@@ -16,7 +16,8 @@ public class StalactiteFightNight{
 	 * 
 	 * @since 1.2
 	 */
-	public static List<String> monsterType, monsterDesc;
+	public static List<String> monsterType, monsterDesc, weaponType, weaponDesc,
+								armorType, armorDesc, potionType, potionDesc;
 	
 	/**
 	 * Random object used throughout the game for generation and event
@@ -49,7 +50,7 @@ public class StalactiteFightNight{
 		CaveNode temp;
 		for(int index = 0; index <100; index++){
 			
-			temp = new CaveNode(rand, 1, "big", "black");
+			temp = new CaveNode(1, "big", "black");
 			
 			if(!temp.hasMonster()){
 				System.out.println("Cave has no monster");
@@ -73,32 +74,30 @@ public class StalactiteFightNight{
 	 */
 	private static void listPopulate()throws FileNotFoundException{
 		
-		/*Open the descripto files*/
-		File monDescFile = new File("dev_documents/monster_desc.txt");
-		File monTypeFile = new File("dev_documents/monster_types.txt");
+		Map<String, List<String>> filesToLists = new HashMap<String,List<String>>();
+		filesToLists.put("dev_documents/monster_types.txt",monsterType);
+		filesToLists.put("dev_documents/weapon_types.txt",weaponType);
+		filesToLists.put("dev_documents/armor_types.txt",armorType);
+		filesToLists.put("dev_documents/potion_types.txt",potionType);
 		
-		/*Scan the files, reading them into a HashSet to scramble them.
-		 * Then, move them into an ArrayList for fast access*/
-		Scanner monDescReader = new Scanner(monDescFile);
+		filesToLists.put("dev_documents/monster_desc.txt",monsterDesc);
+		filesToLists.put("dev_documents/weapon_desc.txt",weaponDesc);
+		filesToLists.put("dev_documents/armor_desc.txt",armorDesc);
+		filesToLists.put("dev_documents/potion_desc.txt",potionDesc);
 		
-		Set<String> monDescSet = new HashSet<String>();
+		Set<String> fileNames = filesToLists.keySet();
 		
-		while(monDescReader.hasNextLine()){
-			monDescSet.add(monDescReader.nextLine());
-		}
-		monsterDesc = new ArrayList<String>(monDescSet);
-		
-		
-		Scanner monTypeReader = new Scanner (monTypeFile);
-		
-		Set<String> monTypeSet = new HashSet<String>();
-		
-		while(monTypeReader.hasNextLine()){
-			monTypeSet.add(monTypeReader.nextLine());
-		}
-		
-		monsterType = new ArrayList<String>(monTypeSet);
-		
+		for(String fileN : fileNames){
+			
+			File words = new File(fileN);
+			Scanner reader = new Scanner(words);
+			
+			while(reader.hasNextLine()){
+				filesToLists.get(fileN).add(reader.nextLine());
+			}
+			
+		}//for each
+				
 	}//listpopulate
 	
 	/**
