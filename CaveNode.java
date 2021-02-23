@@ -71,7 +71,7 @@ public class CaveNode{
 	 * 
 	 * @since 1.2
 	 */
-	private static int MONSTER_CHANCE = 65;
+	private static int MONSTER_CHANCE = 62;
 	
 /*Constructor will need to accept a Random object for contents generation.
  * No need to make a new one here, as that would build up as the game progresses.
@@ -178,7 +178,7 @@ public class CaveNode{
 	 */
 	private void monsterGen(Random rand, int level){
 		
-		/*Don't generate monster is chance is exceeded*/
+		/*Don't generate monster if chance is exceeded*/
 		if(rand.nextInt(100) >= this.MONSTER_CHANCE){
 			
 			return;
@@ -200,6 +200,7 @@ public class CaveNode{
 			
 			/*Generate and hold that monster*/
 			this.caveMon = new Monster(monsterLevel, type, desc);
+			this.hasMonster = true;
 			
 			return;
 		}
