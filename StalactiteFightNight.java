@@ -27,6 +27,12 @@ public class StalactiteFightNight{
 	public static Random rand = new Random();
 	
 	
+	/**
+	 * The driving method for the Stactite Fight Night game.
+	 * 
+	 * @param args - N/A
+	 * @since 1.2
+	 */
 	public static void main(String[] args){
 		
 		/*First, we populate the lists that are used for content generation*/
@@ -36,6 +42,23 @@ public class StalactiteFightNight{
 			
 		}catch(Exception FileNotFoundException){
 			System.out.println("The file paths to content lists are not all valid.");
+		}
+		
+		/*Test to see if monster generation in CaveNode works*/
+		
+		CaveNode temp;
+		for(int index = 0; index <100; index++){
+			
+			temp = new CaveNode(rand, 1, "big", "black");
+			
+			if(!temp.hasMonster()){
+				System.out.println("Cave has no monster");
+				
+			}else{
+				System.out.println(temp.getMonster());
+			}
+			temp =null;
+			
 		}
 		
 		
