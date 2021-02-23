@@ -18,6 +18,14 @@ public class StalactiteFightNight{
 	 */
 	public static List<String> monsterType, monsterDesc;
 	
+	/**
+	 * Random object used throughout the game for generation and event
+	 * choices.
+	 * 
+	 * @since 1.2
+	 */
+	public static Random rand = new Random();
+	
 	
 	public static void main(String[] args){
 		
