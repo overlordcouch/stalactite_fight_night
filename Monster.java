@@ -6,7 +6,7 @@ import java.util.*;
  * CavernNode.
  * 
  * @author M.Ansell
- * @version 1.4
+ * @version 1.5
  */
 public class Monster {
 	
@@ -149,5 +149,13 @@ public class Monster {
 		
 	}	
 	
-	
+	/**
+	 * Override toString method that gives the brief description of the method.
+	 * 
+	 * @return String represention of the Monster
+	 * @since 1.5
+	 */
+	public String toString(){
+		return ""+this.description + " "+this.type;
+	}
 }//monster class
