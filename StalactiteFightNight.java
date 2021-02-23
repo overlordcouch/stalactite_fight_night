@@ -81,28 +81,40 @@ public class StalactiteFightNight{
 	 */
 	private static void listPopulate()throws FileNotFoundException{
 		
-		
+		monsterType = new ArrayList<String>();
+		monsterDesc = new ArrayList<String>();
+		weaponType = new ArrayList<String>();
+		weaponDesc = new ArrayList<String>();
+		armorType = new ArrayList<String>();
+		armorDesc = new ArrayList<String>();
+		potionType = new ArrayList<String>();
+		potionDesc = new ArrayList<String>();
 		Map<String, List<String>> filesToLists = new HashMap<String,List<String>>();
 		filesToLists.put("dev_documents/monster_types.txt",monsterType);
-		//~ filesToLists.put("dev_documents/weapon_types.txt",weaponType);
-		//~ filesToLists.put("dev_documents/armor_types.txt",armorType);
-		//~ filesToLists.put("dev_documents/potion_types.txt",potionType);
+		filesToLists.put("dev_documents/weapon_types.txt",weaponType);
+		filesToLists.put("dev_documents/armor_types.txt",armorType);
+		filesToLists.put("dev_documents/potion_types.txt",potionType);
 		
-		//~ filesToLists.put("dev_documents/monster_desc.txt",monsterDesc);
-		//~ filesToLists.put("dev_documents/weapon_desc.txt",weaponDesc);
-		//~ filesToLists.put("dev_documents/armor_desc.txt",armorDesc);
-		//~ filesToLists.put("dev_documents/potion_desc.txt",potionDesc);
+		filesToLists.put("dev_documents/monster_desc.txt",monsterDesc);
+		filesToLists.put("dev_documents/weapon_desc.txt",weaponDesc);
+		filesToLists.put("dev_documents/armor_desc.txt",armorDesc);
+		filesToLists.put("dev_documents/potion_desc.txt",potionDesc);
 		
 		Set<String> fileNames = filesToLists.keySet();
 		
+		
 		for(String fileN : fileNames){
-			System.out.println(fileN);
 			File words = new File(fileN);
 			Scanner reader = new Scanner(words);
 			
+			
 			while(reader.hasNextLine()){
 				filesToLists.get(fileN).add(reader.nextLine());
+				
 			}
+			
+			words = null;
+			reader = null;
 			
 		}//for each
 				
