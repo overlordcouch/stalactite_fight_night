@@ -71,7 +71,7 @@ public class CaveNode{
 	 * 
 	 * @since 1.2
 	 */
-	private static int MONSTER_CHANCE = 62;
+	private static int MONSTER_CHANCE = 63;
 	
 /*Constructor will need to accept a Random object for contents generation.
  * No need to make a new one here, as that would build up as the game progresses.
