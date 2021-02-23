@@ -98,6 +98,7 @@ public class CaveNode{
 		this.level = level;
 		this.desc1 = adj1;
 		this.desc2 = adj2;
+		this.monsterGen(rand, level);
 		
 		/*TODO:
 		 * Figure out probabilities for monsters, loot, etc.*/
@@ -188,6 +189,17 @@ public class CaveNode{
 			
 			//Generate a monster with random type, description, and the level
 			//calculated above.
+			
+			/*Pull a monster type from the master list by randomly picking an int value less than the size
+			 * of the list and pulling the entry from that index.*/
+			String type = StalactiteFightNight.monsterType.get(rand.nextInt(StalactiteFightNight.monsterType.size()));
+			
+			/*Pull a monster description from the master list by randomly picking an int value less than the size
+			 * of the list and pulling the entry from that index.*/
+			String desc = StalactiteFightNight.monsterDesc.get(rand.nextInt(StalactiteFightNight.monsterDesc.size()));
+			
+			/*Generate and hold that monster*/
+			this.caveMon = new Monster(monsterLevel, type, desc);
 			
 			return;
 		}
