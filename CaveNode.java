@@ -102,7 +102,6 @@ public class CaveNode{
 	 * Builds a CaveNode and populates it the appropriate monsters and 
 	 * items, at the appropriate level.
 	 * 
-	 * @param rand A Random object used for populating the cavern.
 	 * @param level The player's level at the time of entering the cavern.
 	 * @param adj1 The first word describing this particular cavern.
 	 * @param adj2 The second word describing this particular cavern.
@@ -270,6 +269,10 @@ public class CaveNode{
 			return;
 		}//if/else
 	}
-	   
+	
+	
+	public Item getLoot(){
+		return this.loot;
+	}	   
 	
 }//CaveNode class

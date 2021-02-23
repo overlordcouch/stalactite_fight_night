@@ -36,6 +36,7 @@ public class StalactiteFightNight{
 	 */
 	public static void main(String[] args){
 		
+		
 		/*First, we populate the lists that are used for content generation*/
 		try{
 			
@@ -58,6 +59,12 @@ public class StalactiteFightNight{
 			}else{
 				System.out.println(temp.getMonster());
 			}
+			
+			if(!temp.hasLoot()){
+				System.out.println("No loot");
+			}else{
+				System.out.println(temp.getLoot());
+			}
 			temp =null;
 			
 		}
@@ -74,21 +81,22 @@ public class StalactiteFightNight{
 	 */
 	private static void listPopulate()throws FileNotFoundException{
 		
+		
 		Map<String, List<String>> filesToLists = new HashMap<String,List<String>>();
 		filesToLists.put("dev_documents/monster_types.txt",monsterType);
-		filesToLists.put("dev_documents/weapon_types.txt",weaponType);
-		filesToLists.put("dev_documents/armor_types.txt",armorType);
-		filesToLists.put("dev_documents/potion_types.txt",potionType);
+		//~ filesToLists.put("dev_documents/weapon_types.txt",weaponType);
+		//~ filesToLists.put("dev_documents/armor_types.txt",armorType);
+		//~ filesToLists.put("dev_documents/potion_types.txt",potionType);
 		
-		filesToLists.put("dev_documents/monster_desc.txt",monsterDesc);
-		filesToLists.put("dev_documents/weapon_desc.txt",weaponDesc);
-		filesToLists.put("dev_documents/armor_desc.txt",armorDesc);
-		filesToLists.put("dev_documents/potion_desc.txt",potionDesc);
+		//~ filesToLists.put("dev_documents/monster_desc.txt",monsterDesc);
+		//~ filesToLists.put("dev_documents/weapon_desc.txt",weaponDesc);
+		//~ filesToLists.put("dev_documents/armor_desc.txt",armorDesc);
+		//~ filesToLists.put("dev_documents/potion_desc.txt",potionDesc);
 		
 		Set<String> fileNames = filesToLists.keySet();
 		
 		for(String fileN : fileNames){
-			
+			System.out.println(fileN);
 			File words = new File(fileN);
 			Scanner reader = new Scanner(words);
 			
