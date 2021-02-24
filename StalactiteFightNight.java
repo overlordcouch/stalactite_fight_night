@@ -6,7 +6,7 @@ import java.io.*;
  * StalactiteFightNight is the driving class for this game.  
  * 
  * @author M.AnsellRose
- * @version 1.3
+ * @version 1.4
  */
 public class StalactiteFightNight{
 	
@@ -46,30 +46,7 @@ public class StalactiteFightNight{
 			System.out.println("The file paths to content lists are not all valid.");
 		}
 		
-		/*Test to see if monster generation in CaveNode works*/
 		
-		CaveNode temp;
-		for(int index = 0; index <100; index++){
-			
-			temp = new CaveNode(index, "big", "black");
-			
-			System.out.println("You enter "+temp);
-			temp.printPaths();
-			if(!temp.hasMonster()){
-				System.out.println("Cave has no monster");
-				
-			}else{
-				System.out.println(temp.getMonster());
-			}
-			
-			if(!temp.hasLoot()){
-				System.out.println("No loot");
-			}else{
-				System.out.println(temp.getLoot());
-			}
-			temp =null;
-			System.out.println();
-		}
 		
 		
 	}
@@ -176,6 +153,42 @@ public class StalactiteFightNight{
 		}
 		
 
+	}
+	
+	/**
+	 * Tests cavenode functionalities and probabilities.
+	 * 
+	 * @since 1.4
+	 */
+	private void caveTest(){
+		
+		/*Tests CaveNode functionality and monster/loot probabilities
+		 * by generating and outputs 100 caverns*/
+		
+		CaveNode temp;
+		for(int index = 0; index <100; index++){
+			
+			temp = new CaveNode(index, "big", "black");
+			
+			System.out.println("You enter "+temp);
+			temp.printPaths();
+			if(!temp.hasMonster()){
+				System.out.println("Cave has no monster");
+				
+			}else{
+				System.out.println(temp.getMonster());
+			}
+			
+			if(!temp.hasLoot()){
+				System.out.println("No loot");
+			}else{
+				System.out.println(temp.getLoot());
+			}
+			temp =null;
+			System.out.println();
+		}
+		
+		return;
 	}
 	
 	
