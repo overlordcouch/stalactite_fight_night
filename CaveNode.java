@@ -254,7 +254,8 @@ public class CaveNode{
 					break;
 				case 3:
 				case 4: this.lootType = "armor";
-						int armLevel = StalactiteFightNight.rand.nextInt(2 - 1) + 1 + StalactiteFightNight.rand.nextInt(level/7);
+						int mod = level/10;
+						int armLevel = StalactiteFightNight.rand.nextInt(2 - 1) + 1 + StalactiteFightNight.rand.nextInt(level/7 +1);
 						String armType = StalactiteFightNight.armorType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorType.size()));
 						String armDesc = StalactiteFightNight.armorDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorDesc.size()));
 						this.loot = new Armor(armLevel, armType, armDesc);
