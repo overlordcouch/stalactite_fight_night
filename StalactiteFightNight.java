@@ -66,7 +66,7 @@ public class StalactiteFightNight{
 				System.out.println(temp.getLoot());
 			}
 			temp =null;
-			
+			System.out.println();
 		}
 		
 		

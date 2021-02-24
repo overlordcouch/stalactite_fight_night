@@ -254,8 +254,7 @@ public class CaveNode{
 					break;
 				case 3:
 				case 4: this.lootType = "armor";
-						int armLevel = StalactiteFightNight.rand.nextInt((level+2) - (level - 1)) + (level -1);
-						if(armLevel == 0){armLevel = 1;}
+						int armLevel = StalactiteFightNight.rand.nextInt(2 - 1) + 1 + StalactiteFightNight.rand.nextInt(level/7);
 						String armType = StalactiteFightNight.armorType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorType.size()));
 						String armDesc = StalactiteFightNight.armorDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorDesc.size()));
 						this.loot = new Armor(armLevel, armType, armDesc);
@@ -272,8 +271,17 @@ public class CaveNode{
 		}//if/else
 	}
 	
-	
-	public Item getLoot(){
+	/**
+	 * Returns the current loot type, if there is loot.
+	 * 
+	 * @return The loot item in this cavern.
+	 * @throws IllegalStateException if there is no loot in this cavern.
+	 * @since 1.3
+	 */
+	public Item getLoot()throws IllegalStateException{
+		if(!this.hasLoot){
+			throw new IllegalStateException("No loot to be got.");
+		}
 		return this.loot;
 	}	   
 	
