@@ -80,7 +80,7 @@ public class StalactiteFightNight{
 	 * @since 1.2
 	 */
 	private static void listPopulate()throws FileNotFoundException{
-		
+		/*Initialize all the Lists*/
 		monsterType = new ArrayList<String>();
 		monsterDesc = new ArrayList<String>();
 		weaponType = new ArrayList<String>();
@@ -89,6 +89,10 @@ public class StalactiteFightNight{
 		armorDesc = new ArrayList<String>();
 		potionType = new ArrayList<String>();
 		potionDesc = new ArrayList<String>();
+		
+		/*Map each file name to the List that will hold it, that way we can procedurally
+		 * read in the files with streamlined code.*/
+		 
 		Map<String, List<String>> filesToLists = new HashMap<String,List<String>>();
 		filesToLists.put("dev_documents/monster_types.txt",monsterType);
 		filesToLists.put("dev_documents/weapon_types.txt",weaponType);
@@ -100,9 +104,11 @@ public class StalactiteFightNight{
 		filesToLists.put("dev_documents/armor_desc.txt",armorDesc);
 		filesToLists.put("dev_documents/potion_desc.txt",potionDesc);
 		
+		/*Retrieve a Set with all of the keys/ file names*/
 		Set<String> fileNames = filesToLists.keySet();
 		
-		
+		/*For each file name, open the file, put a scanner on it, and use its
+		 * name as a key to access the list that it's contents need to go to.*/
 		for(String fileN : fileNames){
 			File words = new File(fileN);
 			Scanner reader = new Scanner(words);
