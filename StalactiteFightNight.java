@@ -51,7 +51,7 @@ public class StalactiteFightNight{
 		CaveNode temp;
 		for(int index = 0; index <100; index++){
 			
-			temp = new CaveNode(1, "big", "black");
+			temp = new CaveNode(index, "big", "black");
 			
 			if(!temp.hasMonster()){
 				System.out.println("Cave has no monster");
