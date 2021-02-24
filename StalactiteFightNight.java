@@ -54,6 +54,7 @@ public class StalactiteFightNight{
 			temp = new CaveNode(index, "big", "black");
 			
 			System.out.println("You enter "+temp);
+			temp.printPaths();
 			if(!temp.hasMonster()){
 				System.out.println("Cave has no monster");
 				
