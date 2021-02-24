@@ -283,6 +283,23 @@ public class CaveNode{
 			throw new IllegalStateException("No loot to be got.");
 		}
 		return this.loot;
-	}	   
+	}	  
+	
+	/**
+	 * Returns the type of loot that this cavern has, if there is loot.
+	 * 
+	 * @return A string indicating the loot type.
+	 * @throws IllegalStateException if there is no loot in this cavern.
+	 * @since 1.3
+	 */
+	public String getLootType()throws IllegalStateException{
+		
+		if(!this.hasLoot){
+			throw new IllegalStateException("No loot type because no loot.");
+		}
+		
+		return this.lootType;
+		
+	} 
 	
 }//CaveNode class
