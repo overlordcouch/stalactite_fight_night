@@ -69,12 +69,11 @@ beastly
 bloodthirsty
 cussed
 defamatory
-despiteful
 frightful
 furious
 horrid
 lousy
-malign
+malignant
 mean
 ornery
 poisonous
@@ -116,7 +115,6 @@ icky
 lousy
 mucky
 mung
-pigpen
 raunchy
 scummy
 scuzzy
@@ -127,12 +125,10 @@ smutty
 sooty
 squalid
 straggly
-undusted
 unhygienic
 unlaundered
 unsanitary
 unsightly
-unswept
 untidy
 unwashed
 yucky 
@@ -157,7 +153,6 @@ chafed
 choleric
 cross
 displeased
-exacerbated
 ferocious
 fierce
 fiery
