@@ -5,7 +5,7 @@ import java.util.*;
  * about the room's contents and description.
  * 
  * @author M.Ansell
- * @version 1.3
+ * @version 1.4
  */
 public class CaveNode{
 	
@@ -89,24 +89,32 @@ public class CaveNode{
 	 */
 	private static int LOOT_CHANCE = 33;
 	
-/*Constructor will need to accept a Random object for contents generation.
- * No need to make a new one here, as that would build up as the game progresses.
- * 
- * The constructor will need information on the player level to generate
- * appropriate contents.  I think it is best to have a CaveGen function that accesses
- * the adventure class and passes the information here.
- * 
- * The constructor will need 2 string descriptors.*/
+	/**
+	 * Boolean values used in the initial cave generation to indicate
+	 * valid paths forward.
+	 * 
+	 * @since 1.4
+	 */
+	private boolean hasLeft, hasCenter, hasRight;
+	
+	/**
+	 * Pointers for all of the potential paths out of the cave.
+	 * 
+	 * @since 1.4
+	 */
+	private CaveNode leftCave, rightCave, centerCave;
+	
  
 	/**
-	 * Builds a CaveNode and populates it the appropriate monsters and 
-	 * items, at the appropriate level.
+	 * Builds a CaveNode and populates it with the appropriate monsters and 
+	 * items, at the appropriate level.  Determines which paths forward
+	 * exist.  
 	 * 
 	 * @param level The player's level at the time of entering the cavern.
 	 * @param adj1 The first word describing this particular cavern.
 	 * @param adj2 The second word describing this particular cavern.
 	 * 
-	 * @since 1.0
+	 * @since 1.4
 	 */
 	public CaveNode(int level, String adj1, String adj2){
 		
@@ -115,9 +123,14 @@ public class CaveNode{
 		this.desc2 = adj2;
 		this.monsterGen(level);
 		this.lootGen(level);
+		this.pathGen();
 		
-		/*TODO:
-		 * Figure out probabilities for monsters, loot, etc.*/
+		/*At generation, the paths exist, but the caves don't,
+		 * otherwise we'd end up with a never ending recursive 
+		 * construction call*/
+		 this.leftCave = null;
+		 this.rightCave = null;
+		 this.centerCave = null;
 		
 	}
 	
@@ -270,6 +283,29 @@ public class CaveNode{
 			
 			return;
 		}//if/else
+	}//lootGen
+	
+	/**
+	 * Decides which ways you can get out of this cave.
+	 * 
+	 * @since 1.4
+	 */
+	private void pathGen(){
+		
+		/*7 possible combinations of the 3 ways out*/
+		int choice  = StalactiteFightNight.rand.nextInt(7);
+		
+		if(choice%2 == 0){
+			this.hasLeft = true;
+		}
+		
+		if(choice >0 && choice <= 4){
+			this.hasCenter = true;
+		}
+		
+		if(choice > 2){
+			this.hasRight = true;
+		}
 	}
 	
 	/**
@@ -302,5 +338,15 @@ public class CaveNode{
 		return this.lootType;
 		
 	} 
+	
+	/**
+	 * General toString method.  Gives string in the form "a adj, adj cavern"
+	 * 
+	 * @return A string describing the cavern.
+	 * @since 1.4
+	 */
+	public String toString(){
+		return "a " + this.desc1 + ", " + this.desc2 + " cavern.";
+	}
 	
 }//CaveNode class
