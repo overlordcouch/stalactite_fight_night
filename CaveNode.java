@@ -349,4 +349,22 @@ public class CaveNode{
 		return "a " + this.desc1 + ", " + this.desc2 + " cavern.";
 	}
 	
+	/**
+	 * Prints the configuration of the path forward from this cave to the
+	 * console.
+	 * 
+	 * @since 1.4
+	 */
+	public void printPaths(){
+		
+		if(this.hasLeft){
+			System.out.println("You see a tunnel leading off to the left.");
+		}
+		if(this.hasRight){
+			System.out.println("You see a tunnel leading off to the right.");
+		}
+		if(this.hasCenter){
+			System.out.println("You see a tunnel leading off directly across from you.");
+		}
+	}
 }//CaveNode class
