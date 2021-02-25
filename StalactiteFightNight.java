@@ -57,7 +57,7 @@ public class StalactiteFightNight{
 		startScreen();
 		
 		/*Begin with prompting user and creating character*/
-		
+		introPrompt();
 
 		
 		
@@ -88,7 +88,6 @@ public class StalactiteFightNight{
 		}
 		
 		if(input.equals("s")){
-			console.nextLine();
 			return;
 		}
 		
@@ -143,7 +142,9 @@ public class StalactiteFightNight{
 		
 		//Clear the screen and the buffer
 		clearWindow();
-		console.nextLine();
+		if(console.hasNextLine()){
+			console.nextLine();
+		}
 		
 		try{
 		
@@ -163,12 +164,16 @@ public class StalactiteFightNight{
 		
 		System.out.println();
 		
-		System.out.println("Nice to meet you, " + player + ".");
-		System.out.println("My calling is to sit outside this cave and meet those who dare to enter,");
-		System.out.println("so when they inevitably die at least one person will remember them.\n");
+		System.out.println("\"Nice to meet you, " + player + ".\"");
+		System.out.println("\"My calling is to sit outside this cave and meet those who dare to enter,");
+		System.out.println("so when they inevitably die at least one person will remember them.\"\n");
 		
-		System.out.println("I'm not sure how you plan to succed wearing a "+ player.getEquippedArmor()
-							+" with nothing but your "+ player.getEquippedWeapon() +", but who am I to judge?");
+		System.out.println("\"I'm not sure how you plan to succed wearing a "+ player.getEquippedArmor()
+							+" with nothing but your "+ player.getEquippedWeapon() +", but who am I to judge?\"");
+		System.out.println("\n\n\"Good luck, I guess!\"");
+		System.out.println("\n\n\n\n Press any key to enter the caves!  No turning back now.");
+		
+		console.nextLine();
 		
 		
 		
