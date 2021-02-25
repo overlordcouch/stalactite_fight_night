@@ -168,6 +168,17 @@ public class Adventurer{
 	}
 	
 	/**
+	 * Accessor to return the player's max possible health for the
+	 * current level.
+	 * 
+	 * @return The maximum health capacity of the player
+	 * @since 1.6
+	 */
+	public int getMaxHealth(){
+		return this.maxHealth;
+	}
+	
+	/**
 	 * Deal damage to the adventurer by reducing health.
 	 * 
 	 * @param damage The damage to deal to the player
