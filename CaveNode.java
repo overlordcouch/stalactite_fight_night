@@ -102,7 +102,7 @@ public class CaveNode{
 	 * 
 	 * @since 1.4
 	 */
-	private CaveNode leftCave, rightCave, centerCave;
+	private CaveNode leftCave, rightCave, centerCave, previous;
 	
  
 	/**
@@ -113,10 +113,11 @@ public class CaveNode{
 	 * @param level The player's level at the time of entering the cavern.
 	 * @param adj1 The first word describing this particular cavern.
 	 * @param adj2 The second word describing this particular cavern.
+	 * @param previous The previous cave in the tree.
 	 * 
-	 * @since 1.4
+	 * @since 1.5
 	 */
-	public CaveNode(int level, String adj1, String adj2){
+	public CaveNode(int level, String adj1, String adj2, CaveNode previous){
 		
 		this.level = level;
 		this.desc1 = adj1;
@@ -131,6 +132,7 @@ public class CaveNode{
 		 this.leftCave = null;
 		 this.rightCave = null;
 		 this.centerCave = null;
+		 this.previous = previous;
 		
 	}
 	

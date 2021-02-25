@@ -324,7 +324,7 @@ public class StalactiteFightNight{
 		CaveNode temp;
 		for(int index = 0; index <100; index++){
 			
-			temp = new CaveNode(index, "big", "black");
+			temp = new CaveNode(index, "big", "black", null);
 			
 			System.out.println("You enter "+temp);
 			temp.printPaths();
