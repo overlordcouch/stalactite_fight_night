@@ -143,13 +143,16 @@ public class Adventurer{
 		 
 		 this.investigation = 1;
 		 this.strength = 10;
+		 
+		 this.currentWeapon = DEFAULT_WEAPON;
+		 this.currentArmor = DEFAULT_ARMOR;
+		 
 		 this.updateAC();
 		 
 		 this.inCombat = false;
 		 this.myTurn = false;
 		 this.inventory = new ArrayList<Item>();
-		 this.currentWeapon = DEFAULT_WEAPON;
-		 this.currentArmor = DEFAULT_ARMOR;
+		
 	 }
 	      
 	
