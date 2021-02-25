@@ -16,7 +16,9 @@ are related.
 
 - [x] Monster descriptors
 
-- [ ] Weapons, Armors, Potions and descriptions
+- [x] Weapons, Armors, Potions and descriptions
+
+- [ ] Caves
   
 - [x] Create CavernNode class for cave creation.   
   
@@ -36,4 +38,9 @@ are related.
 
 - Start creating actual gameplay, even if limited  
   
-- User start prompt
+-  [x] User start prompt
+
+- Currently working on StalactiteFightNight.enterCaves, the method that  
+comes after the intro.  It serves as the first step into the caverns.  
+Needs to generate some flavor text, and a CaveNode to serve as the tree  
+root.
