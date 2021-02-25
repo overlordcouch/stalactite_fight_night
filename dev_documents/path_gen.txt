@@ -1,0 +1,20 @@
+How paths forward are chosen:
+
+Pick random number <7
+
+0	L
+1	 C
+2	LC
+3	 CR
+4	LCR
+5	  R
+6	L R
+
+if even, then left path will exist
+
+if 0<x<=4, center path exists
+
+if x>2, right path exists
+
+First attempt was a large switch statement, this is
+much cleaner.

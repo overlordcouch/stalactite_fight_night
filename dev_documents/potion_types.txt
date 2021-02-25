@@ -1,0 +1,21 @@
+potion
+salve
+wrap
+bandage
+band-aid
+duct tape
+ointment
+gauze
+cloth strip
+washcloth
+dressing
+compress
+medicine
+balm
+lotion
+cream
+unguent
+liniment
+beaker
+vial
+cloth

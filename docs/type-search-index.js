@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"<Unnamed>","l":"Adventurer"},{"l":"All Classes","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"Armor"},{"p":"<Unnamed>","l":"CaveNode"},{"p":"<Unnamed>","l":"Item"},{"p":"<Unnamed>","l":"Monster"},{"p":"<Unnamed>","l":"Potion"},{"p":"<Unnamed>","l":"StalactiteFightNight"},{"p":"<Unnamed>","l":"Weapon"}];updateSearchResults();

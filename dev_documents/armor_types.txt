@@ -1,0 +1,19 @@
+chain mail
+scale mail
+scale armor 
+plate armor
+half-plate armor
+leather armor
+hardened leather armor
+shield
+helmet
+robe
+cuirass
+shin guards
+work gloves
+bathing suit
+hockey pads
+goggles
+welding mask
+breastplate
+boots
