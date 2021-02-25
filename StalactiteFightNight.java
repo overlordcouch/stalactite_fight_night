@@ -208,6 +208,18 @@ public class StalactiteFightNight{
 	}
 	
 	/**
+	 * Starting point of the adventure.  Generates first cave, introduces
+	 * with flavor text.
+	 * 
+	 * @since 1.5
+	 */
+	private static void enterCaves(){
+		
+		System.out.println();
+
+	}
+	
+	/**
 	 * Runs at the beginning of the program to populate the public lists
 	 * that other game classes use to generate random content.
 	 * 
