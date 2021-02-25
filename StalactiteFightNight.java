@@ -27,6 +27,12 @@ public class StalactiteFightNight{
 	 */
 	public static Random rand = new Random();
 	
+	/**
+	 * Scanner on console input that will be used by various classes for
+	 * gameplay
+	 * 
+	 * @since 1.5
+	 */
 	public static Scanner console = new Scanner(System.in);
 	
 	
@@ -50,7 +56,7 @@ public class StalactiteFightNight{
 		
 		startScreen();
 		
-		
+		/*Begin with prompting user and creating character*/
 		
 
 		
@@ -127,6 +133,49 @@ public class StalactiteFightNight{
 			
 			startScreen();
 	}//instructionPrint
+	
+	/**
+	 * Prints intro flavor text and prompts user through character creation.
+	 * 
+	 * @since 1.5
+	 */
+	private static Adventurer introPrompt(){
+		
+		//Clear the screen and the buffer
+		clearWindow();
+		console.nextLine();
+		
+		try{
+		
+			//Print the intro text and prompt
+			Scanner reader = new Scanner(new File("dev_documents/intro_prompt.txt"));
+			while(reader.hasNextLine()){
+				System.out.println(reader.nextLine());
+			}
+			
+		}catch(Exception FileNotFoundException){
+			System.out.println("Failed to find intro text.  Enter your name.");
+		}
+		
+		
+		
+		Adventurer player = new Adventurer(console.nextLine());
+		
+		System.out.println();
+		
+		System.out.println("Nice to meet you, " + player + ".");
+		System.out.println("My calling is to sit outside this cave and meet those who dare to enter,");
+		System.out.println("so when they inevitably die at least one person will remember them.\n");
+		
+		System.out.println("I'm not sure how you plan to succed wearing a "+ player.getEquippedArmor()
+							+" with nothing but your "+ player.getEquippedWeapon() +", but who am I to judge?");
+		
+		
+		
+		return player;
+		
+		
+	}
 	
 	/**
 	 * Runs at the beginning of the program to populate the public lists

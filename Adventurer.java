@@ -277,6 +277,28 @@ public class Adventurer{
 	public String toString(){
 		return this.name;
 	}
+	
+	/**
+	 * Accessor to return a pointer to the current armor that the 
+	 * adventurer has equipped.
+	 * 
+	 * @return Currently equipped armor.
+	 * @since 1.6
+	 */
+	public Armor getEquippedArmor(){
+		return this.currentArmor;
+	}
+	
+	/**
+	 * Accessor to return a pointer to the current weapon that the
+	 * adventurer is wielding.
+	 * 
+	 * @return The weapon that is equipped.
+	 * @since 1.6
+	 */
+	public Weapon getEquippedWeapon(){
+		return this.currentWeapon;
+	}
 	   
 	 
 	
