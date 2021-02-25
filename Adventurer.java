@@ -6,7 +6,7 @@ import java.lang.Math;
  * Class that contains information, statistics, and inventory for the player character.
  * 
  * @author M.Ansell
- * @version 1.5
+ * @version 1.6
  */
 public class Adventurer{
 	
@@ -266,6 +266,16 @@ public class Adventurer{
 	
 	private void updateAC(){
 		this.ac = 9 + this.level + currentArmor.getArmor();
+	}
+	
+	/**
+	 * Standard toString method, returns the adventurers name only.
+	 * 
+	 * @return the name of the adventurer.
+	 * @since 1.6
+	 */
+	public String toString(){
+		return this.name;
 	}
 	   
 	 
