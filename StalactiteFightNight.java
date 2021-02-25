@@ -194,6 +194,8 @@ public class StalactiteFightNight{
 		System.out.println("\"I'm not sure how you plan to succed wearing a "+ player.getEquippedArmor()
 							+" with nothing but your "+ player.getEquippedWeapon() +", but who am I to judge?\"");
 		System.out.println("\n\n\"Good luck, I guess!\"");
+		
+		
 		System.out.println("\n\n\n\n Press any key to enter the caves!  No turning back now.");
 		
 		console.nextLine();
@@ -306,9 +308,38 @@ public class StalactiteFightNight{
 			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 		}catch(IOException | InterruptedException ex){
 			System.out.println("Couldn't clear terminal!  Oopsie");
-		}
-		
+		}	
 
+	}
+	
+	/**
+	 * Prints the vital statistics of the player, normally at the top of
+	 * the game screen. Prints name, health bar, health, equipped armor,
+	 * and equipped weapon.
+	 * 
+	 * @since 1.5
+	 */
+	public static void printPlayerHeader(){
+		
+		String healthBar ="[";
+		int healthPercentage =(int) Math.round((player.getHealth()/(double)player.getMaxHealth())*10.0) ;	
+		
+		for (int index = 0; index < healthPercentage; index++){
+			healthBar += "|";
+		}
+		for(int index = 0; index < (10 - healthPercentage); index++){
+			healthBar += " ";
+		}
+		healthBar += "]";
+		
+		String justification = 	"\t\t\t\t\t\t\t\t\t\t\t\t\t";											
+		System.out.println(justification+ player);
+		System.out.println(justification+ healthBar);
+		System.out.println(justification+ "Health: "+ player.getHealth() +"/"+player.getMaxHealth());
+		System.out.println(justification+ "Wearing "+ player.getEquippedArmor());
+		System.out.println(justification+ "Wielding " + player.getEquippedWeapon());
+		
+		return;
 	}
 	
 	/**
