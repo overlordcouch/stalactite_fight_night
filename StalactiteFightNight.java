@@ -6,7 +6,7 @@ import java.io.*;
  * StalactiteFightNight is the driving class for this game.  
  * 
  * @author M.AnsellRose
- * @version 1.4
+ * @version 1.5
  */
 public class StalactiteFightNight{
 	
@@ -27,6 +27,8 @@ public class StalactiteFightNight{
 	 */
 	public static Random rand = new Random();
 	
+	public static Scanner console = new Scanner(System.in);
+	
 	
 	/**
 	 * The driving method for the Stactite Fight Night game.
@@ -46,10 +48,85 @@ public class StalactiteFightNight{
 			System.out.println("The file paths to content lists are not all valid.");
 		}
 		
+		startScreen();
 		
+		
+		
+
 		
 		
 	}
+	
+	/**
+	 * Performs startup interactions.  Prints splash screen and interlinks
+	 * with instruction method to loop as much as necessary.  Eventually
+	 * leads to beginning of gameplay.
+	 * 
+	 * @since 1.5
+	 */
+	private static void startScreen(){
+		
+
+		clearWindow();
+		
+		splashPrint();
+		
+		//pull in user input
+		String input = console.next().toLowerCase();
+		
+		/*Wait until user input is either i or s*/
+		while(!input.equals("i") && !input.equals("s")){
+			
+			input = console.next().toLowerCase();
+			
+		}
+		
+		if(input.equals("s")){
+			console.nextLine();
+			return;
+		}
+		
+		if(input.equals("i")){
+			console.nextLine();
+			instructPrint();
+		}	
+		
+	}//startScreen
+	
+	/**
+	 * Prints the instructions to the console.  When complete, it will
+	 * return the user to the start screen.
+	 * 
+	 * @since 1.5
+	 */
+	private static void instructPrint(){
+		//Clear the display
+		clearWindow();
+		
+		//Print the instructions
+		try{
+			Scanner reader=new Scanner( new File("dev_documents/instructions.txt"));
+			
+			while(reader.hasNextLine()){
+				System.out.println(reader.nextLine());
+			}
+			
+		}catch(Exception FileNotFoundException){
+			
+			System.out.println("Instruction file not found.");
+			System.out.println("Press any key to return to the start.");
+		}
+		
+		//Wait for the user to input literally anything
+			
+			while(!console.hasNextLine()){
+				
+			}
+			console.nextLine();
+			
+			
+			startScreen();
+	}//instructionPrint
 	
 	/**
 	 * Runs at the beginning of the program to populate the public lists
@@ -70,7 +147,9 @@ public class StalactiteFightNight{
 		potionDesc = new ArrayList<String>();
 		
 		/*Map each file name to the List that will hold it, that way we can procedurally
-		 * read in the files with streamlined code.*/
+		 * read in the files with streamlined code.  This setup allows for
+		 * new lists of descriptors to be added to the game with a single line
+		 * of code.*/
 		 
 		Map<String, List<String>> filesToLists = new HashMap<String,List<String>>();
 		filesToLists.put("dev_documents/monster_types.txt",monsterType);
