@@ -35,6 +35,13 @@ public class StalactiteFightNight{
 	 */
 	public static Scanner console = new Scanner(System.in);
 	
+	/**
+	 * The object that holds the current player object.
+	 * 
+	 * @since 1.5
+	 */
+	public static Adventurer player;
+	
 	
 	/**
 	 * The driving method for the Stactite Fight Night game.
@@ -138,7 +145,7 @@ public class StalactiteFightNight{
 	 * 
 	 * @since 1.5
 	 */
-	private static Adventurer introPrompt(){
+	private static void introPrompt(){
 		
 		//Clear the screen and the buffer
 		clearWindow();
@@ -160,7 +167,7 @@ public class StalactiteFightNight{
 		
 		
 		
-		Adventurer player = new Adventurer(console.nextLine());
+		player = new Adventurer(console.nextLine());
 		
 		System.out.println();
 		
@@ -177,7 +184,7 @@ public class StalactiteFightNight{
 		
 		
 		
-		return player;
+		return;
 		
 		
 	}
