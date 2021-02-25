@@ -44,6 +44,22 @@ public class StalactiteFightNight{
 	
 	
 	/**
+	 * The cavenode representing where the player currently is.
+	 * 
+	 * @since 1.5
+	 */
+	public static CaveNode currentCave;
+	
+	/**
+	 * Holds the path that the adventurer has traveled.  Allows
+	 * backtracking and retreating along tree.
+	 * 
+	 * @since 1.5
+	 */
+	public static Stack<CaveNode> path = new Stack<CaveNode>();
+	
+	
+	/**
 	 * The driving method for the Stactite Fight Night game.
 	 * 
 	 * @param args - N/A
