@@ -313,6 +313,18 @@ public class Adventurer{
 	public Weapon getEquippedWeapon(){
 		return this.currentWeapon;
 	}
+	
+	/**
+	 * Accessor to determine the player's current level.  Used for ambient
+	 * content generation.
+	 * 
+	 * @return The adventurer's current level.
+	 * @since 1.6
+	 */
+	 
+	 public int getLevel(){
+		 return this.level;
+	 }
 	   
 	 
 	
