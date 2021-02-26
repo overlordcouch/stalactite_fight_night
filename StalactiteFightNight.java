@@ -98,7 +98,7 @@ public class StalactiteFightNight{
 	private static void startScreen(){
 		
 
-		clearWindow();
+		Helper.clearWindow();
 		
 		splashPrint();
 		
@@ -131,7 +131,7 @@ public class StalactiteFightNight{
 	 */
 	private static void instructPrint(){
 		//Clear the display
-		clearWindow();
+		Helper.clearWindow();
 		
 		//Print the instructions
 		try{
@@ -166,10 +166,8 @@ public class StalactiteFightNight{
 	private static void introPrompt(){
 		
 		//Clear the screen and the buffer
-		clearWindow();
-		if(console.hasNextLine()){
-			console.nextLine();
-		}
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
 		
 		try{
 		
@@ -313,20 +311,7 @@ public class StalactiteFightNight{
 		return;
 	}//splashPrint
 	
-	/**
-	 * Clears the console window.  Used regularly in gameplay.
-	 * 
-	 * @since 1.2
-	 */
-	public static void clearWindow(){
-		
-		try{
-			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-		}catch(IOException | InterruptedException ex){
-			System.out.println("Couldn't clear terminal!  Oopsie");
-		}	
-
-	}
+	
 	
 	/**
 	 * Prints the vital statistics of the player, normally at the top of

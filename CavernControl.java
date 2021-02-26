@@ -35,7 +35,7 @@ public class CavernControl{
 	 */
 	public static void cavernMain(){
 		
-		clearWindow();
+		Helper.clearWindow();
 		
 		
 	}
@@ -45,19 +45,6 @@ public class CavernControl{
 	
 	
 	
-	/**
-	 * Clears the console window.  Used regularly in gameplay.
-	 * 
-	 * @since 1.0
-	 */
-	public static void clearWindow(){
-		
-		try{
-			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-		}catch(IOException | InterruptedException ex){
-			System.out.println("Couldn't clear terminal!  Oopsie");
-		}	
-
-	}
+	
 	
 }//caverncontrol
