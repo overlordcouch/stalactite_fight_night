@@ -5,7 +5,7 @@ import java.util.*;
  * about the room's contents and description.
  * 
  * @author M.Ansell
- * @version 1.4
+ * @version 1.6
  */
 public class CaveNode{
 	
@@ -134,6 +134,110 @@ public class CaveNode{
 		 this.centerCave = null;
 		 this.previous = previous;
 		
+	}
+	
+	/**
+	 * Getter for examining paths forward.
+	 * 
+	 * @return true if there is a left-hand path
+	 * @since 1.6
+	 */
+	public boolean hasLeft(){
+		return this.hasLeft;
+	}
+	
+	/**
+	 * Getter for examining paths forward.
+	 * 
+	 * @return true if there is a right-hand path
+	 * @since 1.6
+	 */
+	public boolean hasRight(){
+		return this.hasRight;
+	}
+	
+	/**
+	 * Getter for examining paths forward.
+	 * 
+	 * @return true if there is a path directly ahead
+	 * @since 1.6
+	 */
+	public boolean hasCenter(){
+		return this.hasCenter;
+	}
+	
+	/**
+	 * Retrieves reference the the 'parent' cavern.
+	 * 
+	 * @return The parent CaveNode
+	 * @since 1.6
+	 */
+	public CaveNode getPrev(){
+		return this.previous;
+	}
+	
+	/**
+	 * Returns the right cave object, if there is one.
+	 * 
+	 * @return The cave to the right.
+	 * @since 1.6
+	 */
+	public CaveNode getRight(){
+		return this.rightCave;
+	}
+	
+	/**
+	 * Returns the left cave object, if there is one.
+	 * 
+	 * @return The cave to the left.
+	 * @since 1.6
+	 */
+	public CaveNode getLeft(){
+		return this.leftCave;
+	}
+	
+	/**
+	 * Returns the center cave object, if there is one.
+	 * 
+	 * @return The cave directly ahead.
+	 * @since 1.6
+	 */
+	public CaveNode getCenter(){
+		return this.centerCave;
+	}
+	
+	/**
+	 * Sets the parent reference to the provided node.
+	 * 
+	 * @param parent The parent of this node.
+	 * @since 1.6
+	 */
+	public void setPrev(CaveNode parent){
+		this.previous = parent;
+	}
+	
+	/**
+	 * Setter to link a new cave at the appropriate position.
+	 * 
+	 * @param which Which path forward.  Only acceptable entries are right/left/center.
+	 * @param neighbor The new node to be linked in.
+	 * @since 1.6
+	 */
+	public void setPath(String which, CaveNode neighbor){
+		
+		//Make the input uniform
+		which = which.toLowerCase();
+		
+		//Assign appropriately for valid inputs, throw exception otherwise.
+		if(which.equals("right")){
+			this.rightCave = neighbor;
+		}else if(which.equals("left")){
+			this.leftCave = neighbor;
+		}else if(which.equals("center")){
+			this.centerCave = neighbor;
+		}else{
+			throw new IllegalArgumentException("Not a valid path out of cavern.");
+		}
 	}
 	
 	/**
@@ -348,7 +452,7 @@ public class CaveNode{
 	 * @since 1.4
 	 */
 	public String toString(){
-		return "a " + this.desc1 + ", " + this.desc2 + " cavern.";
+		return "the " + this.desc1 + ", " + this.desc2 + " cavern.";
 	}
 	
 	/**

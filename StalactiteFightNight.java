@@ -17,7 +17,8 @@ public class StalactiteFightNight{
 	 * @since 1.2
 	 */
 	public static List<String> monsterType, monsterDesc, weaponType, weaponDesc,
-								armorType, armorDesc, potionType, potionDesc;
+								armorType, armorDesc, potionType, potionDesc, caveDesc,
+								enterDesc;
 	
 	/**
 	 * Random object used throughout the game for generation and event
@@ -43,12 +44,7 @@ public class StalactiteFightNight{
 	public static Adventurer player;
 	
 	
-	/**
-	 * The cavenode representing where the player currently is.
-	 * 
-	 * @since 1.5
-	 */
-	public static CaveNode currentCave;
+	
 	
 	/**
 	 * Holds the path that the adventurer has traveled.  Allows
@@ -77,10 +73,16 @@ public class StalactiteFightNight{
 			System.out.println("The file paths to content lists are not all valid.");
 		}
 		
+		//Set the current cave to null in preparation for tree generation.
+		CavernControl.currentCave = null;
+		
+		//Put up the start screen and begin gameplay
 		startScreen();
 		
 		/*Begin with prompting user and creating character*/
 		introPrompt();
+		
+		CavernControl.newCavern(null);
 
 		
 		
@@ -96,7 +98,7 @@ public class StalactiteFightNight{
 	private static void startScreen(){
 		
 
-		clearWindow();
+		Helper.clearWindow();
 		
 		splashPrint();
 		
@@ -129,7 +131,7 @@ public class StalactiteFightNight{
 	 */
 	private static void instructPrint(){
 		//Clear the display
-		clearWindow();
+		Helper.clearWindow();
 		
 		//Print the instructions
 		try{
@@ -142,7 +144,7 @@ public class StalactiteFightNight{
 		}catch(Exception FileNotFoundException){
 			
 			System.out.println("Instruction file not found.");
-			System.out.println("Press any key to return to the start.");
+			System.out.println("Press 'enter' to return to the start.");
 		}
 		
 		//Wait for the user to input literally anything
@@ -164,10 +166,8 @@ public class StalactiteFightNight{
 	private static void introPrompt(){
 		
 		//Clear the screen and the buffer
-		clearWindow();
-		if(console.hasNextLine()){
-			console.nextLine();
-		}
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
 		
 		try{
 		
@@ -196,9 +196,9 @@ public class StalactiteFightNight{
 		System.out.println("\n\n\"Good luck, I guess!\"");
 		
 		
-		System.out.println("\n\n\n\n Press any key to enter the caves!  No turning back now.");
+		System.out.println("\n\n\n\n Press 'enter' to enter the caves!  No turning back now.");
 		
-		console.nextLine();
+		while(!console.hasNextLine()){}
 		
 		
 		
@@ -236,6 +236,8 @@ public class StalactiteFightNight{
 		armorDesc = new ArrayList<String>();
 		potionType = new ArrayList<String>();
 		potionDesc = new ArrayList<String>();
+		caveDesc = new ArrayList<String>();
+		enterDesc = new ArrayList<String>();
 		
 		/*Map each file name to the List that will hold it, that way we can procedurally
 		 * read in the files with streamlined code.  This setup allows for
@@ -252,6 +254,8 @@ public class StalactiteFightNight{
 		filesToLists.put("dev_documents/weapon_desc.txt",weaponDesc);
 		filesToLists.put("dev_documents/armor_desc.txt",armorDesc);
 		filesToLists.put("dev_documents/potion_desc.txt",potionDesc);
+		filesToLists.put("dev_documents/cave_desc.txt",caveDesc);
+		filesToLists.put("dev_documents/enter_desc.txt",enterDesc);
 		
 		/*Retrieve a Set with all of the keys/ file names*/
 		Set<String> fileNames = filesToLists.keySet();
@@ -309,57 +313,16 @@ public class StalactiteFightNight{
 		return;
 	}//splashPrint
 	
-	/**
-	 * Clears the console window.  Used regularly in gameplay.
-	 * 
-	 * @since 1.2
-	 */
-	public static void clearWindow(){
-		
-		try{
-			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-		}catch(IOException | InterruptedException ex){
-			System.out.println("Couldn't clear terminal!  Oopsie");
-		}	
-
-	}
 	
-	/**
-	 * Prints the vital statistics of the player, normally at the top of
-	 * the game screen. Prints name, health bar, health, equipped armor,
-	 * and equipped weapon.
-	 * 
-	 * @since 1.5
-	 */
-	public static void printPlayerHeader(){
-		
-		String healthBar ="[";
-		int healthPercentage =(int) Math.round((player.getHealth()/(double)player.getMaxHealth())*10.0) ;	
-		
-		for (int index = 0; index < healthPercentage; index++){
-			healthBar += "|";
-		}
-		for(int index = 0; index < (10 - healthPercentage); index++){
-			healthBar += " ";
-		}
-		healthBar += "]";
-		
-		String justification = 	"\t\t\t\t\t\t\t\t\t\t\t\t\t";											
-		System.out.println(justification+ player);
-		System.out.println(justification+ healthBar);
-		System.out.println(justification+ "Health: "+ player.getHealth() +"/"+player.getMaxHealth());
-		System.out.println(justification+ "Wearing "+ player.getEquippedArmor());
-		System.out.println(justification+ "Wielding " + player.getEquippedWeapon());
-		
-		return;
-	}
+	
+	
 	
 	/**
 	 * Tests cavenode functionalities and probabilities.
 	 * 
 	 * @since 1.4
 	 */
-	private void caveTest(){
+	private static void caveTest(){
 		
 		/*Tests CaveNode functionality and monster/loot probabilities
 		 * by generating and outputs 100 caverns*/
@@ -367,7 +330,7 @@ public class StalactiteFightNight{
 		CaveNode temp;
 		for(int index = 0; index <100; index++){
 			
-			temp = new CaveNode(index, "big", "black", null);
+			temp = new CaveNode(index, caveDesc.get(rand.nextInt(caveDesc.size())), caveDesc.get(rand.nextInt(caveDesc.size())), null);
 			
 			System.out.println("You enter "+temp);
 			temp.printPaths();
