@@ -36,6 +36,8 @@ public class CavernControl{
 	public static void cavernMain(){
 		
 		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		
 		
 		
 	}
