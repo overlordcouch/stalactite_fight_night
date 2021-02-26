@@ -16,14 +16,28 @@ public class CavernControl{
 	 * 
 	 * @since 1.0
 	 */
-	private Random randGen = StalactiteFightNight.rand;
+	private static Random randGen = StalactiteFightNight.rand;
 	
 	/**
 	 * Local pointer to console input from driver class
 	 * 
 	 * @since 1.0
 	 */
-	private Scanner console = StalactiteFightNight.console;
+	private static Scanner console = StalactiteFightNight.console;
+	
+	/**
+	 * Local pointer to the list of cave descriptors generated in main.
+	 * 
+	 * @since 1.0
+	 */
+	private static List<String> caveDesc = StalactiteFightNight.caveDesc;
+	
+	/**
+	 * Local pointer to the player object created by main.
+	 * 
+	 * @since 1.0
+	 */
+	private static Adventurer player = StalactiteFightNight.player;
 	
 	
 	/**
@@ -48,13 +62,24 @@ public class CavernControl{
 	 * Generates a new cavern and links it into the tree structure.  Updates
 	 * path stack and transfers control to cavernMain.
 	 * 
+	 * @param direction The direction to carry on in.
 	 * @since 1.0
 	 */
-	public static void newCavern(){
+	public static void newCavern(String direction){
 		
 		Helper.clearWindow();
 		Helper.clearInputBuffer();
 		Helper.printPlayerHeader();
+		
+		/*Generate the descriptors for this shiny new cavern*/
+		String desc1 = caveDesc.get(randGen.nextInt(caveDesc.size()));
+		String desc2 = caveDesc.get(randGen.nextInt(caveDesc.size()));
+		
+		/*First, we check if this is the first cave in the instance.*/
+		if(StalactiteFightNight.currentCave == null){			
+			
+			StalactiteFightNight.currentCave = new CaveNode(player.getLevel(), desc1, desc2, null);
+		}
 		
 		
 		

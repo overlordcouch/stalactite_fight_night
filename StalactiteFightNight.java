@@ -78,6 +78,10 @@ public class StalactiteFightNight{
 			System.out.println("The file paths to content lists are not all valid.");
 		}
 		
+		//Set the current cave to null in preparation for tree generation.
+		currentCave = null;
+		
+		//Put up the start screen and begin gameplay
 		startScreen();
 		
 		/*Begin with prompting user and creating character*/

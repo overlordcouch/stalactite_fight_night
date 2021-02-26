@@ -5,7 +5,7 @@ import java.util.*;
  * about the room's contents and description.
  * 
  * @author M.Ansell
- * @version 1.5
+ * @version 1.6
  */
 public class CaveNode{
 	
@@ -140,7 +140,7 @@ public class CaveNode{
 	 * Getter for examining paths forward.
 	 * 
 	 * @return true if there is a left-hand path
-	 * @since 1.5
+	 * @since 1.6
 	 */
 	public boolean hasLeft(){
 		return this.hasLeft;
@@ -150,7 +150,7 @@ public class CaveNode{
 	 * Getter for examining paths forward.
 	 * 
 	 * @return true if there is a right-hand path
-	 * @since 1.5
+	 * @since 1.6
 	 */
 	public boolean hasRight(){
 		return this.hasRight;
@@ -160,10 +160,20 @@ public class CaveNode{
 	 * Getter for examining paths forward.
 	 * 
 	 * @return true if there is a path directly ahead
-	 * @since 1.5
+	 * @since 1.6
 	 */
 	public boolean hasCenter(){
 		return this.hasCenter;
+	}
+	
+	/**
+	 * Retrieves reference the the 'parent' cavern.
+	 * 
+	 * @return The parent CaveNode
+	 * @since 1.6
+	 */
+	public CaveNode getPrev(){
+		return this.previous;
 	}
 	
 	/**
@@ -171,7 +181,7 @@ public class CaveNode{
 	 * 
 	 * @param which Which path forward.  Only acceptable entries are right/left/center.
 	 * @param neighbor The new node to be linked in.
-	 * @since 1.5
+	 * @since 1.6
 	 */
 	public void setPath(String which, CaveNode neighbor){
 		
