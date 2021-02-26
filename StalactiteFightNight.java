@@ -17,7 +17,7 @@ public class StalactiteFightNight{
 	 * @since 1.2
 	 */
 	public static List<String> monsterType, monsterDesc, weaponType, weaponDesc,
-								armorType, armorDesc, potionType, potionDesc;
+								armorType, armorDesc, potionType, potionDesc, caveDesc;
 	
 	/**
 	 * Random object used throughout the game for generation and event
@@ -81,6 +81,8 @@ public class StalactiteFightNight{
 		
 		/*Begin with prompting user and creating character*/
 		introPrompt();
+		
+		caveTest();
 
 		
 		
@@ -236,6 +238,7 @@ public class StalactiteFightNight{
 		armorDesc = new ArrayList<String>();
 		potionType = new ArrayList<String>();
 		potionDesc = new ArrayList<String>();
+		caveDesc = new ArrayList<String>();
 		
 		/*Map each file name to the List that will hold it, that way we can procedurally
 		 * read in the files with streamlined code.  This setup allows for
@@ -252,6 +255,7 @@ public class StalactiteFightNight{
 		filesToLists.put("dev_documents/weapon_desc.txt",weaponDesc);
 		filesToLists.put("dev_documents/armor_desc.txt",armorDesc);
 		filesToLists.put("dev_documents/potion_desc.txt",potionDesc);
+		filesToLists.put("dev_documents/cave_desc.txt",caveDesc);
 		
 		/*Retrieve a Set with all of the keys/ file names*/
 		Set<String> fileNames = filesToLists.keySet();
@@ -359,7 +363,7 @@ public class StalactiteFightNight{
 	 * 
 	 * @since 1.4
 	 */
-	private void caveTest(){
+	private static void caveTest(){
 		
 		/*Tests CaveNode functionality and monster/loot probabilities
 		 * by generating and outputs 100 caverns*/
@@ -367,7 +371,7 @@ public class StalactiteFightNight{
 		CaveNode temp;
 		for(int index = 0; index <100; index++){
 			
-			temp = new CaveNode(index, "big", "black", null);
+			temp = new CaveNode(index, caveDesc.get(rand.nextInt(caveDesc.size())), caveDesc.get(rand.nextInt(caveDesc.size())), null);
 			
 			System.out.println("You enter "+temp);
 			temp.printPaths();

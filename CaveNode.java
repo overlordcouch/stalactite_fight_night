@@ -348,7 +348,7 @@ public class CaveNode{
 	 * @since 1.4
 	 */
 	public String toString(){
-		return "a " + this.desc1 + ", " + this.desc2 + " cavern.";
+		return "the " + this.desc1 + ", " + this.desc2 + " cavern.";
 	}
 	
 	/**
