@@ -177,6 +177,16 @@ public class CaveNode{
 	}
 	
 	/**
+	 * Sets the parent reference to the provided node.
+	 * 
+	 * @param parent The parent of this node.
+	 * @since 1.6
+	 */
+	public void setPrev(CaveNode parent){
+		this.previous = parent;
+	}
+	
+	/**
 	 * Setter to link a new cave at the appropriate position.
 	 * 
 	 * @param which Which path forward.  Only acceptable entries are right/left/center.
