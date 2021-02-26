@@ -40,6 +40,8 @@ public class Helper{
 			StalactiteFightNight.console.nextLine();
 		}
 		
+		
+		
 		return;	
 	}
 	

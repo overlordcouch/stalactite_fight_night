@@ -177,6 +177,36 @@ public class CaveNode{
 	}
 	
 	/**
+	 * Returns the right cave object, if there is one.
+	 * 
+	 * @return The cave to the right.
+	 * @since 1.6
+	 */
+	public CaveNode getRight(){
+		return this.rightCave;
+	}
+	
+	/**
+	 * Returns the left cave object, if there is one.
+	 * 
+	 * @return The cave to the left.
+	 * @since 1.6
+	 */
+	public CaveNode getLeft(){
+		return this.leftCave;
+	}
+	
+	/**
+	 * Returns the center cave object, if there is one.
+	 * 
+	 * @return The cave directly ahead.
+	 * @since 1.6
+	 */
+	public CaveNode getCenter(){
+		return this.centerCave;
+	}
+	
+	/**
 	 * Sets the parent reference to the provided node.
 	 * 
 	 * @param parent The parent of this node.

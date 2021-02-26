@@ -144,7 +144,7 @@ public class StalactiteFightNight{
 		}catch(Exception FileNotFoundException){
 			
 			System.out.println("Instruction file not found.");
-			System.out.println("Press any key to return to the start.");
+			System.out.println("Press 'enter' to return to the start.");
 		}
 		
 		//Wait for the user to input literally anything
@@ -196,7 +196,7 @@ public class StalactiteFightNight{
 		System.out.println("\n\n\"Good luck, I guess!\"");
 		
 		
-		System.out.println("\n\n\n\n Press any key to enter the caves!  No turning back now.");
+		System.out.println("\n\n\n\n Press 'enter' to enter the caves!  No turning back now.");
 		
 		while(!console.hasNextLine()){}
 		

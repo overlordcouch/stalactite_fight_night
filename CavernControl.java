@@ -69,10 +69,70 @@ public class CavernControl{
 	 * @since 1.0
 	 */
 	public static void cavernMain(){
+		//Update player reference
+		player = StalactiteFightNight.player;
 		
 		Helper.clearWindow();
 		Helper.clearInputBuffer();
 		Helper.printPlayerHeader();
+		
+		
+		System.out.printf("You are standing in %s\n", currentCave);
+		
+		if(currentCave.getPrev() == null){
+			System.out.println("You have returned to the entrance, only to find that it has caved in.");
+			System.out.println("Looks like the only way out is through the caves!");
+		}
+		
+		if(currentCave.hasLoot()){
+			System.out.println("You notice a chest, nearly hidden among the rocks.");
+		}
+		System.out.println();
+		currentCave.printPaths();
+		Set<String> validInputs = printOptions();
+		
+		System.out.println("\n\t\t\t\tHow do you want to proceed?");
+		
+		String input = console.next().toLowerCase();
+		
+		System.out.println("TEST");
+		
+		while(!validInputs.contains(input)){
+			input = console.next().toLowerCase();
+		}
+
+		
+		/*If its a direction, newCave in the new direction and repeat.
+		 * 
+		 * If search then search, if nap then nap, */
+		 switch(input){
+			case "r":  if(currentCave.getRight() != null){
+							currentCave = currentCave.getRight();
+							cavernMain();
+				
+						}
+						newCavern("right");
+						break;
+						
+			case "l": if(currentCave.getLeft() != null){
+							currentCave = currentCave.getLeft();
+							cavernMain();
+				
+						}
+						newCavern("left");
+						break;
+			case "f": if(currentCave.getCenter() != null){
+							currentCave = currentCave.getCenter();
+							cavernMain();
+				
+						}
+						newCavern("center");
+						break;
+			case "p": currentCave = currentCave.getPrev();
+						cavernMain();
+		}
+		
+		
 		
 		
 		
@@ -114,10 +174,11 @@ public class CavernControl{
 			 * forward to the new cavern*/
 			 currentCave = temp;
 			 
-			 temp = null;
+			 path.push(temp);
 			
 		}
 		
+		/*Print out the player's entrance.*/
 		String entranceFlavor = entranceDesc.get(randGen.nextInt(entranceDesc.size()));
 		System.out.printf("%s %s  ", entranceFlavor, currentCave);
 		
@@ -129,13 +190,54 @@ public class CavernControl{
 		System.out.println();
 		currentCave.printPaths();
 		
-		System.out.println("\n\t\t\t\t\tPress any key to proceed.");
+		System.out.println("\n\t\t\t\t\tPress 'enter' to proceed.");
+		
+		
 		
 		while(!console.hasNextLine()){}
 		
 		cavernMain();
 		
 		
+	}//newCavern
+	
+	
+	private static Set<String> printOptions(){
+		
+		Set<String> validOptions = new HashSet<String>();
+		
+		String justification = 	"\t\t\t\t\t\t\t\t";
+		System.out.println("\n\n\n");
+		
+		System.out.println(justification +"N:Take a nap");
+		validOptions.add("n");
+		
+		if(currentCave.hasLoot()){
+			System.out.println(justification +"O: Open chest");
+			validOptions.add("o");
+		}
+		if(!currentCave.hasLoot() && !currentCave.beenSearched()){
+			System.out.println(justification +"S:Search for hidden loot");
+			validOptions.add("s");
+		}
+		if(currentCave.getPrev() != null){
+			System.out.println(justification +"P:Previous cavern");
+			validOptions.add("p");
+		}
+		if(currentCave.hasLeft()){
+			System.out.println(justification +"L: Go left");
+			validOptions.add("l");
+		}
+		if(currentCave.hasRight()){
+			System.out.println(justification +"R: Go right");
+			validOptions.add("r");
+		}
+		if(currentCave.hasCenter()){
+			System.out.println(justification +"F: Go directly ahead");
+			validOptions.add("f");
+		}
+		
+		return validOptions;
 	}
 	
 	
