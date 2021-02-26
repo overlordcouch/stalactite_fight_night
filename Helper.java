@@ -52,7 +52,7 @@ public class Helper{
 	 * @since 1.0
 	 */
 	public static void printPlayerHeader(){
-		
+		player = StalactiteFightNight.player;
 		String healthBar ="[";
 		int healthPercentage =(int) Math.round((player.getHealth()/(double)player.getMaxHealth())*10.0) ;	
 		
@@ -64,12 +64,13 @@ public class Helper{
 		}
 		healthBar += "]";
 		
-		String justification = 	"\t\t\t\t\t\t\t\t\t\t\t\t\t";											
+		String justification = 	"\t\t\t\t\t\t\t\t";											
 		System.out.println(justification+ player);
 		System.out.println(justification+ healthBar);
 		System.out.println(justification+ "Health: "+ player.getHealth() +"/"+player.getMaxHealth());
 		System.out.println(justification+ "Wearing "+ player.getEquippedArmor());
 		System.out.println(justification+ "Wielding " + player.getEquippedWeapon());
+		System.out.println();
 		
 		return;
 	}

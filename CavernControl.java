@@ -87,7 +87,7 @@ public class CavernControl{
 	 * @since 1.0
 	 */
 	public static void newCavern(String direction){
-		
+		player = StalactiteFightNight.player;
 		Helper.clearWindow();
 		Helper.clearInputBuffer();
 		Helper.printPlayerHeader();
@@ -119,7 +119,21 @@ public class CavernControl{
 		}
 		
 		String entranceFlavor = entranceDesc.get(randGen.nextInt(entranceDesc.size()));
-		System.out.printf("%s %s .", entranceFlavor, currentCave);
+		System.out.printf("%s %s  ", entranceFlavor, currentCave);
+		
+		if(currentCave.hasMonster()){
+			System.out.printf(" \nThe first thing you notice is the %s.", currentCave.getMonster());
+		}else if(currentCave.hasLoot()){
+			System.out.printf("You notice a chest, nearly hidden in the shadows.  ");
+		}
+		System.out.println();
+		currentCave.printPaths();
+		
+		System.out.println("\n\t\t\t\t\tPress any key to proceed.");
+		
+		while(!console.hasNextLine()){}
+		
+		cavernMain();
 		
 		
 	}

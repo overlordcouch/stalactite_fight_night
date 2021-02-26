@@ -82,7 +82,7 @@ public class StalactiteFightNight{
 		/*Begin with prompting user and creating character*/
 		introPrompt();
 		
-		caveTest();
+		CavernControl.newCavern(null);
 
 		
 		
@@ -198,7 +198,7 @@ public class StalactiteFightNight{
 		
 		System.out.println("\n\n\n\n Press any key to enter the caves!  No turning back now.");
 		
-		console.nextLine();
+		while(!console.hasNextLine()){}
 		
 		
 		
