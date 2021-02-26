@@ -37,6 +37,24 @@ public class CavernControl{
 		
 		Helper.clearWindow();
 		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
+		
+		
+		
+		
+	}//cavernMain
+	
+	/**
+	 * Generates a new cavern and links it into the tree structure.  Updates
+	 * path stack and transfers control to cavernMain.
+	 * 
+	 * @since 1.0
+	 */
+	public static void newCavern(){
+		
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
 		
 		
 		
