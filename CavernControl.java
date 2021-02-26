@@ -12,6 +12,13 @@ import java.io.*;
 public class CavernControl{
 	
 	/**
+	 * The cavenode representing where the player currently is.
+	 * 
+	 * @since 1.0
+	 */
+	public static CaveNode currentCave;
+	
+	/**
 	 * Local pointer to the Random object held by the driving class.
 	 * 
 	 * @since 1.0
@@ -33,11 +40,25 @@ public class CavernControl{
 	private static List<String> caveDesc = StalactiteFightNight.caveDesc;
 	
 	/**
+	 * Local pointer to the list of entrance actions in main.
+	 * 
+	 * @since 1.0
+	 */
+	private static List<String> entranceDesc = StalactiteFightNight.enterDesc;
+	
+	/**
 	 * Local pointer to the player object created by main.
 	 * 
 	 * @since 1.0
 	 */
 	private static Adventurer player = StalactiteFightNight.player;
+	
+	/**
+	 * Local pointer to stack that holds the path traversed.
+	 * 
+	 * @since 1.0
+	 */
+	private static Stack<CaveNode> path = StalactiteFightNight.path;
 	
 	
 	/**
@@ -75,12 +96,30 @@ public class CavernControl{
 		String desc1 = caveDesc.get(randGen.nextInt(caveDesc.size()));
 		String desc2 = caveDesc.get(randGen.nextInt(caveDesc.size()));
 		
-		/*First, we check if this is the first cave in the instance.*/
-		if(StalactiteFightNight.currentCave == null){			
+		/*Generate our new cave and connect it.
+		 * First, we check if this is the first cave in the instance.*/
+		if(currentCave == null){			
 			
-			StalactiteFightNight.currentCave = new CaveNode(player.getLevel(), desc1, desc2, null);
+			currentCave = new CaveNode(player.getLevel(), desc1, desc2, null);
+			
+		}else{
+			/*Create new cave and make its parent the current cave*/
+			CaveNode temp = new CaveNode(player.getLevel(), desc1, desc2, currentCave);
+			
+			/*Create the link forward from the current path by setting the directional
+			 * reference.*/
+			currentCave.setPath(direction, temp);
+			
+			/*Update the state of the game by moveing our 'current' reference
+			 * forward to the new cavern*/
+			 currentCave = temp;
+			 
+			 temp = null;
+			
 		}
 		
+		String entranceFlavor = entranceDesc.get(randGen.nextInt(entranceDesc.size()));
+		System.out.printf("%s %s .", entranceFlavor, currentCave);
 		
 		
 	}

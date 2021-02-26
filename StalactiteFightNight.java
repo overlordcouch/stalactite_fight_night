@@ -44,12 +44,7 @@ public class StalactiteFightNight{
 	public static Adventurer player;
 	
 	
-	/**
-	 * The cavenode representing where the player currently is.
-	 * 
-	 * @since 1.5
-	 */
-	public static CaveNode currentCave;
+	
 	
 	/**
 	 * Holds the path that the adventurer has traveled.  Allows
@@ -79,7 +74,7 @@ public class StalactiteFightNight{
 		}
 		
 		//Set the current cave to null in preparation for tree generation.
-		currentCave = null;
+		CavernControl.currentCave = null;
 		
 		//Put up the start screen and begin gameplay
 		startScreen();
