@@ -6,7 +6,7 @@ import java.util.*;
  * CavernNode.
  * 
  * @author M.Ansell
- * @version 1.5
+ * @version 1.6
  */
 public class Monster {
 	
@@ -136,7 +136,7 @@ public class Monster {
 	 * 
 	 * @param diceRoll The result of a d20 roll for attack.
 	 * @return The damage dealt by this strike.
-	 * @since 1.7
+	 * @since 1.6
 	 */
 	public int giveDamage(int diceRoll){
 		boolean isCrit = diceRoll == 20;
@@ -157,4 +157,14 @@ public class Monster {
 	public String toString(){
 		return ""+this.description + " "+this.type;
 	}
+	
+	/**
+	 * Returns the monster's AC.
+	 * 
+	 * @return The monster's AC for comparison against player attack.
+	 * @since 1.6
+	 */
+	 public int getAC(){
+		 return this.ac;
+	 }
 }//monster class

@@ -31,7 +31,20 @@ public class CombatControl{
 	 */
 	private static CaveNode currentCave;
 	
+	/**
+	 * Local pointer to list of death action descriptions.
+	 * 
+	 * @since 1.0
+	 */
 	private static List<String> deathDesc = StalactiteFightNight.deathDesc;
+	
+	/**
+	 * Local pointer to monster miss descriptions.
+	 * 
+	 * @since 1.0
+	 */
+	private static List<String> monsterMiss = StalactiteFightNight.monsterMiss;
+	
 	
 	/**
 	 * The main driver for the combat state.  Orchestrates battle sequence
@@ -65,10 +78,54 @@ public class CombatControl{
 			input = console.next().toLowerCase();
 		}
 		
+		switch(input){
+			
+			case "a":	//player attack
+						break;
+			case "r": 	//retreat
+						break;
+			case "i": 	//go to inventory
+						break;
+		}
 		
 		
 		
 	}//combatMain
+	
+	
+	private static void playerAttack(){
+		//Ensure player reference is up to date
+		player = StalactiteFightNight.player;
+		
+		/*Get a pointer to the monster being fought*/
+		Monster monster = currentCave.getMonster();
+		
+		/*Basic setup functionality.  Clear window and buffer, print player
+		 * state to console*/
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
+		
+		/*See if the attack hits.*/
+		int diceRoll = randGen.nextInt(20)+1;
+		boolean didHit = player.attack(diceRoll) >= monster.getAC();
+		
+		/*If it hit, calculate and apply damage*/
+		int damage = -1;
+		if(didHit){
+			
+			damage = player.giveDamage(diceRoll);
+			
+			monster.takeDamage(damage);			
+		}
+		
+		/*Check if monster died.  If so, give player XP, check level up.
+		 * Remove monster from cavenode.
+		 * 
+		 * if not, display whether or not hit happenned.  give player 
+		 * text.  prompt for continue. */
+		
+	}
 	
 	/**
 	 * Generates and prints the appropriate actions that the user can
@@ -105,7 +162,9 @@ public class CombatControl{
 	
 	/**
 	 * Performs the actions of the monster's turn.  Typically just an 
-	 * attack.
+	 * attack.  Method returns to sender to allow different paths out
+	 * of monsterTurn.  Method automatically passes to death method if
+	 * the player dies.
 	 * 
 	 * @since 1.0
 	 */
@@ -139,21 +198,29 @@ public class CombatControl{
 			}
 		}
 		
-		/*TODO
-		 * CHECK FOR PLAYER DEATH, PRINT OUTCOME
-		 * AND RETURN.*/
-		 
 				
 		Helper.printPlayerHeader();
-		System.out.println("\n\n\nThe "+ currentCave.getMonster() + "hits you for " + damage +" points of damage.");
 		
-		if(player.getHealth() == 0){
-			System.out.println("\n");
-			System.out.println(deathDesc.get(randGen.nextInt(deathDesc.size())));
+		/*Print message about whether or not the monster hit.*/
+		if(didHit){
+			System.out.println("\n\n\nThe "+ currentCave.getMonster() + "hits you for " + damage +" points of damage.");
+		}else{
+			System.out.println("\n\n\n");
+			System.out.println(monsterMiss.get(randGen.nextInt(monsterMiss.size())));
 		}
 		
-		
-		
+		/*Check for death*/
+		if(player.getHealth() == 0){
+			
+			System.out.println("\n");
+			System.out.println(deathDesc.get(randGen.nextInt(deathDesc.size())));
+			
+			Helper.waitForInput();
+			death();
+		}else{
+			Helper.waitForInput();
+			return;
+		}
 		
 	}
 	

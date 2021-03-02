@@ -11,6 +11,14 @@ import java.lang.Math;
 public class Adventurer{
 	
 	/**
+	 * Local pointer to the Random object in the driver
+	 * 
+	 * @since 1.7
+	 */
+	 private Random randGen = StalactiteFightNight.rand;
+	 
+	
+	/**
 	* Player's name
 	* 
 	* @since 1.0
@@ -216,21 +224,22 @@ public class Adventurer{
 	 * Determines the damage done by a successful attack.  Considers critical
 	 * hits, as well as current weapon that is equipped.
 	 * 
-	 * @param rand Random object for determining damage dealt.
-	 * @param isCrit Boolean representation of if the strike was a critical hit.
+	 * @param d20Roll The result of a d20 roll.
 	 * @return The amount of damage to deal to the monster.
-	 * @since 1.5  
+	 * @since 1.7  
 	 */
-	public int giveDamage(Random rand, boolean isCrit){
+	public int giveDamage(int d20Roll){
+		
+		boolean isCrit = d20Roll == 20;
 		
 		/*Return damage based on whether it's a critical hit or not.*/
 		if(isCrit){
 			
-			return this.strength + (rand.nextInt(this.strength)+1) + currentWeapon.getDamageMod();
+			return this.strength + (randGen.nextInt(this.strength)+1) + currentWeapon.getDamageMod();
 			
 		}else{
 			
-			return rand.nextInt(this.strength)+1 + currentWeapon.getDamageMod();
+			return randGen.nextInt(this.strength)+1 + currentWeapon.getDamageMod();
 			
 		}
 	
