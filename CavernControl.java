@@ -139,7 +139,8 @@ public class CavernControl{
 						cavernMain();
 						break;
 						
-			case "n": 
+			case "n": nappyTime();
+						break;
 		}
 		
 		
@@ -199,6 +200,10 @@ public class CavernControl{
 		
 		if(currentCave.hasMonster()){
 			System.out.printf(" \nThe first thing you notice is the %s.", currentCave.getMonster());
+			
+			System.out.println("\n\n\t\t\t\t\t\t\t\t\t\t  Press enter to continue.");
+			
+			while(!console.hasNextLine()){}
 			
 			/*When a monster is encountered, you are immediately in combat.*/
 			player.setCombat(true);
