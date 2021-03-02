@@ -79,7 +79,7 @@ public class CavernControl{
 		
 		System.out.printf("You are standing in %s\n", currentCave);
 		
-		if(currentCave.getPrev() == null){
+		if(currentCave.getPrev() == null && currentCave.exitedFirst ==true){
 			System.out.println("You have returned to the entrance, only to find that it has caved in.");
 			System.out.println("Looks like the only way out is through the caves!");
 		}
@@ -162,9 +162,14 @@ public class CavernControl{
 			
 			currentCave = new CaveNode(player.getLevel(), desc1, desc2, null);
 			
+			/*Set the flag for the first cavern only.*/
+			currentCave.exitedFirst = false;
+			
 		}else{
 			/*Create new cave and make its parent the current cave*/
 			CaveNode temp = new CaveNode(player.getLevel(), desc1, desc2, currentCave);
+			
+			currentCave.exitedFirst = true;
 			
 			/*Create the link forward from the current path by setting the directional
 			 * reference.*/
@@ -185,7 +190,7 @@ public class CavernControl{
 		if(currentCave.hasMonster()){
 			System.out.printf(" \nThe first thing you notice is the %s.", currentCave.getMonster());
 		}else if(currentCave.hasLoot()){
-			System.out.printf("You notice a chest, nearly hidden in the shadows.  ");
+			System.out.printf("\nYou notice a chest, nearly hidden in the shadows.  ");
 		}
 		System.out.println();
 		currentCave.printPaths();

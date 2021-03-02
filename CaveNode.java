@@ -104,6 +104,14 @@ public class CaveNode{
 	 */
 	private CaveNode leftCave, rightCave, centerCave, previous;
 	
+	/**
+	 * Flag used only for the first cave to hold off on displaying
+	 * flavor text that prevents escape through the entrance.
+	 * 
+	 * @since 1.6
+	 */
+	public boolean exitedFirst;
+	
  
 	/**
 	 * Builds a CaveNode and populates it with the appropriate monsters and 
