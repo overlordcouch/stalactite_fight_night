@@ -95,7 +95,7 @@ public class CavernControl{
 		
 		String input = console.next().toLowerCase();
 		
-		System.out.println("TEST");
+		
 		
 		while(!validInputs.contains(input)){
 			input = console.next().toLowerCase();
@@ -212,7 +212,14 @@ public class CavernControl{
 		
 	}//newCavern
 	
-	
+	/**
+	 * Generates and prints the appropriate actions that the user can
+	 * take based on the state of the current cavern.  Returns a Set
+	 * that contains string representations of valid choices for the 
+	 * player
+	 * 
+	 * @return Set of strings that are valid inputs from the player.
+	 */
 	private static Set<String> printOptions(){
 		
 		Set<String> validOptions = new HashSet<String>();
