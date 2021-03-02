@@ -127,9 +127,14 @@ public class CombatControl{
 		boolean didHit = monster.attack(diceRoll) > player.getAC();
 		
 		/*If the monster hits, calculate damage*/
+		int damage;
 		if(didHit){
-			
+			damage = monster.giveDamage(diceRoll);
 		}
+		
+		/*TODO
+		 * APPLY DAMAGE TO PLAYER, CHECK FOR PLAYER DEATH, PRINT OUTCOME
+		 * AND RETURN TO COMBATMAIN*/
 		
 		
 		Helper.printPlayerHeader();
