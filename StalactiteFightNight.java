@@ -135,7 +135,7 @@ public class StalactiteFightNight{
 		
 		//Print the instructions
 		try{
-			Scanner reader=new Scanner( new File("dev_documents/instructions.txt"));
+			Scanner reader=new Scanner( new File("world_gen/instructions.txt"));
 			
 			while(reader.hasNextLine()){
 				System.out.println(reader.nextLine());
@@ -172,7 +172,7 @@ public class StalactiteFightNight{
 		try{
 		
 			//Print the intro text and prompt
-			Scanner reader = new Scanner(new File("dev_documents/intro_prompt.txt"));
+			Scanner reader = new Scanner(new File("world_gen/intro_prompt.txt"));
 			while(reader.hasNextLine()){
 				System.out.println(reader.nextLine());
 			}
@@ -245,17 +245,17 @@ public class StalactiteFightNight{
 		 * of code.*/
 		 
 		Map<String, List<String>> filesToLists = new HashMap<String,List<String>>();
-		filesToLists.put("dev_documents/monster_types.txt",monsterType);
-		filesToLists.put("dev_documents/weapon_types.txt",weaponType);
-		filesToLists.put("dev_documents/armor_types.txt",armorType);
-		filesToLists.put("dev_documents/potion_types.txt",potionType);
+		filesToLists.put("world_gen/monster_types.txt",monsterType);
+		filesToLists.put("world_gen/weapon_types.txt",weaponType);
+		filesToLists.put("world_gen/armor_types.txt",armorType);
+		filesToLists.put("world_gen/potion_types.txt",potionType);
 		
-		filesToLists.put("dev_documents/monster_desc.txt",monsterDesc);
-		filesToLists.put("dev_documents/weapon_desc.txt",weaponDesc);
-		filesToLists.put("dev_documents/armor_desc.txt",armorDesc);
-		filesToLists.put("dev_documents/potion_desc.txt",potionDesc);
-		filesToLists.put("dev_documents/cave_desc.txt",caveDesc);
-		filesToLists.put("dev_documents/enter_desc.txt",enterDesc);
+		filesToLists.put("world_gen/monster_desc.txt",monsterDesc);
+		filesToLists.put("world_gen/weapon_desc.txt",weaponDesc);
+		filesToLists.put("world_gen/armor_desc.txt",armorDesc);
+		filesToLists.put("world_gen/potion_desc.txt",potionDesc);
+		filesToLists.put("world_gen/cave_desc.txt",caveDesc);
+		filesToLists.put("world_gen/enter_desc.txt",enterDesc);
 		
 		/*Retrieve a Set with all of the keys/ file names*/
 		Set<String> fileNames = filesToLists.keySet();
@@ -290,7 +290,7 @@ public class StalactiteFightNight{
 		//Print the splash screen for the game.  Try/catch in case the
 		//.txt file can't be found, so the game can play anyway.
 		try{
-			File file = new File("dev_documents/splash.txt");
+			File file = new File("world_gen/splash.txt");
 			
 			Scanner reader = new Scanner(file);
 			
