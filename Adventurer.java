@@ -6,7 +6,7 @@ import java.lang.Math;
  * Class that contains information, statistics, and inventory for the player character.
  * 
  * @author M.Ansell
- * @version 1.6
+ * @version 1.7
  */
 public class Adventurer{
 	
@@ -331,10 +331,20 @@ public class Adventurer{
 	  * a monster.
 	  * 
 	  * @param  combatStatus Whether or not the player is in combat.
-	  * @since 1.6
+	  * @since 1.7
 	  */
 	 public void setCombat(boolean combatStatus){
 		 this.inCombat = combatStatus;
+	 }
+	 
+	 /**
+	  * Sets the player's health the given value.
+	  * 
+	  * @param newHealth The value to set the player's health to.
+	  * @since 1.7
+	  */
+	 public void setHealth(int newHealth){
+		 this.health = newHealth;
 	 }
 	   
 	 

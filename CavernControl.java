@@ -47,6 +47,13 @@ public class CavernControl{
 	private static List<String> entranceDesc = StalactiteFightNight.enterDesc;
 	
 	/**
+	 * Local pointer to the list of nap actions in main.
+	 * 
+	 * @since 1.1
+	 */
+	private static List<String> napDesc = StalactiteFightNight.napDesc;
+	
+	/**
 	 * Local pointer to the player object created by main.
 	 * 
 	 * @since 1.0
@@ -278,17 +285,30 @@ public class CavernControl{
 		Helper.clearWindow();
 		Helper.clearInputBuffer();
 		
-		System.out.println("\t\t*****************************\n");
-		//Rand gen text here
-		
-		
+				
 		
 		/*Determine how much healing occurred, and apply it to the player.
 		 * Initial: 10% of max health + 1d(max-current), not to exceed
 		 * max health.*/
-		
+		 int healthMissing = player.getMaxHealth() - player.getHealth();
+		 int healthAdd =(int) Math.round((player.getMaxHealth() / 10.0) + randGen.nextInt(healthMissing) + 1);
+		 
+		 /*Heal the player for the calculated amount.  If this exceeds their max, bring it down to their max*/
+		 player.heal(healthAdd);
+		 if(player.getHealth() > player.getMaxHealth()){
+			 player.setHealth(player.getMaxHealth());
+		 }
+		 
+		 
+		 
+		 /*Determine if monster shows up (1/7)*/ 
+		 
+		 /*Tell the player what is up.*/
+		 
+		System.out.println("\t\t*****************************\n\n");
+		System.out.println(napDesc.get(randGen.nextInt(napDesc.size())));
 		System.out.println("\n You took a nap!");
-		/*Determine if monster shows up (1/7)*/ 
+		
 		
 		
 	}//nappyTime
