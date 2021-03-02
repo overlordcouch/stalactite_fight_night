@@ -7,7 +7,7 @@ import java.io.*;
  * consistency.
  * 
  * @author M.Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class CavernControl{
 	
@@ -130,6 +130,9 @@ public class CavernControl{
 						break;
 			case "p": currentCave = currentCave.getPrev();
 						cavernMain();
+						break;
+						
+			case "n": 
 		}
 		
 		
@@ -219,6 +222,7 @@ public class CavernControl{
 	 * player
 	 * 
 	 * @return Set of strings that are valid inputs from the player.
+	 * @since 1.0
 	 */
 	private static Set<String> printOptions(){
 		
@@ -260,8 +264,34 @@ public class CavernControl{
 	
 	
 	
-	
-	
+	/**
+	 * Performs nap function.  Restores some player health at the risk
+	 * of spawning a monster while sleeping.
+	 * 
+	 * @since 1.1
+	 */
+	private static void nappyTime(){
+		
+		/*Ensure that player reference is up to date.  Clear buffer
+		 * and screen*/
+		player = StalactiteFightNight.player;
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		
+		System.out.println("\t\t*****************************\n");
+		//Rand gen text here
+		
+		
+		
+		/*Determine how much healing occurred, and apply it to the player.
+		 * Initial: 10% of max health + 1d(max-current), not to exceed
+		 * max health.*/
+		
+		System.out.println("\n You took a nap!");
+		/*Determine if monster shows up (1/7)*/ 
+		
+		
+	}//nappyTime
 	
 	
 	

@@ -51,7 +51,7 @@ public class CombatControl{
 		
 		System.out.println("\n\nYou are fighting the "+currentCave.getMonster()+"!  \n\nWhat do you want to do?\n");
 		
-		Set<String> validOptions = printOptions();
+		Set<String> validInputs = printOptions();
 		
 		System.out.println("\n\t\t\t\tHow do you want to proceed?");
 		
