@@ -18,7 +18,7 @@ public class StalactiteFightNight{
 	 */
 	public static List<String> monsterType, monsterDesc, weaponType, weaponDesc,
 								armorType, armorDesc, potionType, potionDesc, caveDesc,
-								enterDesc;
+								enterDesc, napDesc;
 	
 	/**
 	 * Random object used throughout the game for generation and event
@@ -238,6 +238,7 @@ public class StalactiteFightNight{
 		potionDesc = new ArrayList<String>();
 		caveDesc = new ArrayList<String>();
 		enterDesc = new ArrayList<String>();
+		napDesc = new ArrayList<String>();
 		
 		/*Map each file name to the List that will hold it, that way we can procedurally
 		 * read in the files with streamlined code.  This setup allows for
@@ -256,6 +257,7 @@ public class StalactiteFightNight{
 		filesToLists.put("world_gen/potion_desc.txt",potionDesc);
 		filesToLists.put("world_gen/cave_desc.txt",caveDesc);
 		filesToLists.put("world_gen/enter_desc.txt",enterDesc);
+		filesToLists.put("world_gen/nap_desc.txt",napDesc);
 		
 		/*Retrieve a Set with all of the keys/ file names*/
 		Set<String> fileNames = filesToLists.keySet();
