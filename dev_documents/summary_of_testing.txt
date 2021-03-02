@@ -14,3 +14,5 @@ Verified that cavern structure retains memory.  Previous caves retain state
 information from prvious player interactions.
 
 Verified player status block prints correctly.
+
+Napping function verified to work in root cave.

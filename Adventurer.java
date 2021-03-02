@@ -283,6 +283,16 @@ public class Adventurer{
 	}
 	
 	/**
+	 * Returns the player's current AC.
+	 * 
+	 * @return The player's armor class.
+	 * @since 1.7
+	 */
+	public int getAC(){
+		return this.ac;
+	}
+	
+	/**
 	 * Standard toString method, returns the adventurers name only.
 	 * 
 	 * @return the name of the adventurer.

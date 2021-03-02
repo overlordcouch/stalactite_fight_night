@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class Monster {
 	
-	
+	private Random randGen = StalactiteFightNight.rand;
 	
 	/**
 	 * The level of the monster.  Plays into strength and health.
@@ -134,17 +134,16 @@ public class Monster {
 	 * Deals monster damage.  Returns the number of points of damage dealt,
 	 * including consideration for a critical strike.
 	 * 
-	 * @param rand A Random object used to generate damage rolls
-	 * @param isCrit Boolean representation of whether the strike is critical.
+	 * @param diceRoll The result of a d20 roll for attack.
 	 * @return The damage dealt by this strike.
-	 * @since 1.4
+	 * @since 1.7
 	 */
-	public int giveDamage(Random rand, boolean isCrit){
-		
+	public int giveDamage(int diceRoll){
+		boolean isCrit = diceRoll == 20;
 		if(isCrit){
-			return (int )0.75*(this.strength) + rand.nextInt(this.strength) + 1;
+			return (int )0.75*(this.strength) + randGen.nextInt(this.strength) + 1;
 		}else{
-			return (rand.nextInt(this.strength)+1 + rand.nextInt(this.strength)+1)/2;
+			return (randGen.nextInt(this.strength)+1 + randGen.nextInt(this.strength)+1)/2;
 		}
 		
 	}	

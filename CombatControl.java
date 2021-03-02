@@ -8,6 +8,8 @@ import java.util.*;
  */
 public class CombatControl{
 	
+	private static Random randGen = StalactiteFightNight.rand;
+	
 	/**
 	 * Local pointer to the scanner on terminal input.
 	 * 
@@ -73,6 +75,7 @@ public class CombatControl{
 	 * player
 	 * 
 	 * @return Set of strings that are valid inputs from the player.
+	 * @since 1.0
 	 */
 	private static Set<String> printOptions(){
 		
@@ -95,6 +98,42 @@ public class CombatControl{
 		
 		
 		return validOptions;
+		
+	}
+	
+	/**
+	 * Performs the actions of the monster's turn.  Typically just an 
+	 * attack.
+	 * 
+	 * @since 1.0
+	 */
+	private static void monsterTurn(){
+		/*Ensure that the player state is up to date*/
+		player = StalactiteFightNight.player;
+		
+		/*Ensure that the pointer to the current cave is up to date */
+		currentCave = CavernControl.currentCave;
+		
+		Monster monster = currentCave.getMonster();
+		
+		/*Basic setup functionality.  Clear window and buffer, print player
+		 * state to console*/
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		
+		
+		/*Determine if the monster hits the player.*/
+		int diceRoll = randGen.nextInt(20)+1;
+		boolean didHit = monster.attack(diceRoll) > player.getAC();
+		
+		/*If the monster hits, calculate damage*/
+		if(didHit){
+			
+		}
+		
+		
+		Helper.printPlayerHeader();
+		
 		
 	}
 	
