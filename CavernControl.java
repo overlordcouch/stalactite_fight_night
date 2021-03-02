@@ -189,6 +189,12 @@ public class CavernControl{
 		
 		if(currentCave.hasMonster()){
 			System.out.printf(" \nThe first thing you notice is the %s.", currentCave.getMonster());
+			
+			/*When a monster is encountered, you are immediately in combat.*/
+			player.setCombat(true);
+			CombatControl.combatMain();
+			
+			
 		}else if(currentCave.hasLoot()){
 			System.out.printf("\nYou notice a chest, nearly hidden in the shadows.  ");
 		}

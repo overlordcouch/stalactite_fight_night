@@ -325,6 +325,17 @@ public class Adventurer{
 	 public int getLevel(){
 		 return this.level;
 	 }
+	 
+	 /**
+	  * Sets the combat state flag of the player when in the presence of
+	  * a monster.
+	  * 
+	  * @param  combatStatus Whether or not the player is in combat.
+	  * @since 1.6
+	  */
+	 public void setCombat(boolean combatStatus){
+		 this.inCombat = combatStatus;
+	 }
 	   
 	 
 	
