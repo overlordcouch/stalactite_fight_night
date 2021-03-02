@@ -291,7 +291,7 @@ public class CavernControl{
 		 * Initial: 10% of max health + 1d(max-current), not to exceed
 		 * max health.*/
 		 int healthMissing = player.getMaxHealth() - player.getHealth();
-		 int healthAdd =(int) Math.round((player.getMaxHealth() / 10.0) + randGen.nextInt(healthMissing) + 1);
+		 int healthAdd =(int) Math.round((player.getMaxHealth() / 10.0) + randGen.nextInt(healthMissing+1));
 		 
 		 /*Heal the player for the calculated amount.  If this exceeds their max, bring it down to their max*/
 		 player.heal(healthAdd);
@@ -302,12 +302,38 @@ public class CavernControl{
 		 
 		 
 		 /*Determine if monster shows up (1/7)*/ 
+		 boolean monsterMade;
+		 if(randGen.nextInt(7) == 4){
+			 currentCave.monsterMaker(player.getLevel());
+			 monsterMade = true;
+			 player.setCombat(true);
+		 }else{
+			 monsterMade = false;
+		 }
 		 
 		 /*Tell the player what is up.*/
 		 
 		System.out.println("\t\t*****************************\n\n");
+		Helper.printPlayerHeader();
+		System.out.println("\n\n");
 		System.out.println(napDesc.get(randGen.nextInt(napDesc.size())));
-		System.out.println("\n You took a nap!");
+		System.out.println("\n\n You took a nap! You healed "+healthAdd +" points of damage.");
+		
+		/*If a monster generated, take the player to combat.*/
+		if(monsterMade){
+			System.out.println("\nUnfortunately, you were woken up by the "+ currentCave.getMonster() + " that wandered in.");
+			System.out.println("\n\n\t\t\t\t\t\t\t\t\t\t  Press enter to continue.");
+			
+			while(!console.hasNextLine()){}
+			
+			CombatControl.combatMain();
+			
+		}else{
+			System.out.println("\n\n\t\t\t\t\t\t\t\t\t\t  Press enter to continue.");
+			while(!console.hasNextLine()){}
+			cavernMain();
+			
+		}
 		
 		
 		
