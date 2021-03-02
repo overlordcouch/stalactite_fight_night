@@ -5,7 +5,7 @@ import java.util.*;
  * about the room's contents and description.
  * 
  * @author M.Ansell
- * @version 1.6
+ * @version 1.7
  */
 public class CaveNode{
 	
@@ -327,28 +327,40 @@ public class CaveNode{
 			return;
 			
 		}else{
-			//Monster level will be player level +-1
-			int monsterLevel = StalactiteFightNight.rand.nextInt((level+1) - (level -1)) + (level - 1);
-			
-			//Generate a monster with random type, description, and the level
-			//calculated above.
-			
-			/*Pull a monster type from the master list by randomly picking an int value less than the size
-			 * of the list and pulling the entry from that index.*/
-			String type = StalactiteFightNight.monsterType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.monsterType.size()));
-			
-			/*Pull a monster description from the master list by randomly picking an int value less than the size
-			 * of the list and pulling the entry from that index.*/
-			String desc = StalactiteFightNight.monsterDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.monsterDesc.size()));
-			
-			/*Generate and hold that monster*/
-			this.caveMon = new Monster(monsterLevel, type, desc);
-			this.hasMonster = true;
-			
-			return;
+			this.monsterMaker(level);
 		}
 		
 	}//monsterGen
+	
+	/**
+	 * Function that is guaranteed to generate a monster.  Used for naps
+	 * and as a helper with normal cave generation.
+	 * 
+	 * @param level The current level of the player at the time of generation.
+	 * @since 1.7
+	 */
+	public void monsterMaker(int level){
+		
+		//Monster level will be player level +-1
+		int monsterLevel = StalactiteFightNight.rand.nextInt((level+1) - (level -1)) + (level - 1);
+
+		//Generate a monster with random type, description, and the level
+		//calculated above.
+
+		/*Pull a monster type from the master list by randomly picking an int value less than the size
+		 * of the list and pulling the entry from that index.*/
+		String type = StalactiteFightNight.monsterType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.monsterType.size()));
+
+		/*Pull a monster description from the master list by randomly picking an int value less than the size
+		 * of the list and pulling the entry from that index.*/
+		String desc = StalactiteFightNight.monsterDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.monsterDesc.size()));
+
+		/*Generate and hold that monster*/
+		this.caveMon = new Monster(monsterLevel, type, desc);
+		this.hasMonster = true;
+
+		return;
+	}
 	
 	/**
 	 * Decides is there is loot upon intial generation, and
