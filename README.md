@@ -18,7 +18,7 @@ are related.
 
 - [x] Weapons, Armors, Potions and descriptions
 
-- [ ] Caves
+- [ X ] Caves
   
 - [x] Create CavernNode class for cave creation.   
   
@@ -36,11 +36,9 @@ are related.
 
 - Add toString methods to classes already made.  
 
-- Start creating actual gameplay, even if limited  
+- [ x ] Start creating actual gameplay, even if limited  
   
 -  [x] User start prompt
 
-- Currently working on StalactiteFightNight.enterCaves, the method that  
-comes after the intro.  It serves as the first step into the caverns.  
-Needs to generate some flavor text, and a CaveNode to serve as the tree  
-root.
+- Currently working on setting a flag for text that only shows up  
+when you return to the first cavern after having left.  
