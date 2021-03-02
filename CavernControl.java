@@ -201,9 +201,7 @@ public class CavernControl{
 		if(currentCave.hasMonster()){
 			System.out.printf(" \nThe first thing you notice is the %s.", currentCave.getMonster());
 			
-			System.out.println("\n\n\t\t\t\t\t\t\t\t\t\t  Press enter to continue.");
-			
-			while(!console.hasNextLine()){}
+			Helper.waitForInput();
 			
 			/*When a monster is encountered, you are immediately in combat.*/
 			player.setCombat(true);
@@ -216,11 +214,7 @@ public class CavernControl{
 		System.out.println();
 		currentCave.printPaths();
 		
-		System.out.println("\n\t\t\t\t\tPress 'enter' to proceed.");
-		
-		
-		
-		while(!console.hasNextLine()){}
+		Helper.waitForInput();
 		
 		cavernMain();
 		
@@ -327,15 +321,12 @@ public class CavernControl{
 		/*If a monster generated, take the player to combat.*/
 		if(monsterMade){
 			System.out.println("\nUnfortunately, you were woken up by the "+ currentCave.getMonster() + " that wandered in.");
-			System.out.println("\n\n\t\t\t\t\t\t\t\t\t\t  Press enter to continue.");
-			
-			while(!console.hasNextLine()){}
+			Helper.waitForInput();
 			
 			CombatControl.combatMain();
 			
 		}else{
-			System.out.println("\n\n\t\t\t\t\t\t\t\t\t\t  Press enter to continue.");
-			while(!console.hasNextLine()){}
+			Helper.waitForInput();
 			cavernMain();
 			
 		}

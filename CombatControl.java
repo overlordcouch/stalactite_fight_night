@@ -31,6 +31,8 @@ public class CombatControl{
 	 */
 	private static CaveNode currentCave;
 	
+	private static List<String> deathDesc = StalactiteFightNight.deathDesc;
+	
 	/**
 	 * The main driver for the combat state.  Orchestrates battle sequence
 	 * and interactions with different game states.
@@ -127,18 +129,35 @@ public class CombatControl{
 		boolean didHit = monster.attack(diceRoll) > player.getAC();
 		
 		/*If the monster hits, calculate damage*/
-		int damage;
+		int damage = -1;
 		if(didHit){
 			damage = monster.giveDamage(diceRoll);
+			player.takeDamage(damage);
+			
+			if(player.getHealth() < 0){
+				player.setHealth(0);
+			}
 		}
 		
 		/*TODO
-		 * APPLY DAMAGE TO PLAYER, CHECK FOR PLAYER DEATH, PRINT OUTCOME
-		 * AND RETURN TO COMBATMAIN*/
-		
-		
+		 * CHECK FOR PLAYER DEATH, PRINT OUTCOME
+		 * AND RETURN.*/
+		 
+				
 		Helper.printPlayerHeader();
+		System.out.println("\n\n\nThe "+ currentCave.getMonster() + "hits you for " + damage +" points of damage.");
 		
+		if(player.getHealth() == 0){
+			System.out.println("\n");
+			System.out.println(deathDesc.get(randGen.nextInt(deathDesc.size())));
+		}
+		
+		
+		
+		
+	}
+	
+	private static void death(){
 		
 	}
 	
