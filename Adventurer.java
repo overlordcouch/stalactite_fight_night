@@ -182,13 +182,23 @@ public class Adventurer{
 	 }
 	 
 	 /**
+	  * Returns the current XP of the player.  Added for combat troubleshooting.
+	  * 
+	  * @return The player's current XP.
+	  * @since 1.7
+	  */
+	 public int getCurrentXP(){
+		 return this.xp;
+	 }
+	 
+	 /**
 	  * Adds XP to the the player.
 	  * 
 	  * @param XP The xp to add to the player's total.
 	  * @since 1.7
 	  */
 	 public void addXP(int XP){
-		 this.xp += xp;
+		 this.xp += XP;
 		 return;
 	 }
 	      

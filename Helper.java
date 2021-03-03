@@ -73,7 +73,7 @@ public class Helper{
 		healthBar += "]";
 		
 		String justification = 	"\t\t\t\t\t\t\t\t";											
-		System.out.println(justification+ player);
+		System.out.println(justification+ player + " ("+player.getLevel()+")");
 		System.out.println(justification+ healthBar);
 		System.out.println(justification+ "Health: "+ player.getHealth() +"/"+player.getMaxHealth());
 		System.out.println(justification+ "Wearing "+ player.getEquippedArmor());
