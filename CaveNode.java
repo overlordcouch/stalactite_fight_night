@@ -297,17 +297,25 @@ public class CaveNode{
 	/**
 	 * Eliminates the monster from this cavern when the monster is killed.
 	 * 
+	 * @return The XP value of the eliminated monster.
 	 * @throws IllegalStateException if there is no monster in here.
-	 * @since 1.1
+	 * @since 1.7
 	 */
-	public void killMonster() throws IllegalStateException{
+	public int killMonster() throws IllegalStateException{
 		
 		if(!this.hasMonster){
 			throw new IllegalStateException("No monster here");
 		}
+		/*Retrieve its XP worth*/
+		int xpVal = this.caveMon.getXPValue();
 		
+		/*Remove it from the cavern*/
 		this.caveMon = null;
 		this.hasMonster = false;
+		
+		/*Return XP for adding to player*/
+		return xpVal;
+	
 	}
 	
 	

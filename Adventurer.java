@@ -162,6 +162,17 @@ public class Adventurer{
 		 this.inventory = new ArrayList<Item>();
 		
 	 }
+	 
+	 /**
+	  * Adds XP to the the player.
+	  * 
+	  * @param XP The xp to add to the player's total.
+	  * @since 1.7
+	  */
+	 public void addXP(int XP){
+		 this.xp += xp;
+		 return;
+	 }
 	      
 	
 	/**

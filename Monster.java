@@ -95,6 +95,16 @@ public class Monster {
 	}
 	
 	/**
+	 * Returns this monster's XP value for defeat.
+	 * 
+	 * @return Monster XP worth for defeat.
+	 * @since 1.6
+	 */
+	public int getXPValue(){
+		return this.defeatXP;
+	}
+	
+	/**
 	 * Applies damage to creature by taking away from health
 	 * 
 	 * @param damage The amount of damage to deal
