@@ -51,6 +51,13 @@ public class CombatControl{
 	 * @since 1.1
 	 */
 	 private static List<String> monsterDeath = StalactiteFightNight.monsterDeath;
+	 
+	 /**
+	  * Local pointer to list of hitting words in driver.
+	  * 
+	  * @since 1.1
+	  */
+	private static List<String> hitWords = StalactiteFightNight.hitWords;
 	
 	
 	/**
@@ -87,7 +94,7 @@ public class CombatControl{
 		
 		switch(input){
 			
-			case "a":	//player attack
+			case "a":	playerAttack();
 						break;
 			case "r": 	//retreat
 						break;
@@ -111,11 +118,14 @@ public class CombatControl{
 		/*Get a pointer to the monster being fought*/
 		Monster monster = currentCave.getMonster();
 		
+		String monsterDescription = monster.toString();
+		
 		/*Basic setup functionality.  Clear window and buffer, print player
 		 * state to console*/
 		Helper.clearWindow();
 		Helper.clearInputBuffer();
 		Helper.printPlayerHeader();
+		System.out.println("\n\n\n");
 		
 		/*See if the attack hits.*/
 		int diceRoll = randGen.nextInt(20)+1;
@@ -130,11 +140,57 @@ public class CombatControl{
 			monster.takeDamage(damage);			
 		}
 		
-		/*Check if monster died.  If so, give player XP, check level up.
-		 * Remove monster from cavenode.
-		 * 
-		 * if not, display whether or not hit happenned.  give player 
-		 * text.  prompt for continue. */
+		/*Check if monster died.*/
+		boolean monsterDedNow = monster.getHealth() <= 0;
+		
+		/*Holder for if player levels up*/
+		boolean levelUpNow = false;
+		
+		/*Transfer XP, remove monster from cavern, perform level up operation
+		 * as necessary, if the monster is dead now.*/
+		 if(monsterDedNow){
+			 
+			 /*Transfer monster XP to player and remove from cavern*/
+			 player.addXP(CavernControl.currentCave.killMonster());
+			 
+			 /*Check if player leveled up, and do the leveling if necessary*/
+			 levelUpNow = player.levelCheck();
+			 
+		 }
+		
+		
+		if(didHit){
+			//Random word for hit
+			String hitDesc = hitWords.get(randGen.nextInt(hitWords.size()));
+			
+			System.out.println("You "+ hitDesc +" the "+ monsterDescription +" for "+ damage+" points of damage!");
+			
+			/*If they kill the monster, print message*/
+			if(monsterDedNow){
+				System.out.println("\n"+monsterDeath.get(randGen.nextInt(monsterDeath.size())));
+				System.out.println("\nYou have defeated the "+monsterDescription +"!");
+			}
+			
+			/*Let them know if they have leveled up.*/
+			if(levelUpNow){
+				
+				System.out.println("\nYou  have leveled up to level "+ player.getLevel()+"!");
+				
+			}
+			
+			
+		}else{//if they didn't hit the monster
+			
+			System.out.println("\nYour strike misses!");
+		}
+		
+		Helper.waitForInput();
+		
+		if(!monsterDedNow){
+			monsterTurn();
+		}else{
+			CavernControl.cavernMain();
+		}
 		
 	}
 	
@@ -230,7 +286,7 @@ public class CombatControl{
 			death();
 		}else{
 			Helper.waitForInput();
-			return;
+			combatMain();
 		}
 		
 	}
