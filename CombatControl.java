@@ -4,7 +4,7 @@ import java.util.*;
  * combat state of the game.
  * 
  * @author M.Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class CombatControl{
 	
@@ -44,6 +44,13 @@ public class CombatControl{
 	 * @since 1.0
 	 */
 	private static List<String> monsterMiss = StalactiteFightNight.monsterMiss;
+	
+	/**
+	 * Local pointer to monster death descriptions.
+	 * 
+	 * @since 1.1
+	 */
+	 private static List<String> monsterDeath = StalactiteFightNight.monsterDeath;
 	
 	
 	/**
@@ -92,7 +99,11 @@ public class CombatControl{
 		
 	}//combatMain
 	
-	
+	/**
+	 * Orchestrates the mechanics of the player attacking a monster.
+	 * 
+	 * @since 1.1
+	 */
 	private static void playerAttack(){
 		//Ensure player reference is up to date
 		player = StalactiteFightNight.player;

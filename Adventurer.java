@@ -164,6 +164,24 @@ public class Adventurer{
 	 }
 	 
 	 /**
+	  * Checks if the player needs to level up, and performs the level up operation
+	  * if appropriate.  Returns a boolean of if the player leveled up to 
+	  * allow generation of appropriate text output.
+	  * 
+	  * @return If the player levels up.
+	  * @since 1.7
+	  */
+	 public boolean levelCheck(){
+		 boolean levelUpNow = this.xp >= this.nextLevelXP;
+		 
+		 if(levelUpNow){
+			 this.levelUp();
+		 }
+		 
+		 return levelUpNow;
+	 }
+	 
+	 /**
 	  * Adds XP to the the player.
 	  * 
 	  * @param XP The xp to add to the player's total.
@@ -296,6 +314,8 @@ public class Adventurer{
 		this.maxHealth = getNewMaxHealth(this.level);
 		
 		this.health += (this.maxHealth - tempHealth);
+		
+		return;
 	}
 	
 	private void updateAC(){
