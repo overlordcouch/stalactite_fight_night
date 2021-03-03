@@ -252,7 +252,7 @@ public class CombatControl{
 		
 		/*Determine if the monster hits the player.*/
 		int diceRoll = randGen.nextInt(20)+1;
-		boolean didHit = monster.attack(diceRoll) > player.getAC();
+		boolean didHit = monster.attack(diceRoll) >= player.getAC();
 		
 		/*If the monster hits, calculate damage*/
 		int damage = -1;
@@ -270,7 +270,7 @@ public class CombatControl{
 		
 		/*Print message about whether or not the monster hit.*/
 		if(didHit){
-			System.out.println("\n\n\nThe "+ currentCave.getMonster() + "hits you for " + damage +" points of damage.");
+			System.out.println("\n\n\nThe "+ currentCave.getMonster() + " hits you for " + damage +" points of damage.");
 		}else{
 			System.out.println("\n\n\n");
 			System.out.println(monsterMiss.get(randGen.nextInt(monsterMiss.size())));

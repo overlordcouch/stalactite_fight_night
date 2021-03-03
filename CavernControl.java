@@ -300,9 +300,9 @@ public class CavernControl{
 		 
 		 
 		 
-		 /*Determine if monster shows up (1/7)*/ 
+		 /*Determine if monster shows up (1/5)*/ 
 		 boolean monsterMade;
-		 if(randGen.nextInt(6) == 4){
+		 if(randGen.nextInt(4) == 3){
 			 currentCave.monsterMaker(player.getLevel());
 			 monsterMade = true;
 			 player.setCombat(true);

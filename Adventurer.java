@@ -293,7 +293,7 @@ public class Adventurer{
 	 * @since 1.4
 	 */
 	private int getNextXP(int currentLevel){
-		return this.nextLevelXP + (((int)Math.round(this.strength/2.0))+this.level - 1)*3;
+		return this.nextLevelXP + (((int)Math.round(this.strength/2.0))+this.level - 1)*5;
 	}
 	
 	
