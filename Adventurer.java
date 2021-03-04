@@ -6,7 +6,7 @@ import java.lang.Math;
  * Class that contains information, statistics, and inventory for the player character.
  * 
  * @author M.Ansell
- * @version 1.7
+ * @version 1.8
  */
 public class Adventurer{
 	
@@ -149,7 +149,7 @@ public class Adventurer{
 		 this.maxHealth = getNewMaxHealth(this.level);
 		 this.health = this.maxHealth;
 		 
-		 this.investigation = 1;
+		 this.investigation = 0;
 		 this.strength = 10;
 		 
 		 this.currentWeapon = DEFAULT_WEAPON;
@@ -405,6 +405,35 @@ public class Adventurer{
 	  */
 	 public void setHealth(int newHealth){
 		 this.health = newHealth;
+	 }
+	 
+	 /**
+	  * Returns the player's current investigation score.  Used when 
+	  * searching for loot.
+	  * 
+	  * @return The player's investigation score.
+	  * @since 1.8
+	  */
+	 public int getInvestigation(){
+		 return this.investigation;
+	 }
+	 
+	 /**
+	  * Method to get better at investigating.  Each time the player searches,
+	  * there is a 50% chance that they get better at searching.
+	  * 
+	  * @return Whether or not the player got better at investigating.
+	  * @since 1.8
+	  */
+	 public boolean improveInvestigation(){
+		 /*Effectively a coin flip.  Each time you do an investigation, 
+		  * there is a 50% chance you get better at investigating.*/
+		  boolean gotBetter = (randGen.nextInt(1) == 1);
+		 if(gotBetter){
+			 this.investigation++;
+		 }
+		 
+		 return gotBetter;
 	 }
 	   
 	 
