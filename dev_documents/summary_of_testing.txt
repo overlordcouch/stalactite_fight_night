@@ -1,0 +1,18 @@
+Summary of in process testing:
+
+Verified that only valid choices result in action at the splash screen.
+
+Verified that user can transition between instructions and splash as many
+times as they want.
+
+Verified transition from splash to gameplay.
+
+Verified cavern tree generation works.  Able to traverse randomly generated
+cave structure.
+
+Verified that cavern structure retains memory.  Previous caves retain state
+information from prvious player interactions.
+
+Verified player status block prints correctly.
+
+Napping function verified to work in root cave.

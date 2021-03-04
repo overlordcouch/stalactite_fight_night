@@ -6,9 +6,17 @@ import java.lang.Math;
  * Class that contains information, statistics, and inventory for the player character.
  * 
  * @author M.Ansell
- * @version 1.6
+ * @version 1.7
  */
 public class Adventurer{
+	
+	/**
+	 * Local pointer to the Random object in the driver
+	 * 
+	 * @since 1.7
+	 */
+	 private Random randGen = StalactiteFightNight.rand;
+	 
 	
 	/**
 	* Player's name
@@ -154,6 +162,45 @@ public class Adventurer{
 		 this.inventory = new ArrayList<Item>();
 		
 	 }
+	 
+	 /**
+	  * Checks if the player needs to level up, and performs the level up operation
+	  * if appropriate.  Returns a boolean of if the player leveled up to 
+	  * allow generation of appropriate text output.
+	  * 
+	  * @return If the player levels up.
+	  * @since 1.7
+	  */
+	 public boolean levelCheck(){
+		 boolean levelUpNow = this.xp >= this.nextLevelXP;
+		 
+		 if(levelUpNow){
+			 this.levelUp();
+		 }
+		 
+		 return levelUpNow;
+	 }
+	 
+	 /**
+	  * Returns the current XP of the player.  Added for combat troubleshooting.
+	  * 
+	  * @return The player's current XP.
+	  * @since 1.7
+	  */
+	 public int getCurrentXP(){
+		 return this.xp;
+	 }
+	 
+	 /**
+	  * Adds XP to the the player.
+	  * 
+	  * @param XP The xp to add to the player's total.
+	  * @since 1.7
+	  */
+	 public void addXP(int XP){
+		 this.xp += XP;
+		 return;
+	 }
 	      
 	
 	/**
@@ -216,21 +263,22 @@ public class Adventurer{
 	 * Determines the damage done by a successful attack.  Considers critical
 	 * hits, as well as current weapon that is equipped.
 	 * 
-	 * @param rand Random object for determining damage dealt.
-	 * @param isCrit Boolean representation of if the strike was a critical hit.
+	 * @param d20Roll The result of a d20 roll.
 	 * @return The amount of damage to deal to the monster.
-	 * @since 1.5  
+	 * @since 1.7  
 	 */
-	public int giveDamage(Random rand, boolean isCrit){
+	public int giveDamage(int d20Roll){
+		
+		boolean isCrit = d20Roll == 20;
 		
 		/*Return damage based on whether it's a critical hit or not.*/
 		if(isCrit){
 			
-			return this.strength + (rand.nextInt(this.strength)+1) + currentWeapon.getDamageMod();
+			return this.strength + (randGen.nextInt(this.strength)+1) + currentWeapon.getDamageMod();
 			
 		}else{
 			
-			return rand.nextInt(this.strength)+1 + currentWeapon.getDamageMod();
+			return randGen.nextInt(this.strength)+1 + currentWeapon.getDamageMod();
 			
 		}
 	
@@ -245,7 +293,7 @@ public class Adventurer{
 	 * @since 1.4
 	 */
 	private int getNextXP(int currentLevel){
-		return this.nextLevelXP + (((int)Math.round(this.strength/2.0))+this.level - 1)*3;
+		return this.nextLevelXP + (((int)Math.round(this.strength/2.0))+this.level - 1)*5;
 	}
 	
 	
@@ -276,10 +324,22 @@ public class Adventurer{
 		this.maxHealth = getNewMaxHealth(this.level);
 		
 		this.health += (this.maxHealth - tempHealth);
+		
+		return;
 	}
 	
 	private void updateAC(){
 		this.ac = 9 + this.level + currentArmor.getArmor();
+	}
+	
+	/**
+	 * Returns the player's current AC.
+	 * 
+	 * @return The player's armor class.
+	 * @since 1.7
+	 */
+	public int getAC(){
+		return this.ac;
 	}
 	
 	/**
@@ -324,6 +384,27 @@ public class Adventurer{
 	 
 	 public int getLevel(){
 		 return this.level;
+	 }
+	 
+	 /**
+	  * Sets the combat state flag of the player when in the presence of
+	  * a monster.
+	  * 
+	  * @param  combatStatus Whether or not the player is in combat.
+	  * @since 1.7
+	  */
+	 public void setCombat(boolean combatStatus){
+		 this.inCombat = combatStatus;
+	 }
+	 
+	 /**
+	  * Sets the player's health the given value.
+	  * 
+	  * @param newHealth The value to set the player's health to.
+	  * @since 1.7
+	  */
+	 public void setHealth(int newHealth){
+		 this.health = newHealth;
 	 }
 	   
 	 

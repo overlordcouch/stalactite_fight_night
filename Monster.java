@@ -6,11 +6,11 @@ import java.util.*;
  * CavernNode.
  * 
  * @author M.Ansell
- * @version 1.5
+ * @version 1.6
  */
 public class Monster {
 	
-	
+	private Random randGen = StalactiteFightNight.rand;
 	
 	/**
 	 * The level of the monster.  Plays into strength and health.
@@ -86,12 +86,22 @@ public class Monster {
 		this.strength = this.level + 9;
 		this.ac = this.level +9;
 		this.defeatXP = this.maxHealth;
-		this.hitMod = level - (int)Math.round(strength/7.0);
+		this.hitMod = level +1; 
 		
 		this.myTurn = false;
 		this.type = type;
 		this.description = desc;
 		
+	}
+	
+	/**
+	 * Returns this monster's XP value for defeat.
+	 * 
+	 * @return Monster XP worth for defeat.
+	 * @since 1.6
+	 */
+	public int getXPValue(){
+		return this.defeatXP;
 	}
 	
 	/**
@@ -131,20 +141,19 @@ public class Monster {
 	
 	
 	/**
-	 * Deals monster damage.  Returns the number of points of damage dealt,
+	 * Deals damage from the monster to the player.  Returns the number of points of damage dealt,
 	 * including consideration for a critical strike.
 	 * 
-	 * @param rand A Random object used to generate damage rolls
-	 * @param isCrit Boolean representation of whether the strike is critical.
+	 * @param diceRoll The result of a d20 roll for attack.
 	 * @return The damage dealt by this strike.
-	 * @since 1.4
+	 * @since 1.6
 	 */
-	public int giveDamage(Random rand, boolean isCrit){
-		
+	public int giveDamage(int diceRoll){
+		boolean isCrit = diceRoll == 20;
 		if(isCrit){
-			return (int )0.75*(this.strength) + rand.nextInt(this.strength) + 1;
+			return (int )0.75*(this.strength) + randGen.nextInt(this.strength) + 1;
 		}else{
-			return (rand.nextInt(this.strength)+1 + rand.nextInt(this.strength)+1)/2;
+			return (randGen.nextInt(this.strength)+1 + randGen.nextInt(this.strength)+1)/2;
 		}
 		
 	}	
@@ -158,4 +167,14 @@ public class Monster {
 	public String toString(){
 		return ""+this.description + " "+this.type;
 	}
+	
+	/**
+	 * Returns the monster's AC.
+	 * 
+	 * @return The monster's AC for comparison against player attack.
+	 * @since 1.6
+	 */
+	 public int getAC(){
+		 return this.ac;
+	 }
 }//monster class

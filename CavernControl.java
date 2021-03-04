@@ -7,7 +7,7 @@ import java.io.*;
  * consistency.
  * 
  * @author M.Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class CavernControl{
 	
@@ -47,6 +47,13 @@ public class CavernControl{
 	private static List<String> entranceDesc = StalactiteFightNight.enterDesc;
 	
 	/**
+	 * Local pointer to the list of nap actions in main.
+	 * 
+	 * @since 1.1
+	 */
+	private static List<String> napDesc = StalactiteFightNight.napDesc;
+	
+	/**
 	 * Local pointer to the player object created by main.
 	 * 
 	 * @since 1.0
@@ -76,10 +83,14 @@ public class CavernControl{
 		Helper.clearInputBuffer();
 		Helper.printPlayerHeader();
 		
+		if(currentCave.hasMonster()){
+			cavernEnter();
+		}
+		
 		
 		System.out.printf("You are standing in %s\n", currentCave);
 		
-		if(currentCave.getPrev() == null){
+		if(currentCave.getPrev() == null && currentCave.exitedFirst ==true){
 			System.out.println("You have returned to the entrance, only to find that it has caved in.");
 			System.out.println("Looks like the only way out is through the caves!");
 		}
@@ -95,7 +106,7 @@ public class CavernControl{
 		
 		String input = console.next().toLowerCase();
 		
-		System.out.println("TEST");
+		
 		
 		while(!validInputs.contains(input)){
 			input = console.next().toLowerCase();
@@ -130,6 +141,10 @@ public class CavernControl{
 						break;
 			case "p": currentCave = currentCave.getPrev();
 						cavernMain();
+						break;
+						
+			case "n": nappyTime();
+						break;
 		}
 		
 		
@@ -162,9 +177,20 @@ public class CavernControl{
 			
 			currentCave = new CaveNode(player.getLevel(), desc1, desc2, null);
 			
+			/*Set the flag for the first cavern only.*/
+			currentCave.exitedFirst = false;
+			
+			/*Make it nearly impossible for the player to die in the first cavern.*/
+			if(currentCave.hasMonster()){
+				Monster monster = currentCave.getMonster();
+				monster.takeDamage(monster.getHealth() -1);
+			}
+			
 		}else{
 			/*Create new cave and make its parent the current cave*/
 			CaveNode temp = new CaveNode(player.getLevel(), desc1, desc2, currentCave);
+			
+			currentCave.exitedFirst = true;
 			
 			/*Create the link forward from the current path by setting the directional
 			 * reference.*/
@@ -178,30 +204,48 @@ public class CavernControl{
 			
 		}
 		
+		cavernEnter();
+		
+		
+	}//newCavern
+	
+	private static void cavernEnter(){
+		
 		/*Print out the player's entrance.*/
 		String entranceFlavor = entranceDesc.get(randGen.nextInt(entranceDesc.size()));
 		System.out.printf("%s %s  ", entranceFlavor, currentCave);
 		
 		if(currentCave.hasMonster()){
 			System.out.printf(" \nThe first thing you notice is the %s.", currentCave.getMonster());
+			
+			Helper.waitForInput();
+			
+			/*When a monster is encountered, you are immediately in combat.*/
+			player.setCombat(true);
+			CombatControl.combatMain();
+			
+			
 		}else if(currentCave.hasLoot()){
-			System.out.printf("You notice a chest, nearly hidden in the shadows.  ");
+			System.out.printf("\nYou notice a chest, nearly hidden in the shadows.  ");
 		}
 		System.out.println();
 		currentCave.printPaths();
 		
-		System.out.println("\n\t\t\t\t\tPress 'enter' to proceed.");
-		
-		
-		
-		while(!console.hasNextLine()){}
+		Helper.waitForInput();
 		
 		cavernMain();
 		
-		
-	}//newCavern
+	}
 	
-	
+	/**
+	 * Generates and prints the appropriate actions that the user can
+	 * take based on the state of the current cavern.  Returns a Set
+	 * that contains string representations of valid choices for the 
+	 * player
+	 * 
+	 * @return Set of strings that are valid inputs from the player.
+	 * @since 1.0
+	 */
 	private static Set<String> printOptions(){
 		
 		Set<String> validOptions = new HashSet<String>();
@@ -242,8 +286,70 @@ public class CavernControl{
 	
 	
 	
-	
-	
+	/**
+	 * Performs nap function.  Restores some player health at the risk
+	 * of spawning a monster while sleeping.
+	 * 
+	 * @since 1.1
+	 */
+	private static void nappyTime(){
+		
+		/*Ensure that player reference is up to date.  Clear buffer
+		 * and screen*/
+		player = StalactiteFightNight.player;
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		
+				
+		
+		/*Determine how much healing occurred, and apply it to the player.
+		 * Initial: 10% of max health + 1d(max-current), not to exceed
+		 * max health.*/
+		 int healthMissing = player.getMaxHealth() - player.getHealth();
+		 int healthAdd =(int) Math.round((player.getMaxHealth() / 10.0) + randGen.nextInt(healthMissing+1));
+		 
+		 /*Heal the player for the calculated amount.  If this exceeds their max, bring it down to their max*/
+		 player.heal(healthAdd);
+		 if(player.getHealth() > player.getMaxHealth()){
+			 player.setHealth(player.getMaxHealth());
+		 }
+		 
+		 
+		 
+		 /*Determine if monster shows up (1/5)*/ 
+		 boolean monsterMade;
+		 if(randGen.nextInt(4) == 3){
+			 currentCave.monsterMaker(player.getLevel());
+			 monsterMade = true;
+			 player.setCombat(true);
+		 }else{
+			 monsterMade = false;
+		 }
+		 
+		 /*Tell the player what is up.*/
+		 
+		System.out.println("\t\t*****************************\n\n");
+		Helper.printPlayerHeader();
+		System.out.println("\n\n");
+		System.out.println(napDesc.get(randGen.nextInt(napDesc.size())));
+		System.out.println("\n\n You took a nap! You healed "+healthAdd +" points of damage.");
+		
+		/*If a monster generated, take the player to combat.*/
+		if(monsterMade){
+			System.out.println("\nUnfortunately, you were woken up by the "+ currentCave.getMonster() + " that wandered in.");
+			Helper.waitForInput();
+			
+			CombatControl.combatMain();
+			
+		}else{
+			Helper.waitForInput();
+			cavernMain();
+			
+		}
+		
+		
+		
+	}//nappyTime
 	
 	
 	
