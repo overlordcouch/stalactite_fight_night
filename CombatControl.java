@@ -96,7 +96,7 @@ public class CombatControl{
 			
 			case "a":	playerAttack();
 						break;
-			case "r": 	//retreat
+			case "r": 	monsterTurn("retreat");
 						break;
 			case "i": 	//go to inventory
 						break;
@@ -187,7 +187,7 @@ public class CombatControl{
 		Helper.waitForInput();
 		
 		if(!monsterDedNow){
-			monsterTurn();
+			monsterTurn(null);
 		}else{
 			CavernControl.cavernMain();
 		}
@@ -233,9 +233,10 @@ public class CombatControl{
 	 * of monsterTurn.  Method automatically passes to death method if
 	 * the player dies.
 	 * 
+	 * @param branch What happens after monster turn (null->combat cycle, "retreat"->exit combat).
 	 * @since 1.0
 	 */
-	private static void monsterTurn(){
+	private static void monsterTurn(String branch){
 		/*Ensure that the player state is up to date*/
 		player = StalactiteFightNight.player;
 		
@@ -268,11 +269,16 @@ public class CombatControl{
 				
 		Helper.printPlayerHeader();
 		
+		/*Retreat specific text option.*/
+		if(branch != null && branch.equals("retreat")){
+			System.out.println("As you turn to run, the "+ monster+" tries to attack you!\n");
+		}
+		
 		/*Print message about whether or not the monster hit.*/
 		if(didHit){
-			System.out.println("\n\n\nThe "+ currentCave.getMonster() + " hits you for " + damage +" points of damage.");
+			System.out.println("The "+ monster + " hits you for " + damage +" points of damage.\n");
 		}else{
-			System.out.println("\n\n\n");
+			System.out.println("");
 			System.out.println(monsterMiss.get(randGen.nextInt(monsterMiss.size())));
 		}
 		
@@ -284,6 +290,13 @@ public class CombatControl{
 			
 			Helper.waitForInput();
 			death();
+		/*Check if player was trying to retreat, if so do the retreat.*/	
+		}else if(branch != null && branch.equals("retreat")){
+			
+			Helper.waitForInput();
+			retreat();
+			
+		/*Final case: normal combat, return to player choices.*/	
 		}else{
 			Helper.waitForInput();
 			combatMain();
@@ -291,7 +304,46 @@ public class CombatControl{
 		
 	}
 	
+	/**
+	 * Retreat action.  Takes the player out of combat and moves them back to the
+	 * previous cave.
+	 * 
+	 * @since 1.1
+	 */
+	private static void retreat(){
+		/*Take the player out of combat.*/
+		player.setCombat(false);
+		
+		/*Move player back to the previous cavern, and enter normal cavern state*/
+		CavernControl.currentCave = CavernControl.currentCave.getPrev();
+		CavernControl.cavernMain();
+	}
+	
+	/*Death actions.
+	 * 
+	 * @since 1.1*/
 	private static void death(){
+		
+		/*Set health to 1/4*/
+		player.setHealth(player.getMaxHealth()/10);
+		
+		/*REmove some random stuff from inventory*/
+		
+		/*Take them out of combat and put them in the previous cave.*/
+		if(CavernControl.currentCave.getPrev() != null){
+			Helper.clearWindow();
+			Helper.clearInputBuffer();
+			System.out.println("You wake, sore and battered, in the cavern you just tried to leave.");
+			Helper.waitForInput();
+			retreat();
+		}else{
+			System.out.println("You can't retreat any further.  The cavern has bested you.");
+			Helper.waitForInput();
+			System.exit(0);
+			
+		}
+		
+		
 		
 	}
 	

@@ -78,7 +78,7 @@ public class Helper{
 		System.out.println(justification+ "Health: "+ player.getHealth() +"/"+player.getMaxHealth());
 		System.out.println(justification+ "Wearing "+ player.getEquippedArmor());
 		System.out.println(justification+ "Wielding " + player.getEquippedWeapon());
-		System.out.println();
+		System.out.println("\n\n\n\n");
 		
 		return;
 	}
@@ -90,7 +90,7 @@ public class Helper{
 	 * @since 1.1
 	 */
 	public static void waitForInput(){
-		System.out.println("\n\n\t\t\t\t\t\t\t\t\t\t  Press enter to continue.");
+		System.out.println("\n\n\t\t\t\t\t\t  Press enter to continue.");
 		while(!console.hasNextLine()){}
 		
 		return;

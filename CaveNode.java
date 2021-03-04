@@ -350,7 +350,7 @@ public class CaveNode{
 	public void monsterMaker(int level){
 		
 		//Monster level will be player level +-1
-		int monsterLevel = StalactiteFightNight.rand.nextInt((level+1) - (level -1)) + (level - 1);
+		int monsterLevel = StalactiteFightNight.rand.nextInt((level+2) - (level -1)) + (level - 1);
 
 		//Generate a monster with random type, description, and the level
 		//calculated above.

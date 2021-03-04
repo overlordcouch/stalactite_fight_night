@@ -83,6 +83,10 @@ public class CavernControl{
 		Helper.clearInputBuffer();
 		Helper.printPlayerHeader();
 		
+		if(currentCave.hasMonster()){
+			cavernEnter();
+		}
+		
 		
 		System.out.printf("You are standing in %s\n", currentCave);
 		
@@ -176,6 +180,12 @@ public class CavernControl{
 			/*Set the flag for the first cavern only.*/
 			currentCave.exitedFirst = false;
 			
+			/*Make it nearly impossible for the player to die in the first cavern.*/
+			if(currentCave.hasMonster()){
+				Monster monster = currentCave.getMonster();
+				monster.takeDamage(monster.getHealth() -1);
+			}
+			
 		}else{
 			/*Create new cave and make its parent the current cave*/
 			CaveNode temp = new CaveNode(player.getLevel(), desc1, desc2, currentCave);
@@ -193,6 +203,13 @@ public class CavernControl{
 			 path.push(temp);
 			
 		}
+		
+		cavernEnter();
+		
+		
+	}//newCavern
+	
+	private static void cavernEnter(){
 		
 		/*Print out the player's entrance.*/
 		String entranceFlavor = entranceDesc.get(randGen.nextInt(entranceDesc.size()));
@@ -218,8 +235,7 @@ public class CavernControl{
 		
 		cavernMain();
 		
-		
-	}//newCavern
+	}
 	
 	/**
 	 * Generates and prints the appropriate actions that the user can

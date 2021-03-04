@@ -86,7 +86,7 @@ public class Monster {
 		this.strength = this.level + 9;
 		this.ac = this.level +9;
 		this.defeatXP = this.maxHealth;
-		this.hitMod = level - (int)Math.round(strength/7.0);
+		this.hitMod = level +1; 
 		
 		this.myTurn = false;
 		this.type = type;
@@ -141,7 +141,7 @@ public class Monster {
 	
 	
 	/**
-	 * Deals monster damage.  Returns the number of points of damage dealt,
+	 * Deals damage from the monster to the player.  Returns the number of points of damage dealt,
 	 * including consideration for a critical strike.
 	 * 
 	 * @param diceRoll The result of a d20 roll for attack.
