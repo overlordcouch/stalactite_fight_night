@@ -3,7 +3,7 @@
  * Item superclass contains state and methods common to all items
  * 
  * @author M.Ansell
- * @version 1.1
+ * @version 1.2
  */
 public class Item {
 	
@@ -62,10 +62,10 @@ public class Item {
 		 * user interaction.
 		 * 
 		 * @return String representation of the Item.
-		 * @since 1.0 
+		 * @since 1.2 
 		 */
 		public String toString(){
-			return "Level " + level + " "+ description + " " + type;
+			return description + " " + type;
 		}
 		
 		

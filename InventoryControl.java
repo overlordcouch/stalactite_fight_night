@@ -48,6 +48,17 @@ public class InventoryControl{
 	 */
 	private static void printInventory(){
 		
+		String header = "Inventory";
+		for(int i = 0; i<40; i++){
+			header = "*"+ header +"*";
+		}
+		System.out.println(header);
+		
+		System.out.println("\n#\tLevel\tItem");
+		
+		
+		
 	}
+	
 	
 }//InventoryControl Class
