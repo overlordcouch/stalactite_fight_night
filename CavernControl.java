@@ -7,7 +7,7 @@ import java.io.*;
  * consistency.
  * 
  * @author M.Ansell
- * @version 1.1
+ * @version 1.2
  */
 public class CavernControl{
 	
@@ -145,6 +145,8 @@ public class CavernControl{
 						
 			case "n": nappyTime();
 						break;
+			case "s": //search
+						break;
 		}
 		
 		
@@ -209,6 +211,13 @@ public class CavernControl{
 		
 	}//newCavern
 	
+	/**
+	 * CavernEnter controls entry into a cavern from any game state.  
+	 * Version 1.2 moved this code out from newCavern in support of returning
+	 * to cavern state from combat state.
+	 * 
+	 * @since 1.2
+	 */
 	private static void cavernEnter(){
 		
 		/*Print out the player's entrance.*/
@@ -347,10 +356,15 @@ public class CavernControl{
 			
 		}
 		
-		
-		
 	}//nappyTime
 	
-	
+	/**
+	 * Implements searching for loot in the cavern.  
+	 * 
+	 * @since 1.2
+	 */
+	private static void search(){
+		
+	}
 	
 }//caverncontrol
