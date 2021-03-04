@@ -435,6 +435,27 @@ public class Adventurer{
 		 
 		 return gotBetter;
 	 }
+	 
+	 /**
+	  * Accessor to get a pointer to the player's inventory.
+	  * 
+	  * @return A pointer to the player's inventory.
+	  * @since 1.8
+	  */
+	 public List<Item> getInventory(){
+		 return this.inventory;
+	 }
+	 
+	 /**
+	  * Returns whether the player is in combat or not.  Mainly used in
+	  * inventory operations.
+	  * 
+	  * @return Whether the player is in combat.
+	  * @since 1.8
+	  */
+	 public boolean inCombat(){
+		 return this.inCombat;
+	 }
 	   
 	 
 	
