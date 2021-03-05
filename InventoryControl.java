@@ -114,14 +114,66 @@ public class InventoryControl{
 						break;
 						
 			//Equip
-			case "e":	//itemEquip(choice);
+			case "e":	itemEquip(choice);
+						break;
+						
+			//Return to inventory
+			case "r":	inventoryMain();
+						break;
+						
+			//Use a consumable item
+			case "u":	useConsumable(choice);
 						break;
 		}
 		
 		
 	}
 	
-	private static void itemEQuip(int listPostion){
+	/**
+	 * Uses a consumable item.  At time of writing, this only includes potions,
+	 * but may change in future iterations.
+	 * 
+	 * @param listPosition The List index of the item to use.
+	 * @since 1.1
+	 */
+	private static void useConsumable(int listPosition){
+		/*Clear screen and print player information*/
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
+		
+		Item toUse = inventory.remove(listPosition);
+		
+		/*Examine the item to be consumed.  Take appropriate action
+		 * based on what kind of item it is.*/
+		if(toUse instanceof Potion){
+			int healPts = ((Potion)toUse).usePotion();
+			player.heal(healPts);
+			
+			System.out.println("You use the "+ toUse +" and heal for "+ healPts +" points of damage!");
+		}
+		
+		/*If in combat, its the monster turn now, if not, go back to inventory.*/
+		
+		System.out.println("\n\n");
+		Helper.waitForInput();
+		
+		if(player.inCombat()){
+			CombatControl.monsterTurn(null);
+		}else{
+			inventoryMain();
+		}
+		
+	}
+	
+	/**
+	 * Swaps the chosen item in inventory with the appropriate piece on the
+	 * player.
+	 * 
+	 * @param listPosition The index of the item to be equipped.
+	 * @since 1.1
+	 */
+	private static void itemEquip(int listPosition){
 		
 		/*Clear screen and print player information*/
 		Helper.clearWindow();
@@ -136,8 +188,46 @@ public class InventoryControl{
 		/*Examine the item to be equipped to figure out where it needs
 		 * to go.*/
 		if(toEquip instanceof Armor){
-			Armor temp = player.getArmor();
+			Armor temp = player.getEquippedArmor();
+			
+			/*Put currently equipped armor into the inventory*/
+			inventory.add(temp);
+			
+			/*Equip the new armor*/
+			player.setArmor((Armor) toEquip);
+			
+			/*Tell the player about it.*/
+			System.out.println("You swap your "+ temp + " for the far superior " + toEquip+"!");
+			System.out.println(temp+" was returned to your inventory!");
+			
+		}else if (toEquip instanceof Weapon){
+			
+			Weapon temp = player.getEquippedWeapon();
+			
+			/*Put currently equipped armor into the inventory*/
+			inventory.add(temp);
+			
+			/*Equip the new armor*/
+			player.setWeapon((Weapon) toEquip);
+			
+			/*Tell the player about it.*/
+			System.out.println("You swap your "+ temp + " for the far superior " + toEquip+"!");
+			System.out.println(temp+" was returned to your inventory!");
+			
 		}
+		
+		System.out.println("\n\n");
+		Helper.waitForInput();
+		
+		/*If you are in combat, return it to combat on the monster's turn*/
+		if(player.inCombat()){
+			CombatControl.monsterTurn(null);
+		}else{
+			
+			inventoryMain();
+			
+		}
+		
 	}
 	
 	/**

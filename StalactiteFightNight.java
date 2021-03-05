@@ -192,7 +192,7 @@ public class StalactiteFightNight{
 		System.out.println("\"My calling is to sit outside this cave and meet those who dare to enter,");
 		System.out.println("so when they inevitably die at least one person will remember them.\"\n");
 		
-		System.out.println("\"I'm not sure how you plan to succed wearing a "+ player.getEquippedArmor()
+		System.out.println("\"I'm not sure how you plan to succeed wearing a "+ player.getEquippedArmor()
 							+" with nothing but your "+ player.getEquippedWeapon() +", but who am I to judge?\"");
 		System.out.println("\n\n\"Good luck, I guess!\"");
 		

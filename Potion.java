@@ -3,7 +3,7 @@
  * an additional field for healing.
  * 
  * @author M.Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class Potion extends Item{
 	
@@ -42,18 +42,15 @@ public class Potion extends Item{
 	
 	/**
 	 * Uses this healing item.  The amount of healing provided gets returned
-	 * to the caller.  The description of the item changes to 'used up', and the
-	 * healing field is set to 0 to ensure no reuse.  Recommend removing this
+	 * to the caller.  Recommend removing this
 	 * item from inventory as part of the use.
 	 * 
 	 * @return The amount of healing provided.
-	 * @since 1.0
+	 * @since 1.1
 	 */
 	public int usePotion(){
 		int temp = healing;
-		this.description = "completely used up";
-		this.healing = 0;
-		
+				
 		return temp;
 	}
 	

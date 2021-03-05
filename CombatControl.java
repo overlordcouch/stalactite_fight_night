@@ -236,7 +236,7 @@ public class CombatControl{
 	 * @param branch What happens after monster turn (null->combat cycle, "retreat"->exit combat).
 	 * @since 1.0
 	 */
-	private static void monsterTurn(String branch){
+	public static void monsterTurn(String branch){
 		/*Ensure that the player state is up to date*/
 		player = StalactiteFightNight.player;
 		
