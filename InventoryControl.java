@@ -5,7 +5,7 @@ import java.util.*;
  * interaction.
  * 
  * @author M.Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class InventoryControl{
 	
@@ -66,7 +66,7 @@ public class InventoryControl{
 				CavernControl.cavernMain();
 			}
 		}else{/*If they aren't quitting, go to appropriate interactions*/
-			//itemInteraction(input);
+			itemInteraction(input);
 		}
 		
 		
@@ -95,14 +95,74 @@ public class InventoryControl{
 		
 		System.out.println("You are looking at a level "+ piece.getLevel() + " "+ piece);
 		
-		//printItemOptions(piece);
+		/*Print valid options for the item based on item and context.
+		 * Create a list of valid inputs from the user*/
+		Set<String> validOptions = printItemOptions(piece);
 		
-		/*Make use of chort-circuited comparison to prevent player changing armor 
-		 * in the middle of combat*/
-		if(piece instanceof Armor && player.inCombat()){
-			
-			
+		System.out.println("\n\t\t\t\tWhat would you like to do with this?");
+		
+		String input = console.next().toLowerCase();
+		
+		while(!validOptions.contains(input)){
+			input = console.next().toLowerCase();
 		}
+		
+		switch(input){
+			
+			//Discard
+			case "d":	itemDiscard(choice);
+						break;
+						
+			//Equip
+			case "e":	//itemEquip(choice);
+						break;
+		}
+		
+		
+	}
+	
+	private static void itemEQuip(int listPostion){
+		
+		/*Clear screen and print player information*/
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
+		
+		
+		
+		/*Pull the item to be equipped out of the inventory*/
+		Item toEquip = inventory.remove(listPosition);
+		
+		/*Examine the item to be equipped to figure out where it needs
+		 * to go.*/
+		if(toEquip instanceof Armor){
+			Armor temp = player.getArmor();
+		}
+	}
+	
+	/**
+	 * Discards item from player inventory, letting the player know
+	 * if was discarded.
+	 * 
+	 * @param listPosition The List index of the item that was chosen.
+	 * @since 1.1
+	 */ 
+	private static void itemDiscard(int listPosition){
+		
+		/*Clear screen and print player information*/
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
+		
+		/*Inform the player that it was discarded, and remove it from the inventory.*/
+		System.out.println("You discarded the "+ inventory.get(listPosition) + "!");
+		inventory.remove(listPosition);
+		
+		System.out.println("\n\n\n");
+		Helper.waitForInput();
+		
+		inventoryMain();
+		
 		
 	}
 	
@@ -128,8 +188,25 @@ public class InventoryControl{
 				validOptions.add("e");
 			}
 			
-			/********************HERE BE THE WORK************************/
+		}else if(piece instanceof Weapon){
+			
+			System.out.println(justification + "E: Equip Item");
+			validOptions.add("e");
+			
+		}else if (piece instanceof Potion){
+			
+			System.out.println(justification + "U: Use Item");
+			validOptions.add("u");
+			
 		}
+		
+		
+		System.out.println(justification+ "D: Discard Item");
+		validOptions.add("d");
+		
+		System.out.println(justification + "R: Return to Inventory");
+		validOptions.add("r");
+		
 		
 		return validOptions;
 		

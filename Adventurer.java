@@ -456,6 +456,26 @@ public class Adventurer{
 	 public boolean inCombat(){
 		 return this.inCombat;
 	 }
+	 
+	 /**
+	  * Equips new armor to the player.
+	  * 
+	  * @param freshDigs The new piece of armor to equip.
+	  * @since 1.8
+	  */
+	 public void setArmor(Armor freshDigs){
+		 this.currentArmor = freshDigs;
+	 }
+	 
+	 /**
+	  * Equips a new weapon to the player.
+	  * 
+	  * @param freshTools The weapon to be equipped.
+	  * @since 1.8
+	  */
+	 public void setWeapon(Weapon freshTools){
+		 this.currentWeapon = freshTools;
+	 }
 	   
 	 
 	
