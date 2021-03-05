@@ -106,8 +106,6 @@ public class CavernControl{
 		
 		String input = console.next().toLowerCase();
 		
-		
-		
 		while(!validInputs.contains(input)){
 			input = console.next().toLowerCase();
 		}
