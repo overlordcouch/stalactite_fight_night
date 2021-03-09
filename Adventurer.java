@@ -426,14 +426,19 @@ public class Adventurer{
 	  * @since 1.8
 	  */
 	 public boolean improveInvestigation(){
-		 /*Effectively a coin flip.  Each time you do an investigation, 
-		  * there is a 50% chance you get better at investigating.*/
-		  boolean gotBetter = (randGen.nextInt(2) == 1);
-		 if(gotBetter){
-			 this.investigation++;
-		 }
 		 
-		 return gotBetter;
+		 if(this.investigation <25){
+			 /*1/3 chance of improvement Each time you do an investigation, 
+			  * there is a 50% chance you get better at investigating.*/
+			 boolean gotBetter = (randGen.nextInt(3) == 1);
+			 if(gotBetter){
+				 this.investigation++;
+			 }
+			 
+			 return gotBetter;
+		 }else{
+			 return false;
+		 }
 	 }
 	 
 	 /**
