@@ -145,6 +145,9 @@ public class CavernControl{
 						break;
 			case "s": //search
 						break;
+						
+			case "i":	InventoryControl.inventoryMain();
+						break;
 		}
 		
 		
