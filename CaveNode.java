@@ -485,6 +485,7 @@ public class CaveNode{
 	 */
 	public void clearLoot(){
 		this.loot = null;
+		this.hasLoot = false;
 		
 	}
 }//CaveNode class
