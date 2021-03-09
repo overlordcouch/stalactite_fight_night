@@ -191,28 +191,38 @@ public class InventoryControl{
 			Armor temp = player.getEquippedArmor();
 			
 			/*Put currently equipped armor into the inventory*/
-			inventory.add(temp);
+			if(!temp.toString().equals("filthy bathrobe")){
+				inventory.add(temp);
+			}
 			
 			/*Equip the new armor*/
 			player.setArmor((Armor) toEquip);
 			
 			/*Tell the player about it.*/
 			System.out.println("You swap your "+ temp + " for the far superior " + toEquip+"!");
-			System.out.println(temp+" was returned to your inventory!");
+			
+			if(!temp.toString().equals("filthy bathrobe")){
+				System.out.println("The "+temp+" was returned to your inventory!");
+			}
 			
 		}else if (toEquip instanceof Weapon){
 			
 			Weapon temp = player.getEquippedWeapon();
 			
 			/*Put currently equipped armor into the inventory*/
-			inventory.add(temp);
+			if(!temp.toString().equals("puny fists")){
+				inventory.add(temp);
+			}
 			
 			/*Equip the new armor*/
 			player.setWeapon((Weapon) toEquip);
 			
 			/*Tell the player about it.*/
 			System.out.println("You swap your "+ temp + " for the far superior " + toEquip+"!");
-			System.out.println(temp+" was returned to your inventory!");
+			
+			if(!temp.toString().equals("filthy bathrobe")){
+				System.out.println("The "+temp+" was returned to your inventory!");
+			}
 			
 		}
 		
