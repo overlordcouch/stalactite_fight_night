@@ -7,7 +7,7 @@ import java.io.*;
  * consistency.
  * 
  * @author M.Ansell
- * @version 1.2
+ * @version 1.3
  */
 public class CavernControl{
 	
@@ -148,6 +148,9 @@ public class CavernControl{
 						
 			case "i":	InventoryControl.inventoryMain();
 						break;
+						
+			case "o":	//openChest();
+						break;
 		}
 		
 		
@@ -266,6 +269,9 @@ public class CavernControl{
 		System.out.println(justification +"N:Take a nap");
 		validOptions.add("n");
 		
+		System.out.println(justification + "I: Access your inventory");
+		validOptions.add("i");
+		
 		if(currentCave.hasLoot()){
 			System.out.println(justification +"O: Open chest");
 			validOptions.add("o");
@@ -358,6 +364,90 @@ public class CavernControl{
 		}
 		
 	}//nappyTime
+	
+	/**
+	 * Manages interactions with item chests.
+	 * 
+	 * @since 1.3
+	 */
+	private static void openChest(){
+		
+		player = StalactiteFightNight.player;
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
+		
+		System.out.println("You open the chest, revealing the "+ currentCave.getLoot() + "!");
+		System.out.println("\n\nWhat do you want to do with it?");
+		
+		Set<String> validInputs = printChestOptions();
+		
+		String input = console.next().toLowerCase();
+		
+		while(!validInputs.contains(input)){
+			input = console.next().toLowerCase();
+		}
+		
+		switch(input){
+			
+			/*Leave the item*/
+			case "l":	Helper.clearWindow();
+						Helper.clearInputBuffer();
+						Helper.printPlayerHeader();
+						System.out.println("You decide to leave the "+ currentCave.getLoot()+" for now.");
+						Helper.waitForInput();
+						CavernControl.cavernMain();
+						
+			/*Grab the item*/
+			case "g":	Helper.clearWindow();
+						Helper.clearInputBuffer();
+						Helper.printPlayerHeader();
+						System.out.println("You stuff the "+currentCave.getLoot()+" into your bag.");
+						player.getInventory().add(currentCave.getLoot());
+						currentCave.clearLoot();
+						Helper.waitForInput();
+						CavernControl.cavernMain();
+						
+			/*Get rid of the item*/
+			case "t":	Helper.clearWindow();
+						Helper.clearInputBuffer();
+						Helper.printPlayerHeader();
+						System.out.println("You hurl the "+currentCave.getLoot()+" into the darkness, losing it forever.");
+						currentCave.clearLoot();
+						Helper.waitForInput();
+						CavernControl.cavernMain();
+			
+		}
+		
+	}//openChest
+	
+	/**
+	 * Generates and prints the appropriate actions that the user can
+	 * take with a chest.
+	 * 
+	 * @return Set of strings that are valid inputs from the player.
+	 * @since 1.3
+	 */
+	private static Set<String> printChestOptions(){
+		
+		Set<String> validOptions = new HashSet<String>();
+		
+		String justification = 	"\t\t\t\t\t\t\t\t";
+		System.out.println("\n\n\n");
+		
+		System.out.println(justification +"G:Grab the item");
+		validOptions.add("g");
+		
+		System.out.println(justification + "L: Leave the item");
+		validOptions.add("l");
+		
+		System.out.println(justification + "T: Toss the item");
+		validOptions.add("t");
+		
+		
+		
+		return validOptions;
+	}
 	
 	/**
 	 * Implements searching for loot in the cavern.  
