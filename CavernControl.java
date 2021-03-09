@@ -149,7 +149,7 @@ public class CavernControl{
 			case "i":	InventoryControl.inventoryMain();
 						break;
 						
-			case "o":	//openChest();
+			case "o":	openChest();
 						break;
 		}
 		
