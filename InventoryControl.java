@@ -298,7 +298,7 @@ public class InventoryControl{
 			System.out.println(justification + "U: Use Item");
 			validOptions.add("u");
 			
-		}
+		} 
 		
 		
 		System.out.println(justification+ "D: Discard Item");
