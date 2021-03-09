@@ -332,6 +332,23 @@ public class CombatControl{
 		
 		/*REmove some random stuff from inventory*/
 		
+		/*Determine how many items are going to get removed from inventory*/
+		int invLoss = randGen.nextInt(player.getInventory().size());
+		
+		/*Remove that many items at random from the inventory*/
+		for(int i = 0; i < invLoss; i++){
+			int removeIndex = randGen.nextInt(player.getInventory().size());
+			player.getInventory().remove(removeIndex);
+		}
+		
+		if(invLoss > 0){
+			if(invLoss != 1){
+				System.out.println("That monster mugged you!  You seem to have lost "+invLoss+" items from your inventory.");
+			}else{
+				System.out.println("That monster mugged you!  You seem to have lost an item from your inventory.");
+			}
+		}
+		
 		/*Take them out of combat and put them in the previous cave.*/
 		if(CavernControl.currentCave.getPrev() != null){
 			Helper.clearWindow();
