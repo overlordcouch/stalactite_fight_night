@@ -156,6 +156,9 @@ public class CombatControl{
 			 /*Check if player leveled up, and do the leveling if necessary*/
 			 levelUpNow = player.levelCheck();
 			 
+			 /*Put the player out of combat*/
+			 player.setCombat(false);
+			 
 		 }
 		
 		
