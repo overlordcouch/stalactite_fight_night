@@ -280,8 +280,26 @@ public class CombatControl{
 		/*Print message about whether or not the monster hit.*/
 		if(didHit){
 			System.out.println("The "+ monster + " hits you for " + damage +" points of damage.\n");
+
+			
+			/*Alter the durability of the armor*/
+			if(!player.getEquippedArmor().toString().equals("filthy bathrobe")){
+				Armor armor = player.getEquippedArmor();
+				
+				player.getEquippedArmor().hurtDurability();
+				if(player.getEquippedArmor().getDurability() == 5){
+					System.out.println("Your "+ armor + " is starting to look pretty rough from the beating it's taken.");
+				}
+				
+				if(player.getEquippedArmor().getDurability() == 0){
+					
+					System.out.println("Your "+ armor +" falls to shreds.  You are left only in your bathrobe.");
+					player.setArmor("default");
+					
+				}
+			}//durability branch
+			
 		}else{
-			System.out.println("");
 			System.out.println(monsterMiss.get(randGen.nextInt(monsterMiss.size())));
 		}
 		
@@ -330,7 +348,15 @@ public class CombatControl{
 		/*Set health to 1/4*/
 		player.setHealth(player.getMaxHealth()/10);
 		
-		/*REmove some random stuff from inventory, if there is anything there*/
+		
+		
+		/*Take them out of combat and put them in the previous cave.*/
+		if(CavernControl.currentCave.getPrev() != null){
+			Helper.clearWindow();
+			Helper.clearInputBuffer();
+			System.out.println("You wake, sore and battered, in the cavern you just tried to leave.");
+			
+			/*REmove some random stuff from inventory, if there is anything there*/
 		if(player.getInventory().size() != 0){
 		
 			/*Determine how many items are going to get removed from inventory*/
@@ -351,11 +377,6 @@ public class CombatControl{
 			}
 		}
 		
-		/*Take them out of combat and put them in the previous cave.*/
-		if(CavernControl.currentCave.getPrev() != null){
-			Helper.clearWindow();
-			Helper.clearInputBuffer();
-			System.out.println("You wake, sore and battered, in the cavern you just tried to leave.");
 			Helper.waitForInput();
 			retreat();
 		}else{

@@ -85,8 +85,6 @@ public class StalactiteFightNight{
 		
 		CavernControl.newCavern(null);
 		
-		//~ Item test = new Item(1, "cool", "cool");
-		//~ System.out.println(test instanceof Armor);
 
 		
 		
@@ -360,7 +358,7 @@ public class StalactiteFightNight{
 			if(!temp.hasLoot()){
 				System.out.println("No loot");
 			}else{
-				System.out.println(temp.getLoot());
+				System.out.println(temp.getLoot() + "Level "+ temp.getLoot().getLevel());
 			}
 			temp =null;
 			System.out.println();
