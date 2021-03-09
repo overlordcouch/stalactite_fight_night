@@ -98,7 +98,7 @@ public class CombatControl{
 						break;
 			case "r": 	monsterTurn("retreat");
 						break;
-			case "i": 	//go to inventory
+			case "i": 	InventoryControl.inventoryMain();
 						break;
 		}
 		
