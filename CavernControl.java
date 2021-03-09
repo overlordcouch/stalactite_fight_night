@@ -7,7 +7,7 @@ import java.io.*;
  * consistency.
  * 
  * @author M.Ansell
- * @version 1.3
+ * @version 1.4
  */
 public class CavernControl{
 	
@@ -54,6 +54,13 @@ public class CavernControl{
 	private static List<String> napDesc = StalactiteFightNight.napDesc;
 	
 	/**
+	 * Local pointer to the list of nap actions in main.
+	 * 
+	 * @since 1.4
+	 */
+	private static List<String> searchDesc = StalactiteFightNight.searchDesc;
+	
+	/**
 	 * Local pointer to the player object created by main.
 	 * 
 	 * @since 1.0
@@ -98,6 +105,10 @@ public class CavernControl{
 		if(currentCave.hasLoot()){
 			System.out.println("You notice a chest, nearly hidden among the rocks.");
 		}
+		
+		if(currentCave.beenSearched()){
+			System.out.println("You have searched this cave thoroughly for loot.");
+		}
 		System.out.println();
 		currentCave.printPaths();
 		Set<String> validInputs = printOptions();
@@ -113,7 +124,7 @@ public class CavernControl{
 		
 		/*If its a direction, newCave in the new direction and repeat.
 		 * 
-		 * If search then search, if nap then nap, */
+		 * If search then search, if nap then nap, etc. */
 		 switch(input){
 			case "r":  if(currentCave.getRight() != null){
 							currentCave = currentCave.getRight();
@@ -143,7 +154,7 @@ public class CavernControl{
 						
 			case "n": nappyTime();
 						break;
-			case "s": //search
+			case "s":  search();
 						break;
 						
 			case "i":	InventoryControl.inventoryMain();
@@ -452,9 +463,36 @@ public class CavernControl{
 	/**
 	 * Implements searching for loot in the cavern.  
 	 * 
-	 * @since 1.2
+	 * @since 1.4
 	 */
 	private static void search(){
+		
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
+		
+		System.out.println(searchDesc.get(randGen.nextInt(searchDesc.size())));
+		currentCave.beenSearched(true);
+		
+		/*See if you find anything*/
+		boolean foundSomething = randGen.nextInt(100) < (10 + player.getInvestigation());
+		
+		/*See if you get better at finding things*/
+		boolean getBetter = player.improveInvestigation();
+		
+		if(foundSomething){
+			System.out.println("You discover a chest that you hadn't seen before!");
+			currentCave.lootGen(player.getLevel(), "search");			
+		}else{
+			System.out.println("You find a lot of dirt and rocks, but no loot.");
+		}
+		
+		if(getBetter){
+			System.out.println("You feel like you have a better idea of where to look next time.");
+		}
+		
+		Helper.waitForInput();
+		cavernMain();		
 		
 	}
 	

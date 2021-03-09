@@ -33,7 +33,7 @@ public class CaveNode{
 	/**
 	* Has the cavern been searched?
 	* 
-	* @since 1.0
+	* @since 1.7
 	*/
 	private boolean searched;
 
@@ -125,7 +125,8 @@ public class CaveNode{
 		this.desc1 = adj1;
 		this.desc2 = adj2;
 		this.monsterGen(level);
-		this.lootGen(level);
+		this.lootGen(level, null);
+		this.searched = false;
 		this.pathGen();
 		
 		/*At generation, the paths exist, but the caves don't,
@@ -263,6 +264,16 @@ public class CaveNode{
 	}
 	
 	/**
+	 * Accessor to set if this cavern has been searched.
+	 * 
+	 * @return If this cavern has been searched yet.
+	 * @since 1.7
+	 */
+	public boolean beenSearched(boolean wasSearched){
+		return this.searched = wasSearched;
+	}
+	
+	/**
 	 * Accessor to check if this cavern has a monster.
 	 * 
 	 * @return If there is a monster here.
@@ -370,12 +381,12 @@ public class CaveNode{
 	 * 
 	 * @param rand A Random object used to generate the items and description.
 	 * @param level The level of the player at the time of calling
-	 * @since 1.2
+	 * @since 1.7
 	 */
-	private void lootGen(int level){
+	public void lootGen(int level, String qualifier){
 		
-		/*Do nothing if loot chance is exceeded*/
-		if(StalactiteFightNight.rand.nextInt() >= this.LOOT_CHANCE){
+		/*Do nothing if loot chance is exceeded.  Only an option during normal cave generation.*/
+		if((qualifier == null) && StalactiteFightNight.rand.nextInt() >= this.LOOT_CHANCE){
 			return;
 		}else{
 			this.hasLoot = true;
@@ -393,8 +404,7 @@ public class CaveNode{
 						this.loot = new Weapon(weapLevel, weapType, weapDesc);
 					break;
 				case 3:
-				case 4: int mod = level/10;
-						int armLevel = StalactiteFightNight.rand.nextInt(2 - 1) + 1 + StalactiteFightNight.rand.nextInt(level/7 +1);
+				case 4: int armLevel = StalactiteFightNight.rand.nextInt(2 - 1) + 1 + StalactiteFightNight.rand.nextInt(level/7 +1);
 						String armType = StalactiteFightNight.armorType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorType.size()));
 						String armDesc = StalactiteFightNight.armorDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorDesc.size()));
 						this.loot = new Armor(armLevel, armType, armDesc);

@@ -330,22 +330,24 @@ public class CombatControl{
 		/*Set health to 1/4*/
 		player.setHealth(player.getMaxHealth()/10);
 		
-		/*REmove some random stuff from inventory*/
+		/*REmove some random stuff from inventory, if there is anything there*/
+		if(player.getInventory().size() != 0){
 		
-		/*Determine how many items are going to get removed from inventory*/
-		int invLoss = randGen.nextInt(player.getInventory().size());
-		
-		/*Remove that many items at random from the inventory*/
-		for(int i = 0; i < invLoss; i++){
-			int removeIndex = randGen.nextInt(player.getInventory().size());
-			player.getInventory().remove(removeIndex);
-		}
-		
-		if(invLoss > 0){
-			if(invLoss != 1){
-				System.out.println("That monster mugged you!  You seem to have lost "+invLoss+" items from your inventory.");
-			}else{
-				System.out.println("That monster mugged you!  You seem to have lost an item from your inventory.");
+			/*Determine how many items are going to get removed from inventory*/
+			int invLoss = randGen.nextInt(player.getInventory().size());
+			
+			/*Remove that many items at random from the inventory*/
+			for(int i = 0; i < invLoss; i++){
+				int removeIndex = randGen.nextInt(player.getInventory().size());
+				player.getInventory().remove(removeIndex);
+			}
+			
+			if(invLoss > 0){
+				if(invLoss != 1){
+					System.out.println("That monster mugged you!  You seem to have lost "+invLoss+" items from your inventory.");
+				}else{
+					System.out.println("That monster mugged you!  You seem to have lost an item from your inventory.");
+				}
 			}
 		}
 		

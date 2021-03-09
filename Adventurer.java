@@ -428,7 +428,7 @@ public class Adventurer{
 	 public boolean improveInvestigation(){
 		 /*Effectively a coin flip.  Each time you do an investigation, 
 		  * there is a 50% chance you get better at investigating.*/
-		  boolean gotBetter = (randGen.nextInt(1) == 1);
+		  boolean gotBetter = (randGen.nextInt(2) == 1);
 		 if(gotBetter){
 			 this.investigation++;
 		 }
@@ -465,6 +465,7 @@ public class Adventurer{
 	  */
 	 public void setArmor(Armor freshDigs){
 		 this.currentArmor = freshDigs;
+		 this.updateAC();
 	 }
 	 
 	 /**
