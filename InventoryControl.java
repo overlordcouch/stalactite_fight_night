@@ -221,7 +221,7 @@ public class InventoryControl{
 			/*Tell the player about it.*/
 			System.out.println("You swap your "+ temp + " for the far superior " + toEquip+"!");
 			
-			if(!temp.toString().equals("filthy bathrobe")){
+			if(!temp.toString().equals("puny fists")){
 				System.out.println("The "+temp+" was returned to your inventory!");
 			}
 			
