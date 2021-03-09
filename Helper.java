@@ -76,8 +76,8 @@ public class Helper{
 		System.out.println(justification+ player + " ("+player.getLevel()+")");
 		System.out.println(justification+ healthBar);
 		System.out.println(justification+ "Health: "+ player.getHealth() +"/"+player.getMaxHealth());
-		System.out.println(justification+ "Wearing "+ player.getEquippedArmor());
-		System.out.println(justification+ "Wielding " + player.getEquippedWeapon());
+		System.out.println(justification+ "Wearing "+ player.getEquippedArmor() + "("+player.getEquippedArmor().getLevel() + ")");
+		System.out.println(justification+ "Wielding " + player.getEquippedWeapon() + "("+ player.getEquippedWeapon().getLevel() + ")");
 		System.out.println("\n\n\n\n");
 		
 		return;
