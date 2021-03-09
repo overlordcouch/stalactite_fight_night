@@ -95,6 +95,7 @@ public class InventoryControl{
 		
 		System.out.println("You are looking at a level "+ piece.getLevel() + " "+ piece);
 		
+		
 		/*Print valid options for the item based on item and context.
 		 * Create a list of valid inputs from the user*/
 		Set<String> validOptions = printItemOptions(piece);
@@ -280,7 +281,7 @@ public class InventoryControl{
 		
 		/*Generate armor options.*/
 		if(piece instanceof Armor){
-			
+						
 			if(player.inCombat()){
 				System.out.println(justification +"Can't change clothes in combat :(");
 			}else{
@@ -294,6 +295,7 @@ public class InventoryControl{
 			validOptions.add("e");
 			
 		}else if (piece instanceof Potion){
+		
 			
 			System.out.println(justification + "U: Use Item");
 			validOptions.add("u");

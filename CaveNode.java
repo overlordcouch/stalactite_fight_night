@@ -398,11 +398,11 @@ public class CaveNode{
 						String armType = StalactiteFightNight.armorType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorType.size()));
 						String armDesc = StalactiteFightNight.armorDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorDesc.size()));
 						this.loot = new Armor(armLevel, armType, armDesc);
-					break;
+						break;
 				case 5: int potLevel = StalactiteFightNight.rand.nextInt((level+1) - (level)) + (level);
 						String potType = StalactiteFightNight.potionType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.potionType.size()));
 						String potDesc = StalactiteFightNight.potionDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.potionDesc.size()));
-						this.loot = new Armor(potLevel, potType, potDesc);
+						this.loot = new Potion(potLevel, potType, potDesc);
 					break;
 			}//switch/case
 			

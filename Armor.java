@@ -7,10 +7,7 @@
  */
 public class Armor extends Item{
 	
-	/*TODO:
-	  * FIgure out how armor should be related to level.
-	  * Figure out how base durability should be related to level.
-	  * Implement ^^ those functions in constructor. */
+
 	
 	/**
 	 * How good is this piece of armor at stopping hits.
@@ -37,7 +34,7 @@ public class Armor extends Item{
 	  */
 	 public Armor(int level, String type, String desc){
 		 super(level, type, desc);
-		 this.armor = -1;
+		 this.armor = level;
 		 this.durability = -1;
 		 
 	 }
