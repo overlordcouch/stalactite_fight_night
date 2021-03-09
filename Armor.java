@@ -1,13 +1,20 @@
+import java.util.Random;
 /**
  * Armor object class is a subclass of item that implements methods and
  * fields specific to Armor items.
  * 
  * @author M.Ansell
- * @version 1.0
+ * @version 1.1
  */
 public class Armor extends Item{
 	
-
+	/**
+	 * Pointer to the main random object.
+	 * 
+	 * @since 1.1
+	 */
+	private Random randGen = StalactiteFightNight.rand;
+	
 	
 	/**
 	 * How good is this piece of armor at stopping hits.
@@ -17,9 +24,9 @@ public class Armor extends Item{
 	private int armor;
 	
 	/**
-	 * How much more beating can this thing take
+	 * How much more beating can this thing take.
 	 * 
-	 * @since 1.0
+	 * @since 1.1
 	 */
 	private int durability;
 	
@@ -35,7 +42,7 @@ public class Armor extends Item{
 	 public Armor(int level, String type, String desc){
 		 super(level, type, desc);
 		 this.armor = level;
-		 this.durability = -1;
+		 this.durability = randGen.nextInt(35) + 1 + level;
 		 
 	 }
 	 
@@ -60,4 +67,12 @@ public class Armor extends Item{
 		return this.durability;
 	}
 	
+	/**
+	 * Does a hit on durability when the armor is struck by a monster.
+	 * 
+	 * @since 1.1
+	 */
+	public void hurtDurability(){
+		this.durability--;
+	}
 }//Armor object class

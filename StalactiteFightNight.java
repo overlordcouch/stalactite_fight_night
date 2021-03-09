@@ -341,7 +341,7 @@ public class StalactiteFightNight{
 	private static void caveTest(){
 		
 		/*Tests CaveNode functionality and monster/loot probabilities
-		 * by generating and outputs 100 caverns*/
+		 * by generating and outputing 100 caverns*/
 		
 		CaveNode temp;
 		for(int index = 0; index <100; index++){

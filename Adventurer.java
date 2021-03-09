@@ -474,6 +474,17 @@ public class Adventurer{
 	 }
 	 
 	 /**
+	  * Overloaded armor set to allow return to default armor when equipped
+	  * armor breaks.
+	  * 
+	  * @param qualifier If a string is passed, revert to default armor.
+	  * @since 1.8
+	  */
+	public void setArmor(String qualifier){
+		this.currentArmor = DEFAULT_ARMOR;
+	}
+	 
+	 /**
 	  * Equips a new weapon to the player.
 	  * 
 	  * @param freshTools The weapon to be equipped.
