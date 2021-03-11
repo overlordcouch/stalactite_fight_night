@@ -73,7 +73,7 @@ public class CaveNode{
 	 * 
 	 * @since 1.2
 	 */
-	private static int MONSTER_CHANCE = 63;
+	private static int MONSTER_CHANCE = 73;
 	
 	/**
 	 * The chance percentage that there will be loot in this cavern that
@@ -81,7 +81,7 @@ public class CaveNode{
 	 * 
 	 * @since 1.2
 	 */
-	private static int LOOT_CHANCE = 33;
+	private static int LOOT_CHANCE = 57;
 	
 	/**
 	 * Boolean values used in the initial cave generation to indicate
@@ -391,26 +391,28 @@ public class CaveNode{
 		}else{
 			this.hasLoot = true;
 			/*First, choose what kind of loot to generate*/
-			int choice = StalactiteFightNight.rand.nextInt(6);
+			int choice = StalactiteFightNight.rand.nextInt(7);
 			
 			//And then generate it
 			switch(choice){
 				case 0:
 				case 1:
+				case 2:
 						int weapLevel = StalactiteFightNight.rand.nextInt((level+2) - (level - 1)) + (level -1);
 						if(weapLevel == 0){weapLevel = 1;}
 						String weapType = StalactiteFightNight.weaponType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.weaponType.size()));
 						String weapDesc = StalactiteFightNight.weaponDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.weaponDesc.size()));
 						this.loot = new Weapon(weapLevel, weapType, weapDesc);
 					break;
-				case 2:	
+					
 				case 3:
 				case 4: int armLevel = StalactiteFightNight.rand.nextInt(2 - 1) + 1 + StalactiteFightNight.rand.nextInt(level/7 +1) + StalactiteFightNight.rand.nextInt(2);
 						String armType = StalactiteFightNight.armorType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorType.size()));
 						String armDesc = StalactiteFightNight.armorDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorDesc.size()));
 						this.loot = new Armor(armLevel, armType, armDesc);
 						break;
-				case 5: int potLevel = StalactiteFightNight.rand.nextInt((level+1) - (level)) + (level);
+				case 5: 
+				case 6: int potLevel = StalactiteFightNight.rand.nextInt((level+1) - (level)) + (level);
 						String potType = StalactiteFightNight.potionType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.potionType.size()));
 						String potDesc = StalactiteFightNight.potionDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.potionDesc.size()));
 						this.loot = new Potion(potLevel, potType, potDesc);

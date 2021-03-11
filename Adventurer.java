@@ -256,7 +256,7 @@ public class Adventurer{
 	 * @since 1.5
 	 */
 	public int attack(int d20Roll){
-		return d20Roll + (int)Math.round(this.strength/ 10.0) + currentWeapon.getHitMod();
+		return d20Roll + (int)Math.round(this.strength/ 9.0) + currentWeapon.getHitMod();
 	}
 	
 	/**
@@ -293,7 +293,7 @@ public class Adventurer{
 	 * @since 1.4
 	 */
 	private int getNextXP(int currentLevel){
-		return this.nextLevelXP + (((int)Math.round(this.strength/2.0))+this.level - 1)*5;
+		return this.nextLevelXP + (((int)Math.round(this.strength/2.0))+this.level - 1)*7;
 	}
 	
 	
