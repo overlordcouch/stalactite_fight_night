@@ -98,7 +98,7 @@ public class CombatControl{
 						break;
 			case "r": 	monsterTurn("retreat");
 						break;
-			case "i": 	//go to inventory
+			case "i": 	InventoryControl.inventoryMain();
 						break;
 		}
 		
@@ -155,6 +155,9 @@ public class CombatControl{
 			 
 			 /*Check if player leveled up, and do the leveling if necessary*/
 			 levelUpNow = player.levelCheck();
+			 
+			 /*Put the player out of combat*/
+			 player.setCombat(false);
 			 
 		 }
 		
@@ -236,7 +239,7 @@ public class CombatControl{
 	 * @param branch What happens after monster turn (null->combat cycle, "retreat"->exit combat).
 	 * @since 1.0
 	 */
-	private static void monsterTurn(String branch){
+	public static void monsterTurn(String branch){
 		/*Ensure that the player state is up to date*/
 		player = StalactiteFightNight.player;
 		
@@ -277,8 +280,26 @@ public class CombatControl{
 		/*Print message about whether or not the monster hit.*/
 		if(didHit){
 			System.out.println("The "+ monster + " hits you for " + damage +" points of damage.\n");
+
+			
+			/*Alter the durability of the armor*/
+			if(!player.getEquippedArmor().toString().equals("filthy bathrobe")){
+				Armor armor = player.getEquippedArmor();
+				
+				player.getEquippedArmor().hurtDurability();
+				if(player.getEquippedArmor().getDurability() == 5){
+					System.out.println("Your "+ armor + " is starting to look pretty rough from the beating it's taken.");
+				}
+				
+				if(player.getEquippedArmor().getDurability() == 0){
+					
+					System.out.println("Your "+ armor +" falls to shreds.  You are left only in your bathrobe.");
+					player.setArmor("default");
+					
+				}
+			}//durability branch
+			
 		}else{
-			System.out.println("");
 			System.out.println(monsterMiss.get(randGen.nextInt(monsterMiss.size())));
 		}
 		
@@ -327,13 +348,33 @@ public class CombatControl{
 		/*Set health to 1/4*/
 		player.setHealth(player.getMaxHealth()/10);
 		
-		/*REmove some random stuff from inventory*/
+		
 		
 		/*Take them out of combat and put them in the previous cave.*/
 		if(CavernControl.currentCave.getPrev() != null){
 			Helper.clearWindow();
 			Helper.clearInputBuffer();
 			System.out.println("You wake, sore and battered, in the cavern you just tried to leave.");
+			
+			/*REmove some random stuff from inventory, if there is anything there*/
+			if(player.getInventory().size() != 0){
+				/*Determine how many items are going to get removed from inventory*/
+				int invLoss = randGen.nextInt(player.getInventory().size());
+				/*Remove that many items at random from the inventory*/
+				for(int i = 0; i < invLoss; i++){
+					int removeIndex = randGen.nextInt(player.getInventory().size());
+					player.getInventory().remove(removeIndex);
+				}
+				
+				if(invLoss > 0){
+					if(invLoss != 1){
+						System.out.println("That monster mugged you!  You seem to have lost "+invLoss+" items from your inventory.");
+					}else{
+						System.out.println("That monster mugged you!  You seem to have lost an item from your inventory.");
+					}
+				}
+			}
+		
 			Helper.waitForInput();
 			retreat();
 		}else{
@@ -342,8 +383,6 @@ public class CombatControl{
 			System.exit(0);
 			
 		}
-		
-		
 		
 	}
 	

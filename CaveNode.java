@@ -33,7 +33,7 @@ public class CaveNode{
 	/**
 	* Has the cavern been searched?
 	* 
-	* @since 1.0
+	* @since 1.7
 	*/
 	private boolean searched;
 
@@ -53,13 +53,7 @@ public class CaveNode{
 
 	private Item loot;
 	
-	/**
-	 * The type of loot that is generated if it is generated.  Allows for
-	 * casting for access to appropriate subclass methods.
-	 * 
-	 * @since 1.3
-	 */
-	private String lootType;
+	
 
 	/**
 	* The level of the cavern.  Matches player level at time of generation,
@@ -79,7 +73,7 @@ public class CaveNode{
 	 * 
 	 * @since 1.2
 	 */
-	private static int MONSTER_CHANCE = 63;
+	private static int MONSTER_CHANCE = 73;
 	
 	/**
 	 * The chance percentage that there will be loot in this cavern that
@@ -87,7 +81,7 @@ public class CaveNode{
 	 * 
 	 * @since 1.2
 	 */
-	private static int LOOT_CHANCE = 33;
+	private static int LOOT_CHANCE = 57;
 	
 	/**
 	 * Boolean values used in the initial cave generation to indicate
@@ -131,7 +125,8 @@ public class CaveNode{
 		this.desc1 = adj1;
 		this.desc2 = adj2;
 		this.monsterGen(level);
-		this.lootGen(level);
+		this.lootGen(level, null);
+		this.searched = false;
 		this.pathGen();
 		
 		/*At generation, the paths exist, but the caves don't,
@@ -269,6 +264,16 @@ public class CaveNode{
 	}
 	
 	/**
+	 * Accessor to set if this cavern has been searched.
+	 * 
+	 * @return If this cavern has been searched yet.
+	 * @since 1.7
+	 */
+	public boolean beenSearched(boolean wasSearched){
+		return this.searched = wasSearched;
+	}
+	
+	/**
 	 * Accessor to check if this cavern has a monster.
 	 * 
 	 * @return If there is a monster here.
@@ -376,42 +381,41 @@ public class CaveNode{
 	 * 
 	 * @param rand A Random object used to generate the items and description.
 	 * @param level The level of the player at the time of calling
-	 * @since 1.2
+	 * @since 1.7
 	 */
-	private void lootGen(int level){
+	public void lootGen(int level, String qualifier){
 		
-		/*Do nothing if loot chance is exceeded*/
-		if(StalactiteFightNight.rand.nextInt() >= this.LOOT_CHANCE){
+		/*Do nothing if loot chance is exceeded.  Only an option during normal cave generation.*/
+		if((qualifier == null) && StalactiteFightNight.rand.nextInt() >= this.LOOT_CHANCE){
 			return;
 		}else{
 			this.hasLoot = true;
 			/*First, choose what kind of loot to generate*/
-			int choice = StalactiteFightNight.rand.nextInt(6);
+			int choice = StalactiteFightNight.rand.nextInt(7);
 			
 			//And then generate it
 			switch(choice){
 				case 0:
 				case 1:
-				case 2: this.lootType = "weapon";
+				case 2:
 						int weapLevel = StalactiteFightNight.rand.nextInt((level+2) - (level - 1)) + (level -1);
 						if(weapLevel == 0){weapLevel = 1;}
 						String weapType = StalactiteFightNight.weaponType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.weaponType.size()));
 						String weapDesc = StalactiteFightNight.weaponDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.weaponDesc.size()));
 						this.loot = new Weapon(weapLevel, weapType, weapDesc);
 					break;
+					
 				case 3:
-				case 4: this.lootType = "armor";
-						int mod = level/10;
-						int armLevel = StalactiteFightNight.rand.nextInt(2 - 1) + 1 + StalactiteFightNight.rand.nextInt(level/7 +1);
+				case 4: int armLevel = StalactiteFightNight.rand.nextInt(2 - 1) + 1 + StalactiteFightNight.rand.nextInt(level/7 +1) + StalactiteFightNight.rand.nextInt(2);
 						String armType = StalactiteFightNight.armorType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorType.size()));
 						String armDesc = StalactiteFightNight.armorDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.armorDesc.size()));
 						this.loot = new Armor(armLevel, armType, armDesc);
-					break;
-				case 5: this.lootType = "potion";
-						int potLevel = StalactiteFightNight.rand.nextInt((level+1) - (level)) + (level);
+						break;
+				case 5: 
+				case 6: int potLevel = StalactiteFightNight.rand.nextInt((level+1) - (level)) + (level);
 						String potType = StalactiteFightNight.potionType.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.potionType.size()));
 						String potDesc = StalactiteFightNight.potionDesc.get(StalactiteFightNight.rand.nextInt(StalactiteFightNight.potionDesc.size()));
-						this.loot = new Armor(potLevel, potType, potDesc);
+						this.loot = new Potion(potLevel, potType, potDesc);
 					break;
 			}//switch/case
 			
@@ -456,22 +460,7 @@ public class CaveNode{
 		return this.loot;
 	}	  
 	
-	/**
-	 * Returns the type of loot that this cavern has, if there is loot.
-	 * 
-	 * @return A string indicating the loot type.
-	 * @throws IllegalStateException if there is no loot in this cavern.
-	 * @since 1.3
-	 */
-	public String getLootType()throws IllegalStateException{
-		
-		if(!this.hasLoot){
-			throw new IllegalStateException("No loot type because no loot.");
-		}
-		
-		return this.lootType;
-		
-	} 
+	
 	
 	/**
 	 * General toString method.  Gives string in the form "a adj, adj cavern"
@@ -500,5 +489,16 @@ public class CaveNode{
 		if(this.hasCenter){
 			System.out.println("You see a tunnel leading off directly across from you.");
 		}
+	}
+	
+	/**
+	 * Clears the chamber's loot reference.
+	 * 
+	 * @since 1.7
+	 */
+	public void clearLoot(){
+		this.loot = null;
+		this.hasLoot = false;
+		
 	}
 }//CaveNode class

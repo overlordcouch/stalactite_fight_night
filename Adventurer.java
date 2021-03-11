@@ -6,7 +6,7 @@ import java.lang.Math;
  * Class that contains information, statistics, and inventory for the player character.
  * 
  * @author M.Ansell
- * @version 1.7
+ * @version 1.8
  */
 public class Adventurer{
 	
@@ -149,7 +149,7 @@ public class Adventurer{
 		 this.maxHealth = getNewMaxHealth(this.level);
 		 this.health = this.maxHealth;
 		 
-		 this.investigation = 1;
+		 this.investigation = 0;
 		 this.strength = 10;
 		 
 		 this.currentWeapon = DEFAULT_WEAPON;
@@ -256,7 +256,7 @@ public class Adventurer{
 	 * @since 1.5
 	 */
 	public int attack(int d20Roll){
-		return d20Roll + (int)Math.round(this.strength/ 10.0) + currentWeapon.getHitMod();
+		return d20Roll + (int)Math.round(this.strength/ 9.0) + currentWeapon.getHitMod();
 	}
 	
 	/**
@@ -293,7 +293,7 @@ public class Adventurer{
 	 * @since 1.4
 	 */
 	private int getNextXP(int currentLevel){
-		return this.nextLevelXP + (((int)Math.round(this.strength/2.0))+this.level - 1)*5;
+		return this.nextLevelXP + (((int)Math.round(this.strength/2.0))+this.level - 1)*7;
 	}
 	
 	
@@ -405,6 +405,93 @@ public class Adventurer{
 	  */
 	 public void setHealth(int newHealth){
 		 this.health = newHealth;
+	 }
+	 
+	 /**
+	  * Returns the player's current investigation score.  Used when 
+	  * searching for loot.
+	  * 
+	  * @return The player's investigation score.
+	  * @since 1.8
+	  */
+	 public int getInvestigation(){
+		 return this.investigation;
+	 }
+	 
+	 /**
+	  * Method to get better at investigating.  Each time the player searches,
+	  * there is a 50% chance that they get better at searching.
+	  * 
+	  * @return Whether or not the player got better at investigating.
+	  * @since 1.8
+	  */
+	 public boolean improveInvestigation(){
+		 
+		 if(this.investigation <25){
+			 /*1/3 chance of improvement Each time you do an investigation, 
+			  * there is a 50% chance you get better at investigating.*/
+			 boolean gotBetter = (randGen.nextInt(3) == 1);
+			 if(gotBetter){
+				 this.investigation++;
+			 }
+			 
+			 return gotBetter;
+		 }else{
+			 return false;
+		 }
+	 }
+	 
+	 /**
+	  * Accessor to get a pointer to the player's inventory.
+	  * 
+	  * @return A pointer to the player's inventory.
+	  * @since 1.8
+	  */
+	 public List<Item> getInventory(){
+		 return this.inventory;
+	 }
+	 
+	 /**
+	  * Returns whether the player is in combat or not.  Mainly used in
+	  * inventory operations.
+	  * 
+	  * @return Whether the player is in combat.
+	  * @since 1.8
+	  */
+	 public boolean inCombat(){
+		 return this.inCombat;
+	 }
+	 
+	 /**
+	  * Equips new armor to the player.
+	  * 
+	  * @param freshDigs The new piece of armor to equip.
+	  * @since 1.8
+	  */
+	 public void setArmor(Armor freshDigs){
+		 this.currentArmor = freshDigs;
+		 this.updateAC();
+	 }
+	 
+	 /**
+	  * Overloaded armor set to allow return to default armor when equipped
+	  * armor breaks.
+	  * 
+	  * @param qualifier If a string is passed, revert to default armor.
+	  * @since 1.8
+	  */
+	public void setArmor(String qualifier){
+		this.currentArmor = DEFAULT_ARMOR;
+	}
+	 
+	 /**
+	  * Equips a new weapon to the player.
+	  * 
+	  * @param freshTools The weapon to be equipped.
+	  * @since 1.8
+	  */
+	 public void setWeapon(Weapon freshTools){
+		 this.currentWeapon = freshTools;
 	 }
 	   
 	 

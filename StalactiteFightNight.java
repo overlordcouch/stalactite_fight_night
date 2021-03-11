@@ -19,7 +19,7 @@ public class StalactiteFightNight{
 	public static List<String> monsterType, monsterDesc, weaponType, weaponDesc,
 								armorType, armorDesc, potionType, potionDesc, caveDesc,
 								enterDesc, napDesc, deathDesc, monsterMiss, monsterDeath,
-								hitWords;
+								hitWords, searchDesc;
 	
 	/**
 	 * Random object used throughout the game for generation and event
@@ -84,6 +84,7 @@ public class StalactiteFightNight{
 		introPrompt();
 		
 		CavernControl.newCavern(null);
+		
 
 		
 		
@@ -192,7 +193,7 @@ public class StalactiteFightNight{
 		System.out.println("\"My calling is to sit outside this cave and meet those who dare to enter,");
 		System.out.println("so when they inevitably die at least one person will remember them.\"\n");
 		
-		System.out.println("\"I'm not sure how you plan to succed wearing a "+ player.getEquippedArmor()
+		System.out.println("\"I'm not sure how you plan to succeed wearing a "+ player.getEquippedArmor()
 							+" with nothing but your "+ player.getEquippedWeapon() +", but who am I to judge?\"");
 		System.out.println("\n\n\"Good luck, I guess!\"");
 		
@@ -244,6 +245,7 @@ public class StalactiteFightNight{
 		monsterMiss = new ArrayList<String>();
 		monsterDeath = new ArrayList<String>();
 		hitWords = new ArrayList<String>();
+		searchDesc = new ArrayList<String>();
 		
 		/*Map each file name to the List that will hold it, that way we can procedurally
 		 * read in the files with streamlined code.  This setup allows for
@@ -267,6 +269,7 @@ public class StalactiteFightNight{
 		filesToLists.put("world_gen/monsterMiss.txt",monsterMiss);
 		filesToLists.put("world_gen/monster_death.txt",monsterDeath);
 		filesToLists.put("world_gen/hit_words.txt",hitWords);
+		filesToLists.put("world_gen/search.txt",searchDesc);
 		
 		/*Retrieve a Set with all of the keys/ file names*/
 		Set<String> fileNames = filesToLists.keySet();
@@ -336,7 +339,7 @@ public class StalactiteFightNight{
 	private static void caveTest(){
 		
 		/*Tests CaveNode functionality and monster/loot probabilities
-		 * by generating and outputs 100 caverns*/
+		 * by generating and outputing 100 caverns*/
 		
 		CaveNode temp;
 		for(int index = 0; index <100; index++){
@@ -355,7 +358,7 @@ public class StalactiteFightNight{
 			if(!temp.hasLoot()){
 				System.out.println("No loot");
 			}else{
-				System.out.println(temp.getLoot());
+				System.out.println(temp.getLoot() + "Level "+ temp.getLoot().getLevel());
 			}
 			temp =null;
 			System.out.println();

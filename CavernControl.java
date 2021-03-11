@@ -7,7 +7,7 @@ import java.io.*;
  * consistency.
  * 
  * @author M.Ansell
- * @version 1.1
+ * @version 1.4
  */
 public class CavernControl{
 	
@@ -54,6 +54,13 @@ public class CavernControl{
 	private static List<String> napDesc = StalactiteFightNight.napDesc;
 	
 	/**
+	 * Local pointer to the list of nap actions in main.
+	 * 
+	 * @since 1.4
+	 */
+	private static List<String> searchDesc = StalactiteFightNight.searchDesc;
+	
+	/**
 	 * Local pointer to the player object created by main.
 	 * 
 	 * @since 1.0
@@ -98,6 +105,10 @@ public class CavernControl{
 		if(currentCave.hasLoot()){
 			System.out.println("You notice a chest, nearly hidden among the rocks.");
 		}
+		
+		if(currentCave.beenSearched()){
+			System.out.println("You have searched this cave thoroughly for loot.");
+		}
 		System.out.println();
 		currentCave.printPaths();
 		Set<String> validInputs = printOptions();
@@ -106,8 +117,6 @@ public class CavernControl{
 		
 		String input = console.next().toLowerCase();
 		
-		
-		
 		while(!validInputs.contains(input)){
 			input = console.next().toLowerCase();
 		}
@@ -115,7 +124,7 @@ public class CavernControl{
 		
 		/*If its a direction, newCave in the new direction and repeat.
 		 * 
-		 * If search then search, if nap then nap, */
+		 * If search then search, if nap then nap, etc. */
 		 switch(input){
 			case "r":  if(currentCave.getRight() != null){
 							currentCave = currentCave.getRight();
@@ -144,6 +153,14 @@ public class CavernControl{
 						break;
 						
 			case "n": nappyTime();
+						break;
+			case "s":  search();
+						break;
+						
+			case "i":	InventoryControl.inventoryMain();
+						break;
+						
+			case "o":	openChest();
 						break;
 		}
 		
@@ -209,6 +226,13 @@ public class CavernControl{
 		
 	}//newCavern
 	
+	/**
+	 * CavernEnter controls entry into a cavern from any game state.  
+	 * Version 1.2 moved this code out from newCavern in support of returning
+	 * to cavern state from combat state.
+	 * 
+	 * @since 1.2
+	 */
 	private static void cavernEnter(){
 		
 		/*Print out the player's entrance.*/
@@ -255,6 +279,9 @@ public class CavernControl{
 		
 		System.out.println(justification +"N:Take a nap");
 		validOptions.add("n");
+		
+		System.out.println(justification + "I: Access your inventory");
+		validOptions.add("i");
 		
 		if(currentCave.hasLoot()){
 			System.out.println(justification +"O: Open chest");
@@ -316,9 +343,9 @@ public class CavernControl{
 		 
 		 
 		 
-		 /*Determine if monster shows up (1/5)*/ 
+		 /*Determine if monster shows up (1/6)*/ 
 		 boolean monsterMade;
-		 if(randGen.nextInt(4) == 3){
+		 if(randGen.nextInt(5) == 3){
 			 currentCave.monsterMaker(player.getLevel());
 			 monsterMade = true;
 			 player.setCombat(true);
@@ -347,10 +374,126 @@ public class CavernControl{
 			
 		}
 		
-		
-		
 	}//nappyTime
 	
+	/**
+	 * Manages interactions with item chests.
+	 * 
+	 * @since 1.3
+	 */
+	private static void openChest(){
+		
+		player = StalactiteFightNight.player;
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
+		
+		System.out.println("You open the chest, revealing the "+ currentCave.getLoot() + "!");
+		System.out.println("\n\nWhat do you want to do with it?");
+		
+		Set<String> validInputs = printChestOptions();
+		
+		String input = console.next().toLowerCase();
+		
+		while(!validInputs.contains(input)){
+			input = console.next().toLowerCase();
+		}
+		
+		switch(input){
+			
+			/*Leave the item*/
+			case "l":	Helper.clearWindow();
+						Helper.clearInputBuffer();
+						Helper.printPlayerHeader();
+						System.out.println("You decide to leave the "+ currentCave.getLoot()+" for now.");
+						Helper.waitForInput();
+						CavernControl.cavernMain();
+						
+			/*Grab the item*/
+			case "g":	Helper.clearWindow();
+						Helper.clearInputBuffer();
+						Helper.printPlayerHeader();
+						System.out.println("You stuff the "+currentCave.getLoot()+" into your bag.");
+						player.getInventory().add(currentCave.getLoot());
+						currentCave.clearLoot();
+						Helper.waitForInput();
+						CavernControl.cavernMain();
+						
+			/*Get rid of the item*/
+			case "t":	Helper.clearWindow();
+						Helper.clearInputBuffer();
+						Helper.printPlayerHeader();
+						System.out.println("You hurl the "+currentCave.getLoot()+" into the darkness, losing it forever.");
+						currentCave.clearLoot();
+						Helper.waitForInput();
+						CavernControl.cavernMain();
+			
+		}
+		
+	}//openChest
 	
+	/**
+	 * Generates and prints the appropriate actions that the user can
+	 * take with a chest.
+	 * 
+	 * @return Set of strings that are valid inputs from the player.
+	 * @since 1.3
+	 */
+	private static Set<String> printChestOptions(){
+		
+		Set<String> validOptions = new HashSet<String>();
+		
+		String justification = 	"\t\t\t\t\t\t\t\t";
+		System.out.println("\n\n\n");
+		
+		System.out.println(justification +"G:Grab the item");
+		validOptions.add("g");
+		
+		System.out.println(justification + "L: Leave the item");
+		validOptions.add("l");
+		
+		System.out.println(justification + "T: Toss the item");
+		validOptions.add("t");
+		
+		
+		
+		return validOptions;
+	}
+	
+	/**
+	 * Implements searching for loot in the cavern.  
+	 * 
+	 * @since 1.4
+	 */
+	private static void search(){
+		
+		Helper.clearWindow();
+		Helper.clearInputBuffer();
+		Helper.printPlayerHeader();
+		
+		System.out.println(searchDesc.get(randGen.nextInt(searchDesc.size())));
+		currentCave.beenSearched(true);
+		
+		/*See if you find anything*/
+		boolean foundSomething = randGen.nextInt(100) < (10 + player.getInvestigation());
+		
+		/*See if you get better at finding things*/
+		boolean getBetter = player.improveInvestigation();
+		
+		if(foundSomething){
+			System.out.println("You discover a chest that you hadn't seen before!");
+			currentCave.lootGen(player.getLevel(), "search");			
+		}else{
+			System.out.println("You find a lot of dirt and rocks, but no loot.");
+		}
+		
+		if(getBetter){
+			System.out.println("You feel like you have a better idea of where to look next time.");
+		}
+		
+		Helper.waitForInput();
+		cavernMain();		
+		
+	}
 	
 }//caverncontrol

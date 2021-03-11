@@ -4,3 +4,5 @@ The creature stumbles, beefing it on the hit.
 You block the creature's attack with your wild reflexes.  
 You duck the creature's attack.
 You are too fast, dancing out of the way of the creature's strike.
+It was a miss!  It was a monster miss.
+It slashes at you, but you dodge out of the way!

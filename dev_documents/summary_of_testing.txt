@@ -16,3 +16,9 @@ information from prvious player interactions.
 Verified player status block prints correctly.
 
 Napping function verified to work in root cave.
+
+Combat largely implemented and tested.
+	-Attacking monster and being attacked verifed to work correctly.
+	-XP transfer and leveling up verified to work correctly.
+	-Napping function verified to work correctly with health regen.
+	-Retreat function added and verified to work correctly.
