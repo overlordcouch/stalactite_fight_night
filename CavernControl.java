@@ -162,6 +162,9 @@ public class CavernControl{
 						
 			case "o":	openChest();
 						break;
+			//Invisible option to exit the game			
+			case "q":	System.exit(0);
+						break;
 		}
 		
 		
@@ -307,7 +310,7 @@ public class CavernControl{
 			System.out.println(justification +"F: Go directly ahead");
 			validOptions.add("f");
 		}
-		
+		validOptions.add("q");
 		return validOptions;
 	}
 	
