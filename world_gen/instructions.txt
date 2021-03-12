@@ -1,7 +1,93 @@
-Eventually, there will be helpful directions here.
+An Adventurer is You!
+
+GAMEPLAY:
+In Stalactite Fight Night, you play a thrill-seeking adventurer
+attempting to plumb the depths of the Caves of Neverending Despair
+and Depth.  Armed with your bare hands and your trusty bathrobe, you
+set off to prove your bravery in the caves!
+
+You enter the caves and are provided with a description of your
+surroundings.  You may encounter aggressive monsters that you need
+to defend yourself against.  On the other hand, you may encounter 
+hidden treasure chests containing a variety of helpful trash and loot.
+Search caves to find less obvious loot!  Don't be discouraged if you
+don't find anything.  Each time you search, you get a little better at
+finding hidden loot!
+
+If you are overcome by monsters while exploring the caves, you will wake up
+in the last safe cave you were in, but the monsters may have jacked some of
+your hard earned loot!
+
+You can find armor to help protect yourself, but you are still likely
+to take a beating from all of the monsters you encounter.  Your armor
+has a limited durability, and will eventually fail.
+
+ITEMS:  Every piece of loot you find has a use!  You can use everything 
+you find as a weapon, as armor, or to help heal yourself! 
+
+The top right corner of the screen will display your character's status:
+
+			PlayerName (Player Level)
+			[Health Bar!]
+			Health Points/ Max Health
+			Equipped Armor (Armor Level)
+			Equipped Weapon (Weapon Level)
 
 
-And here.
+The options available for you to act upon are displayed in the lower
+right-hand corner of the screen.  
+
+******** Cave Actions:
+
+		N: Take a nap.  Napping will allow you to regain some
+				or all of your missing health.  Be careful,
+				though!  You are in dangerous caverns, so
+				monsters may wander in while you are napping.
 
 
-Until then, press any key to return to the main menu.
+		I:  Access your inventory.  Check out the loot/trash you have
+					    collected.  For more details, see
+					    inventor actions.
+
+		O:  Open the chest.  If you see a chest in the cavern, open it!
+				     They contain all sorts of useful items!
+
+		S:  Search for loot. If you don't see a chest anywhere, or have already
+         			     found the obvious one, search for more!  The more you
+				     search, the better you get at searching!
+
+		R/L/F:  Choose a direction to travel.  These are based on the paths you can
+			see out of the current cave.
+
+
+********Combat Actions:
+
+		I:  Inventory.		Interact with your items!  You can't change your
+					armor in battle, because that would leave you too
+					exposed.  You can swap weapons or quickly heal 
+					self, but this will use up your combat turn.
+					See Inventory Actions for more detail on 
+					inventory interaction.
+
+		R:  Retreat.		Retreat from battle!  This game is meant to be challenging, 
+					so retreat is nothing to be afraid of.  Be careful, though!  
+					As you turn to run, the monster may get a chance to hit you!
+
+		A:  Attack.		Defend yourself with whatever fanciful weapon you have equipped!
+
+
+********Inventory Actions:
+
+		#:  Choose an item.	Your inventory is numbered, allowing you to choose an item to interact 
+					with.
+
+		E:  Equip.		If the item is a weapon or armor, you can equip it!  Your currently
+					equipped item will be returned to your inventory.
+
+		U:  Use.		If the item can heal you, you can use it!
+
+		D:  Discard.		Tired of low level stuff junking up your bag?  Discard it!
+		
+
+		
+					
