@@ -244,6 +244,9 @@ public class Adventurer{
 	 */
 	public void heal(int points){
 		this.health += points;
+		if(this.health > this.maxHealth){
+			this.health = this.maxHealth;
+		}
 		return;
 	}
 	

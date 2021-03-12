@@ -64,6 +64,13 @@ public class StalactiteFightNight{
 	 */
 	public static void main(String[] args){
 		
+		/*For assignment turn-in and testing, we allow for the input 
+		 * of a seed for the random number generator.  If there is a seed,
+		 * we'll reinitialize the rand with that seed.*/
+		 if(args.length > 0){
+			 rand  =  new Random(Integer.parseInt(args[0]));
+		 }
+		
 		
 		/*First, we populate the lists that are used for content generation*/
 		try{
