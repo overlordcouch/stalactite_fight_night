@@ -12,6 +12,6 @@ jobs:
           java-package: jdk
           architecture: x64
       - run: javac *.java
-      - run: java StalactiteFightNight
+      - run: java StalactiteFightNight <test_input.txt
       - run: javadoc -d out *.java
 
