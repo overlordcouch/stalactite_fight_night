@@ -30,7 +30,7 @@ public class Helper{
 		try{
 			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 		}catch(IOException | InterruptedException ex){
-			System.out.println("Couldn't clear terminal!  Oopsie");
+			System.out.println("\t\t**************************************");
 		}	
 
 	}
