@@ -264,8 +264,9 @@ public class CaveNode{
 	}
 	
 	/**
-	 * Accessor to set if this cavern has been searched.
+	 * Override method to set the searched status of the node.
 	 * 
+	 * @param wasSearched What to set the search status to.
 	 * @return If this cavern has been searched yet.
 	 * @since 1.7
 	 */
@@ -379,7 +380,7 @@ public class CaveNode{
 	 * Decides is there is loot upon intial generation, and
 	 * generates that loot if necessary.
 	 * 
-	 * @param rand A Random object used to generate the items and description.
+	 * @param qualifier A string that differentiates normal generation and search generation.
 	 * @param level The level of the player at the time of calling
 	 * @since 1.7
 	 */

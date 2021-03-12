@@ -12,6 +12,10 @@ jobs:
           java-package: jdk
           architecture: x64
       - run: javac *.java
+<<<<<<< HEAD
       - run: java StalactiteFightNight
+=======
+      - run: java StalactiteFightNight 2718 <test_input.txt
+>>>>>>> 3bf5a5193a864d117c5fdca817ca62c6669d7817
       - run: javadoc -d out *.java
 
