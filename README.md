@@ -99,6 +99,36 @@ the random lists that keep the game interesting.  This class also provides
 the UI for the instructions, intro screen, and initial introduction at  
 the beginning of the game.  Basically, this class gets everything started,  
 and then passes control to the state-classes who retain control for the duration  
-of the game.
+of the game.  
+  
+--- 
+--- 
+  
+# Testing  
+All individual aspects of the game were tested by playtesting to verify  
+functinality. The game as a whole was proofed in this manner.  For a  
+demonstration of the game's capabilities, see the output of the github  
+workflow.  A test case was  constructed that demonstrates nearly all key  
+aspects of the game as functional.  A listing of demonstrated functions  
+follows, found in the same order in the output:  
+  
+ - Entry/exit from Instruction screen
+ - Character creation and introduction text
+ - General combat interaction
+ - Searching, and improvement of the search skill
+ - Finding loot, adding to inventory  
+ - Equipping items from inventory  
+ - Leaving found loot behind, coming back, and adding to inventory
+ - Equipping armor
+ - Healing in battle, including loss of turn due to healing action
+ - Leveling up the character
+ - Weapon equip from inventory, including placing previously equipped  
+  item back into the inventory.  
+ - Nap, health regeneration, and monster generation during napping.  
+ - Retreat from battle  
+ - Discarding of items from treasure chests  
+ - Discarding items from inventory  
+ - Armor wear and tear
+ - Armor breakdown/destruction from use
   
 
